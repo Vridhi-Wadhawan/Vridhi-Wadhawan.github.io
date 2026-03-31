@@ -50,6 +50,7 @@
   --tag-border: rgba(120,74,30,0.20);
   --tag-text: #7A4A1E;
 }
+
 /* ============================================
    RESET & BASE
    ============================================ */
@@ -126,7 +127,7 @@ nav {
   transition: background 0.4s ease;
 }
 
-[data-theme="light"] nav { background: rgba(250,247,242,0.9); }
+[data-theme="light"] nav { background: rgba(250,246,239,0.92); }
 
 .nav-logo {
   font-family: 'Playfair Display', serif;
@@ -1294,8 +1295,8 @@ body::after {
     AI Architecture, Data Science, ML Engineering — if you're building something meaningful, I'd like to hear about it.
   </p>
 
-  <a href="mailto:vridhi99@gmail.com" class="btn-primary" style="font-size:0.82rem; padding: 0.9rem 2.2rem;">
-    vridhi99@gmail.com
+  <a href="/cdn-cgi/l/email-protection#2c5a5e4548444515156c4b414d4540024f4341" class="btn-primary" style="font-size:0.82rem; padding: 0.9rem 2.2rem;">
+    <span class="__cf_email__" data-cfemail="5c2a2e3538343565651c3b313d3530723f3331">[email&#160;protected]</span>
   </a>
 
   <div class="contact-links">
@@ -1321,7 +1322,7 @@ body::after {
   <span style="color:var(--teal); font-size:0.55rem; letter-spacing:0.15em">MAKING DATA SPEAK</span>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ============================================
    CURSOR
    ============================================ */
@@ -1451,14 +1452,3 @@ document.querySelectorAll('.video-item').forEach(item => {
   item.addEventListener('mouseenter', () => {
     const src = iframe.src;
     if (!src.includes('autoplay=1')) {
-      iframe.src = src.replace('autoplay=0', 'autoplay=1');
-    }
-  });
-  item.addEventListener('mouseleave', () => {
-    const src = iframe.src;
-    iframe.src = src.replace('autoplay=1', 'autoplay=0');
-  });
-});
-</script>
-</body>
-</html>
