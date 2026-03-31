@@ -152,20 +152,6 @@ nav {
 .nav-links a:hover { color: var(--teal); }
 
 /* ============================================
-   SCROLL REVEAL ANIMATIONS
-   ============================================ */
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ============================================
    HERO
    ============================================ */
 .hero {
@@ -335,67 +321,61 @@ section { padding: 6rem 3rem; }
 }
 
 /* ============================================
-   ABOUT SECTION WITH PHOTO
+   ABOUT
    ============================================ */
-#about {
-  padding: 6rem 3rem;
-}
-
-.about-container {
+.about-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1.5fr;
   gap: 4rem;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
+  align-items: start;
 }
 
-.about-text h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.2rem;
-  font-weight: 900;
-  margin-bottom: 1.5rem;
-  color: var(--text);
+.about-photo-col { position: relative; }
+.about-photo {
+  width: 100%;
+  border-radius: 4px;
+  display: block;
+  border: 1px solid var(--border);
+}
+.about-photo-tag {
+  position: absolute;
+  bottom: 1rem; left: 1rem;
+  background: var(--bg);
+  border: 1px solid var(--border2);
+  color: var(--teal);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  padding: 0.3rem 0.7rem;
 }
 
-.about-description {
+.about-text p {
   font-size: 0.8rem;
   color: var(--text2);
   line-height: 1.9;
   margin-bottom: 1.2rem;
 }
+.about-text strong { color: var(--teal); font-weight: 500; }
 
-.about-photo-wrapper {
-  position: relative;
-  overflow: hidden;
-  border-radius: 4px;
-  border: 1px solid var(--border);
+.about-badges {
+  display: flex; flex-wrap: wrap; gap: 0.5rem;
+  margin-top: 1.5rem;
 }
-
-.about-photo {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-  border-radius: 3px;
-}
-
-@media (max-width: 768px) {
-  .about-container {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
+.badge {
+  background: var(--teal3);
+  border: 1px solid var(--border2);
+  color: var(--teal);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  padding: 0.3rem 0.8rem;
 }
 
 /* ============================================
-   WORK / EXPERIENCE - HOVER TO REVEAL
+   WORK / EXPERIENCE
    ============================================ */
-.work-cards-container {
+.work-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
 }
 
 .work-card {
@@ -404,115 +384,59 @@ section { padding: 6rem 3rem; }
   padding: 2rem;
   position: relative;
   overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: border-color 0.3s, transform 0.3s;
   cursor: default;
-  min-height: 280px;
-  display: flex;
-  flex-direction: column;
 }
-
-.work-card::before {
+.work-card::after {
   content: '';
   position: absolute;
   left: 0; top: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--teal3);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
+  width: 3px; height: 100%;
+  background: var(--teal);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.3s;
 }
+.work-card:hover { border-color: var(--border2); transform: translateX(4px); }
+.work-card:hover::after { transform: scaleY(1); }
 
-.work-card:hover {
-  border-color: var(--border2);
-  transform: translateY(-8px);
-}
-
-.work-card:hover::before {
-  opacity: 1;
-}
-
-/* Work card header with badge */
-.work-card-header {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
-  position: relative;
-  z-index: 2;
-}
-
-.work-badge {
-  background: var(--teal3);
-  border: 1px solid var(--border2);
-  color: var(--teal);
-  font-size: 0.55rem;
-  letter-spacing: 0.1em;
-  padding: 0.3rem 0.6rem;
-  border-radius: 2px;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.work-card-main {
-  flex: 1;
-}
-
-.work-company {
-  font-size: 0.75rem;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+.work-period {
+  font-size: 0.6rem; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--teal);
   margin-bottom: 0.4rem;
-  display: block;
 }
-
 .work-role {
   font-family: 'Syne', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--text);
-  line-height: 1.3;
+  font-size: 1rem; font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+.work-company {
+  font-size: 0.72rem; color: var(--muted);
+  margin-bottom: 1.2rem;
+}
+.work-highlights { list-style: none; }
+.work-highlights li {
+  font-size: 0.72rem; color: var(--text2);
+  line-height: 1.8; padding-left: 1rem;
+  position: relative; margin-bottom: 0.3rem;
+}
+.work-highlights li::before {
+  content: '→';
+  position: absolute; left: 0;
+  color: var(--teal); font-size: 0.65rem;
 }
 
-/* Work card meta (period & location) */
-.work-card-meta {
-  display: flex;
-  gap: 1rem;
-  font-size: 0.7rem;
-  color: var(--text2);
-  margin-bottom: 1rem;
-  position: relative;
-  z-index: 2;
+.work-metrics {
+  display: flex; flex-wrap: wrap; gap: 0.5rem;
+  margin-top: 1.2rem;
 }
-
-.work-period,
-.work-location {
-  display: block;
+.metric-chip {
+  background: var(--teal3);
+  border: 1px solid var(--border);
+  color: var(--teal);
+  font-size: 0.62rem;
+  padding: 0.2rem 0.6rem;
   letter-spacing: 0.05em;
-}
-
-/* Hidden details - show on hover */
-.work-card-details {
-  font-size: 0.75rem;
-  color: var(--text2);
-  line-height: 1.8;
-  margin-top: auto;
-  opacity: 0;
-  transition: opacity 0.4s ease 0.1s;
-  position: relative;
-  z-index: 2;
-}
-
-.work-card:hover .work-card-details {
-  opacity: 1;
-}
-
-.work-card-details p {
-  margin-bottom: 0.8rem;
-}
-
-.work-card-details p:last-child {
-  margin-bottom: 0;
 }
 
 /* ============================================
@@ -535,6 +459,9 @@ section { padding: 6rem 3rem; }
   transition: all 0.2s;
 }
 .tab-btn.active { border-color: var(--teal); color: var(--teal); background: var(--teal3); }
+
+/* ====== UPDATE PROJECTS HERE ====== */
+/* Add new project objects to the JS array below */
 
 .projects-grid {
   display: grid;
@@ -672,263 +599,265 @@ section { padding: 6rem 3rem; }
 }
 
 /* ============================================
-   SIDE B — VIDEO BACKGROUND
+   SIDE B — vinyl section
    ============================================ */
 #side-b {
+  background: var(--bg3);
   position: relative;
+  overflow: hidden;
+}
+
+#side-b::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 80% 50%, rgba(10,186,181,0.04) 0%, transparent 60%);
+  pointer-events: none;
 }
 
 .vinyl-decoration {
   position: absolute;
-  top: 5%;
-  right: 5%;
-  width: 200px;
-  height: 200px;
-  pointer-events: none;
+  right: -80px; top: 50%;
+  transform: translateY(-50%);
+  width: 320px; height: 320px;
+  opacity: 0.15;
 }
-.outer { border: 2px solid var(--border2); border-radius: 50%; width: 100%; height: 100%; position: absolute; }
-.grooves { position: absolute; inset: 20px; border: 1px dashed var(--border); border-radius: 50%; }
-.inner { position: absolute; inset: 40%; background: var(--teal); border-radius: 50%; }
-.center-dot { position: absolute; inset: 45%; background: var(--bg); border-radius: 50%; }
+.vinyl-decoration .outer {
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  border: 1px solid var(--teal);
+  position: absolute;
+  animation: vinylSpin 12s linear infinite;
+}
+.vinyl-decoration .inner {
+  width: 40%; height: 40%;
+  border-radius: 50%;
+  border: 1px solid var(--teal);
+  position: absolute;
+  top: 30%; left: 30%;
+}
+.vinyl-decoration .grooves {
+  width: 90%; height: 90%;
+  border-radius: 50%;
+  border: 1px solid rgba(10,186,181,0.3);
+  position: absolute; top: 5%; left: 5%;
+}
+.vinyl-decoration .center-dot {
+  width: 8px; height: 8px;
+  background: var(--teal);
+  border-radius: 50%;
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+@keyframes vinylSpin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+.vinyl-decoration .outer { animation: vinylSpin 12s linear infinite; }
+
+.sideb-intro {
+  font-size: 0.75rem; color: var(--text2);
+  line-height: 1.9; margin-bottom: 3rem;
+  max-width: 550px;
+}
+.sideb-intro em { color: var(--teal); font-style: normal; }
 
 .video-strip {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
+  display: flex; gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--teal) var(--bg3);
 }
 
 .video-item {
+  flex-shrink: 0;
+  width: 220px;
   position: relative;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: border-color 0.3s;
 }
-
-.video-item.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+.video-item:hover { border-color: var(--border2); }
 
 .video-thumb-wrap {
-  position: relative;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  background: var(--bg3);
+  width: 100%; height: 130px;
+  position: relative; overflow: hidden;
+  background: var(--bg2);
 }
-
 .video-thumb-wrap iframe {
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   border: none;
+  pointer-events: none;
+  transition: transform 0.3s;
 }
-
+.video-item:hover .video-thumb-wrap iframe {
+  transform: scale(1.05);
+}
 .video-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0,0,0,0.3);
-  opacity: 0;
+  position: absolute; inset: 0;
+  background: rgba(8,12,12,0.5);
+  display: flex; align-items: center; justify-content: center;
   transition: opacity 0.3s;
   pointer-events: none;
 }
-
-.video-item:hover .video-overlay {
-  opacity: 1;
-}
-
+.video-item:hover .video-overlay { opacity: 0; }
 .play-icon {
-  font-size: 2rem;
-  color: var(--teal);
+  width: 32px; height: 32px;
+  border: 2px solid var(--teal);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--teal); font-size: 0.7rem;
 }
-
 .video-meta {
-  margin-top: 1rem;
-  font-size: 0.75rem;
-  color: var(--text2);
+  padding: 0.7rem 0.8rem;
+  font-size: 0.62rem; color: var(--text2); line-height: 1.5;
 }
-
 .video-link {
-  display: inline-block;
-  margin-top: 0.5rem;
-  color: var(--teal);
+  display: block; margin-top: 0.3rem;
+  font-size: 0.6rem; color: var(--teal);
   text-decoration: none;
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
+  pointer-events: auto;
 }
-
-.video-link:hover {
-  text-decoration: underline;
-}
+.video-link:hover { text-decoration: underline; }
 
 /* ============================================
-   CONTACT — WITH VIDEO BACKGROUND
+   CONTACT / LET'S WORK TOGETHER
    ============================================ */
 #contact {
-  position: relative;
-  padding: 8rem 3rem;
-  background: var(--bg2);
-  overflow: hidden;
-  min-height: 80vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   text-align: center;
-}
-
-/* Background video container */
-.contact-video-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.15;
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* Content overlay on top of video */
-#contact > * {
+  padding: 8rem 3rem;
   position: relative;
-  z-index: 1;
+  overflow: hidden;
 }
+#contact::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, rgba(10,186,181,0.06) 0%, transparent 60%);
+}
+#contact > * { position: relative; z-index: 1; }
 
 .contact-eyebrow {
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--teal);
-  display: block;
-  margin-bottom: 1rem;
+  font-size: 0.62rem; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--teal);
+  margin-bottom: 1rem; display: block;
 }
-
 .contact-title {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 900;
-  line-height: 1.1;
-  margin-bottom: 1.5rem;
-  max-width: 800px;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 900; line-height: 1; margin-bottom: 1.5rem;
 }
-
-.contact-title em {
-  font-style: italic;
-  color: var(--teal);
-}
-
+.contact-title em { font-style: italic; color: var(--teal); }
 .contact-sub {
-  font-size: 0.8rem;
-  color: var(--text2);
-  max-width: 600px;
-  line-height: 1.8;
-  margin-bottom: 2.5rem;
+  font-size: 0.75rem; color: var(--muted);
+  line-height: 1.8; margin-bottom: 2.5rem;
+  max-width: 420px; margin-left: auto; margin-right: auto;
 }
 
 .contact-links {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-top: 2rem;
+  display: flex; justify-content: center;
+  gap: 2rem; flex-wrap: wrap; margin-top: 2rem;
 }
-
 .contact-link {
-  color: var(--text2);
-  text-decoration: none;
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  transition: color 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  justify-content: center;
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: 0.7rem; letter-spacing: 0.1em;
+  color: var(--muted); text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px; transition: all 0.2s;
 }
-
-.contact-link:hover {
-  color: var(--teal);
-}
+.contact-link:hover { color: var(--teal); border-bottom-color: var(--teal); }
 
 /* ============================================
    FOOTER
    ============================================ */
 footer {
-  padding: 3rem;
-  text-align: center;
   border-top: 1px solid var(--border);
-  font-size: 0.7rem;
+  padding: 1.5rem 3rem;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 0.6rem; letter-spacing: 0.1em;
   color: var(--muted);
-  background: var(--bg2);
 }
 
-footer span {
-  display: block;
-  margin: 0.5rem 0;
+/* ============================================
+   SCROLL ANIMATIONS
+   ============================================ */
+.reveal {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
+.reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* ============================================
    RESPONSIVE
    ============================================ */
-@media (max-width: 768px) {
-  nav {
-    padding: 1rem 1.5rem;
-  }
-
-  .nav-links {
-    display: none;
-  }
-
-  .hero {
-    padding: 6rem 1.5rem 2rem;
-  }
-
-  .hero-photo-wrap {
-    width: 100%;
-    position: relative;
-    right: auto;
-    bottom: auto;
-    opacity: 1;
-    margin-top: 2rem;
-  }
-
-  .work-cards-container {
-    grid-template-columns: 1fr;
-  }
-
-  #contact {
-    padding: 4rem 1.5rem;
-    min-height: auto;
-  }
-
-  .contact-title {
-    font-size: 2rem;
-  }
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  .hero-photo-wrap { display: none; }
+  section { padding: 4rem 1.5rem; }
+  .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .about-photo-col { max-width: 300px; }
+  footer { flex-direction: column; gap: 0.5rem; }
+  .vinyl-decoration { display: none; }
 }
 
+/* Noise texture overlay */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9997; opacity: 0.3;
+}
+
+/* Skills section */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+.skill-card {
+  border: 1px solid var(--border);
+  background: var(--card);
+  padding: 1.5rem;
+  transition: border-color 0.3s;
+}
+.skill-card:hover { border-color: var(--border2); }
+.skill-card-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.78rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  margin-bottom: 0.8rem;
+}
+.skill-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.skill-tag {
+  background: var(--teal3);
+  border: 1px solid var(--tag-border);
+  color: var(--tag-text);
+  font-size: 0.62rem; padding: 0.2rem 0.5rem;
+  letter-spacing: 0.04em;
+}
+.skill-tag.alt {
+  background: rgba(201,168,76,0.08);
+  border-color: rgba(201,168,76,0.2);
+  color: var(--gold);
+}
 </style>
 </head>
 <body>
 
-<!-- Cursor elements -->
-<div id="cursorDot" class="cursor-dot"></div>
-<div id="cursorRing" class="cursor-ring"></div>
+<!-- Custom cursor -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
 <!-- Theme toggle -->
-<button id="themeToggle" class="theme-toggle">☽</button>
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">☽</button>
 
-<!-- Navigation -->
+<!-- NAV -->
 <nav>
-  <div class="nav-logo">Vridhi Wadhawan</div>
+  <div class="nav-logo">VW</div>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#work">Work</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#writing">Writing</a></li>
+    <li><a href="#side-b">Side B</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -938,107 +867,162 @@ footer span {
      ============================================ -->
 <section class="hero">
   <canvas id="particle-canvas"></canvas>
+
   <div class="hero-content">
-    <div class="hero-status">
-      <span>Available for opportunities</span>
-    </div>
-    <h1 class="hero-name">Making Data <em>Speak</em></h1>
+    <div class="hero-status">Open to opportunities</div>
+
+    <h1 class="hero-name">
+      Vridhi<br><em>Wadhawan</em>
+    </h1>
+
     <p class="hero-tagline">
-      Building systems that <strong>listen</strong>. 
-      AI architect & data scientist with expertise in ML systems, computer vision, and knowledge graphs.
+      <strong>Making data speak.</strong> Building systems that listen.<br>
+      AI & Data Professional · ISB Scholar · Ex-Deloitte · Ex-Vitrina AI (Stanford SRI)
     </p>
+
     <div class="hero-ctas">
-      <a href="mailto:vridhi99@gmail.com" class="btn-primary">Get in Touch</a>
-      <a href="https://github.com/Vridhi-Wadhawan" target="_blank" class="btn-outline">View GitHub</a>
+      <!-- ====== UPDATE RESUME LINK HERE ====== -->
+      <a href="https://drive.google.com/file/d/1pR4eTMWTr2HWwAdhVWH_v_cPjCWO0RaQ/view?usp=sharing" target="_blank" class="btn-primary">Download Resume</a>
+      <a href="#contact" class="btn-outline">Let's Work Together</a>
     </div>
+
     <div class="hero-stats">
-      <div class="hero-stat">
-        <span class="num">4+</span>
-        <span class="label">Years</span>
-      </div>
-      <div class="hero-stat">
-        <span class="num">AI/ML</span>
-        <span class="label">Expertise</span>
-      </div>
-      <div class="hero-stat">
-        <span class="num">ISB</span>
-        <span class="label">Studying</span>
-      </div>
+      <div class="hero-stat"><span class="num">4+</span><span class="label">Years Experience</span></div>
+      <div class="hero-stat"><span class="num">10K+</span><span class="label">Records Maintained</span></div>
+      <div class="hero-stat"><span class="num">12+</span><span class="label">GitHub Projects</span></div>
+      <div class="hero-stat"><span class="num">98%</span><span class="label">Peak Precision (CV)</span></div>
     </div>
+  </div>
+
+  <!-- ====== UPDATE PHOTO URL HERE ====== -->
+  <!-- Current photo: high-res blazer shot from WhatsApp -->
+  <div class="hero-photo-wrap">
+    <img src="https://drive.google.com/uc?export=view&id=18MxIlCkP-2i6uzlaiIWChRY8Dl4mjn9E" alt="Vridhi Wadhawan" onerror="this.parentElement.style.display='none'" />
   </div>
 </section>
 
 <!-- ============================================
-     ABOUT WITH PHOTO
+     ABOUT
      ============================================ -->
-<section id="about" class="reveal">
-  <div class="about-container">
-    <div class="about-text">
-      <h2>About</h2>
-      <p class="about-description">
-        AI and data professional with expertise in machine learning, MLOps, computer vision, and knowledge systems. 
-        Passionate about building elegant systems that make data speak.
-      </p>
-      <p class="about-description">
-        Currently pursuing an Advanced Management Program in Business Analytics at ISB on a merit scholarship. 
-        When I'm not building ML pipelines, you'll find me behind a camera or writing about data and systems.
-      </p>
-    </div>
-    <div class="about-photo-wrapper">
-      <!-- Photo from Google Drive -->
-      <img src="https://drive.google.com/uc?export=view&id=18MxIlCkP-2i6uzlaiIWChRY8Dl4mjn9E" alt="Vridhi Wadhawan" class="about-photo">
-    </div>
-  </div>
-</section>
-
-<!-- ============================================
-     WORK EXPERIENCE — HOVER TO REVEAL DETAILS
-     ============================================ -->
-<section id="work" class="section-alt reveal">
+<section id="about" class="section-alt">
   <div class="section-header">
-    <span class="section-num">01 — Work</span>
+    <span class="section-num">01 — About</span>
+    <div class="section-line"></div>
+  </div>
+  <h2 class="section-title">The Person Behind the Data</h2>
+  <p class="section-sub">A bit of context.</p>
+
+  <div class="about-grid">
+    <div class="about-photo-col reveal">
+      <!-- Same photo, smaller version -->
+      <img class="about-photo" src="https://drive.google.com/uc?export=view&id=18MxIlCkP-2i6uzlaiIWChRY8Dl4mjn9E" alt="Vridhi Wadhawan" onerror="this.style.display='none'" />
+      <div class="about-photo-tag">Delhi, India · She/Her</div>
+    </div>
+
+    <div class="about-text reveal">
+      <p>I work with data and machine learning, and I enjoy building things that don't stop at analysis — things that are actually usable in practice. My focus is on <strong>practical, reproducible solutions</strong>: understanding not just what works, but how those systems can be maintained and used in real settings.</p>
+
+      <p>I've worked with <strong>financial and operational datasets</strong> where data quality and consistency mattered as much as the insights themselves. Most of my projects reflect learning-by-doing across forecasting, machine learning systems, computer vision, and deployment.</p>
+
+      <p>Currently pursuing an <strong>Advanced Management Program in Business Analytics at ISB, Hyderabad</strong>, on a 40% merit-based scholarship. Previously with Deloitte USI (Global Financial Services) and Vitrina AI — a Stanford Research Institute incubated start-up.</p>
+
+      <p>I enjoy movies and music, and I like noticing patterns and structure in both — whether it's a story, a dataset, or a system.</p>
+
+      <div class="about-badges">
+        <span class="badge">ISB · 40% Merit Scholarship</span>
+        <span class="badge">Ex-Deloitte USI</span>
+        <span class="badge">Ex-Vitrina AI (SRI)</span>
+        <span class="badge">Machine Learning</span>
+        <span class="badge">MLOps</span>
+        <span class="badge">Computer Vision</span>
+        <span class="badge">Knowledge Graphs</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     SKILLS
+     ============================================ -->
+<section id="skills">
+  <div class="section-header">
+    <span class="section-num">02 — Capabilities</span>
+    <div class="section-line"></div>
+  </div>
+  <h2 class="section-title">What I Work With</h2>
+  <p class="section-sub">Tools and domains I've built real things in.</p>
+
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-card-title">ML & AI</div>
+      <div class="skill-tags">
+        <span class="skill-tag">PyTorch</span><span class="skill-tag">TensorFlow</span><span class="skill-tag">scikit-learn</span><span class="skill-tag">XGBoost</span><span class="skill-tag">Transfer Learning</span><span class="skill-tag">CNNs / RNNs</span><span class="skill-tag">LSTM</span><span class="skill-tag">LlamaIndex</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-card-title">MLOps & Deployment</div>
+      <div class="skill-tags">
+        <span class="skill-tag alt">Docker</span><span class="skill-tag alt">AWS EC2</span><span class="skill-tag alt">Flask API</span><span class="skill-tag alt">Streamlit</span><span class="skill-tag alt">FastAPI</span><span class="skill-tag alt">Airflow</span><span class="skill-tag alt">SHAP</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-card-title">Data & Analytics</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span><span class="skill-tag">SQL</span><span class="skill-tag">R</span><span class="skill-tag">Tableau</span><span class="skill-tag">Pandas / Dask</span><span class="skill-tag">Advanced Excel</span><span class="skill-tag">Informatica MDM</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-card-title">Data Modelling</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Knowledge Graphs</span><span class="skill-tag">Ontology Design</span><span class="skill-tag">Semantic Graphs</span><span class="skill-tag">SWIFT</span><span class="skill-tag">Salesforce</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     WORK EXPERIENCE
+     ============================================ -->
+<section id="work" class="section-alt">
+  <div class="section-header">
+    <span class="section-num">03 — Experience</span>
     <div class="section-line"></div>
   </div>
   <h2 class="section-title">Where I've Worked</h2>
+  <p class="section-sub">4+ years across fintech data, AI start-ups, and analytics consulting.</p>
 
-  <div class="work-cards-container">
-    <!-- Deloitte -->
+  <div class="work-cards">
     <div class="work-card reveal">
-      <div class="work-card-header">
-        <div class="work-badge">Full-time</div>
-        <div class="work-card-main">
-          <span class="work-company">Deloitte USI</span>
-          <div class="work-role">Analyst, Digital Data Analytics & Innovation</div>
-        </div>
-      </div>
-      <div class="work-card-meta">
-        <span class="work-period">Jun 2023 – Sep 2025</span>
-        <span class="work-location">Hyderabad, Hybrid</span>
-      </div>
-      <!-- Hidden details — appear on hover -->
-      <div class="work-card-details">
-        <p>Built and deployed ML pipelines for enterprise transformation. Maintained data integrity across 10,000+ records with automated validation protocols.</p>
-        <p>Computer vision, time series forecasting, and MLOps infrastructure across multiple financial domains. Mentored junior analysts and earned 2× Spot Awards for exceeding milestones.</p>
+      <div class="work-period">Jun 2023 – Sep 2025</div>
+      <div class="work-role">Analyst — Global Financial Services</div>
+      <div class="work-company">Deloitte USI · Digital Data Analytics & Innovation (DDAI) · Hyderabad, Hybrid</div>
+      <ul class="work-highlights">
+        <li>Maintained data integrity across 10,000+ records with automated quality checks & cross-validation against third-party sources</li>
+        <li>Synthesized financial data for 500+ global companies, driving comprehensive industry-level insights for the DDAI team</li>
+        <li>Established standardized validation protocols across multiple time zones; mentored junior analysts on data best practices</li>
+        <li>Earned 2× Spot Awards & the Amazing Addition Award for exceeding project delivery milestones</li>
+      </ul>
+      <div class="work-metrics">
+        <span class="metric-chip">10K+ records</span>
+        <span class="metric-chip">500+ companies</span>
+        <span class="metric-chip">2× Spot Award</span>
       </div>
     </div>
 
-    <!-- Vitrina AI -->
     <div class="work-card reveal">
-      <div class="work-card-header">
-        <div class="work-badge">Startup</div>
-        <div class="work-card-main">
-          <span class="work-company">Vitrina AI</span>
-          <div class="work-role">Data Analyst & Operations</div>
-        </div>
-      </div>
-      <div class="work-card-meta">
-        <span class="work-period">Jul 2021 – Jun 2023</span>
-        <span class="work-location">New Delhi, Remote</span>
-      </div>
-      <!-- Hidden details — appear on hover -->
-      <div class="work-card-details">
-        <p>Stanford SRI-incubated. Enhanced dataset accuracy for media & OTT firms by analyzing 4,500+ industry data points. Created structured catalog of 1,200+ articles for recommendation systems.</p>
-        <p>Delivered actionable insights through monthly reports on 200+ companies using Advanced Excel & Tableau. End-to-end video production understanding and strategic insights to leadership.</p>
+      <div class="work-period">Jul 2021 – Jun 2023</div>
+      <div class="work-role">Data Analyst & Operations Insight</div>
+      <div class="work-company">Vitrina AI · Stanford SRI Incubated · New Delhi, Remote</div>
+      <ul class="work-highlights">
+        <li>Enhanced dataset accuracy & classification coverage for Media & OTT firms by analyzing 4,500+ industry data points</li>
+        <li>Executed a Data Annotation Project creating a structured catalog of 1,200+ articles for recommendation algorithm training</li>
+        <li>Delivered actionable insights through monthly & yearly reports on 200+ companies using Advanced Excel & Tableau</li>
+        <li>Developed solid grasp of end-to-end video production distribution stages; presented insights to senior management & founder</li>
+      </ul>
+      <div class="work-metrics">
+        <span class="metric-chip">4,500+ data points</span>
+        <span class="metric-chip">1,200+ articles</span>
+        <span class="metric-chip">200+ companies</span>
       </div>
     </div>
   </div>
@@ -1047,9 +1031,9 @@ footer span {
 <!-- ============================================
      PROJECTS
      ============================================ -->
-<section id="projects" class="reveal">
+<section id="projects">
   <div class="section-header">
-    <span class="section-num">02 — Projects</span>
+    <span class="section-num">04 — Projects</span>
     <div class="section-line"></div>
   </div>
   <h2 class="section-title">Things I've Built</h2>
@@ -1060,68 +1044,108 @@ footer span {
     <button class="tab-btn" data-target="research">Research</button>
   </div>
 
-  <!-- Build projects grid -->
+  <!-- ====== ADD / EDIT PROJECTS IN THIS GRID ====== -->
   <div class="projects-grid" id="grid-build">
-    <a class="project-card reveal" href="https://github.com/Vridhi-Wadhawan" target="_blank" data-num="01">
+    <a class="project-card" href="https://github.com/Vridhi-Wadhawan/deep-learning-models-in-practice" target="_blank" data-num="01">
       <span class="project-link-icon">↗</span>
-      <span class="project-tag-label">ML · MLOps</span>
+      <span class="project-tag-label">Deep Learning · Aug–Sep 2025</span>
       <div class="project-name">Deep Learning Models in Practice</div>
-      <div class="project-desc">Production-ready implementations of transformer models, CNNs, and time series architectures with deployment pipelines.</div>
+      <div class="project-desc">Built and evaluated deep learning models across structured, text, and image data using PyTorch and TensorFlow. LSTM spam classifier, CNN transfer learning, churn prediction.</div>
       <div class="project-chips">
-        <span class="chip">PyTorch</span>
-        <span class="chip">FastAPI</span>
-        <span class="chip">Docker</span>
+        <span class="chip">PyTorch</span><span class="chip">TensorFlow</span><span class="chip">CNN</span><span class="chip">LSTM</span><span class="chip">Transfer Learning</span>
       </div>
     </a>
 
-    <a class="project-card reveal" href="https://github.com/Vridhi-Wadhawan" target="_blank" data-num="02">
+    <a class="project-card" href="https://github.com/Vridhi-Wadhawan/stock-forecasting-mlops" target="_blank" data-num="02">
       <span class="project-link-icon">↗</span>
-      <span class="project-tag-label">Computer Vision</span>
-      <div class="project-name">Vision Systems & Object Detection</div>
-      <div class="project-desc">Custom CV pipelines for enterprise applications, including YOLO fine-tuning and real-time inference optimization.</div>
+      <span class="project-tag-label">Time Series · MLOps · Nov 2025</span>
+      <div class="project-name">Stock Forecasting – End-to-End ML Deployment</div>
+      <div class="project-desc">ARIMA, Auto-ARIMA & XGBoost on 5 years of HDFC Bank data. Streamlit pipeline with engineered indicators & drift-aware retraining for real-time decision support.</div>
       <div class="project-chips">
-        <span class="chip">YOLOv8</span>
-        <span class="chip">OpenCV</span>
-        <span class="chip">ONNX</span>
+        <span class="chip">ARIMA</span><span class="chip">XGBoost</span><span class="chip">Streamlit</span><span class="chip">MLOps</span>
       </div>
     </a>
 
-    <a class="project-card reveal" href="https://github.com/Vridhi-Wadhawan" target="_blank" data-num="03">
+    <a class="project-card" href="https://github.com/Vridhi-Wadhawan/bank-marketing-mlops" target="_blank" data-num="03">
       <span class="project-link-icon">↗</span>
-      <span class="project-tag-label">Knowledge Graphs</span>
-      <div class="project-name">Semantic Systems & Knowledge Graphs</div>
-      <div class="project-desc">Building ontologies and knowledge representations for enterprise AI. RDF, SPARQL, and semantic reasoning.</div>
+      <span class="project-tag-label">MLOps · Production · Jul 2025</span>
+      <div class="project-name">Bank Marketing MLOps Pipeline</div>
+      <div class="project-desc">End-to-end MLOps pipeline. KNN classification → Flask API → Docker → AWS EC2. SHAP interpretability for customer conversion drivers. +15% projected ROI.</div>
       <div class="project-chips">
-        <span class="chip">Ontologies</span>
-        <span class="chip">RDF</span>
-        <span class="chip">SPARQL</span>
+        <span class="chip">Docker</span><span class="chip">AWS EC2</span><span class="chip">Flask</span><span class="chip">SHAP</span><span class="chip">KNN</span>
+      </div>
+    </a>
+
+    <a class="project-card" href="https://github.com/Vridhi-Wadhawan/residential-complex-knowledge-graph" target="_blank" data-num="04">
+      <span class="project-link-icon">↗</span>
+      <span class="project-tag-label">Data Modelling · Sep 2025</span>
+      <div class="project-name">Residential Complex Knowledge Graph — Digital Twin</div>
+      <div class="project-desc">Scalable knowledge graph ontology modeling a residential complex digital twin. Building hierarchy, automation, security workflows, and community facilities using semantic graph principles.</div>
+      <div class="project-chips">
+        <span class="chip">Knowledge Graphs</span><span class="chip">Ontology Design</span><span class="chip">Semantic Graphs</span>
+      </div>
+    </a>
+
+    <a class="project-card" href="https://github.com/Vridhi-Wadhawan/rag-politics-qa-llamaindex" target="_blank" data-num="05">
+      <span class="project-link-icon">↗</span>
+      <span class="project-tag-label">RAG · NLP · Oct–Nov 2025</span>
+      <div class="project-name">RAG on Indian Prime Ministers (LlamaIndex)</div>
+      <div class="project-desc">Retrieval-Augmented QA system on Wikipedia data about Indian Prime Ministers. Baseline vs enhanced RAG evaluation using LlamaIndex and Llama 3.</div>
+      <div class="project-chips">
+        <span class="chip">RAG</span><span class="chip">LlamaIndex</span><span class="chip">Llama 3</span><span class="chip">NLP</span>
+      </div>
+    </a>
+
+    <a class="project-card" href="https://github.com/Vridhi-Wadhawan/product-segmentation-affinity-analysis" target="_blank" data-num="06">
+      <span class="project-link-icon">↗</span>
+      <span class="project-tag-label">Strategy · Oct–Nov 2025</span>
+      <div class="project-name">Affinity-Based Product Segmentation</div>
+      <div class="project-desc">Affinity-based segmentation model using probability-weighted consumer preference data. White-space target segment identification; actionable pricing and portfolio strategy.</div>
+      <div class="project-chips">
+        <span class="chip">Market Segmentation</span><span class="chip">Affinity Analysis</span><span class="chip">Portfolio Strategy</span>
+      </div>
+    </a>
+
+    <a class="project-card" href="https://github.com/Vridhi-Wadhawan/stock-market-anomaly-detection" target="_blank" data-num="07">
+      <span class="project-link-icon">↗</span>
+      <span class="project-tag-label">Anomaly Detection · Mar 2026</span>
+      <div class="project-name">Stock Market Anomaly Detection</div>
+      <div class="project-desc">Detecting anomalies in stock returns using Isolation Forest. Links unusual market movements with real-world financial news and earnings events.</div>
+      <div class="project-chips">
+        <span class="chip">Isolation Forest</span><span class="chip">Time Series</span><span class="chip">Financial Data</span>
+      </div>
+    </a>
+
+    <a class="project-card" href="https://github.com/Vridhi-Wadhawan/business-intelligence-dashboard-tableau" target="_blank" data-num="08">
+      <span class="project-link-icon">↗</span>
+      <span class="project-tag-label">BI · Data Viz · Mar 2025</span>
+      <div class="project-name">Business Intelligence & Data Viz Portfolio (Tableau)</div>
+      <div class="project-desc">End-to-end BI dashboards in Tableau — KPI framing, segmentation analysis, and executive-ready insights. Applied advanced filters and calculated fields for dynamic interaction.</div>
+      <div class="project-chips">
+        <span class="chip">Tableau</span><span class="chip">Data Visualization</span><span class="chip">KPI Design</span>
       </div>
     </a>
   </div>
 
-  <!-- Research projects grid -->
-  <div class="projects-grid" id="grid-research" data-tab="research">
-    <a class="project-card reveal" href="#" target="_blank" data-num="04">
+  <!-- Research tab -->
+  <div class="projects-grid" id="grid-research" style="display:none">
+    <a class="project-card" href="https://github.com/Vridhi-Wadhawan/social-media-advertising-impact" target="_blank" data-num="R1">
       <span class="project-link-icon">↗</span>
-      <span class="project-tag-label">Research</span>
-      <div class="project-name">Attention Mechanisms & Transformers</div>
-      <div class="project-desc">Deep exploration of transformer architectures, attention mechanisms, and their applications in NLP and vision.</div>
+      <span class="project-tag-label">Research · Marketing Analytics</span>
+      <div class="project-name">Impact of Sponsored Ads on Consumer Perception</div>
+      <div class="project-desc">Survey-based primary research (n=~300). Regression analysis examining how sponsored social media ads influence consumer perception and buying behaviour. Key finding: relevance & credibility drive impact more than exposure frequency.</div>
       <div class="project-chips">
-        <span class="chip">Transformers</span>
-        <span class="chip">NLP</span>
-        <span class="chip">Vision</span>
+        <span class="chip">Regression Analysis</span><span class="chip">Survey Research</span><span class="chip">Consumer Behaviour</span><span class="chip">Digital Marketing</span>
       </div>
     </a>
 
-    <a class="project-card reveal" href="#" target="_blank" data-num="05">
+    <a class="project-card" href="https://github.com/Vridhi-Wadhawan/organizational-value-alignment-diagnostic" target="_blank" data-num="R2">
       <span class="project-link-icon">↗</span>
-      <span class="project-tag-label">Research</span>
-      <div class="project-name">Time Series Forecasting</div>
-      <div class="project-desc">Advanced time series models, LSTM/GRU architectures, and ensemble methods for financial prediction.</div>
+      <span class="project-tag-label">Research · Organizational Behaviour</span>
+      <div class="project-name">Organizational Value Alignment Diagnostic</div>
+      <div class="project-desc">Survey-based diagnostic (n=32) evaluating employee-employer value alignment. Likert-scale analysis identifying drivers of alignment including recognition systems and leadership communication. Strategic recommendations for policy design.</div>
       <div class="project-chips">
-        <span class="chip">LSTM</span>
-        <span class="chip">Forecasting</span>
-        <span class="chip">Ensembles</span>
+        <span class="chip">Survey Design</span><span class="chip">Likert Analysis</span><span class="chip">Data Visualization</span><span class="chip">Org Behaviour</span>
       </div>
     </a>
   </div>
@@ -1130,68 +1154,59 @@ footer span {
 <!-- ============================================
      WRITING
      ============================================ -->
-<section id="writing" class="section-alt reveal">
+<section id="writing" class="section-alt">
   <div class="section-header">
-    <span class="section-num">03 — Writing</span>
+    <span class="section-num">05 — Writing</span>
     <div class="section-line"></div>
   </div>
-  <h2 class="section-title">Essays & Reflections</h2>
+  <h2 class="section-title">Published Work</h2>
+  <p class="section-sub">Articles written for Legex and published on Medium. Legal literacy, finance, and social commentary.</p>
 
-  <!-- Featured article: The Affair -->
-  <div class="writing-featured">
-    <a href="https://medium.com/@vri1999" target="_blank" class="article-featured reveal">
-      <div style="flex: 1;">
-        <span class="article-featured-badge">Most Praised</span>
-        <div class="article-featured-label">Medium Essay</div>
-        <div class="article-featured-title">The Affair</div>
-        <div class="article-featured-desc">
-          A reflection written during my internship at Legex, exploring themes of ambition, choice, professional identity, and what it means to build something meaningful. This piece resonated deeply with readers and sparked conversations about work culture and personal integrity.
-        </div>
-        <div class="article-claps">👏 Most read & most praised</div>
+  <!-- Featured article -->
+  <div class="writing-featured reveal">
+    <a class="article-featured" href="https://medium.com/legex/affair-shattering-the-grand-ambition-of-love-5fb71a867f36" target="_blank">
+      <div class="article-featured-badge">Most Praised · 44 Claps</div>
+      <div>
+        <div class="article-featured-label">Legex · May 2020</div>
+        <div class="article-featured-title">Affair: Shattering the Grand Ambition of Love</div>
+        <div class="article-featured-desc">An examination of Section 497 of the Indian Penal Code — Adultery — and what its decriminalisation reveals about the law's relationship with love, autonomy, and societal morality.</div>
+        <div class="article-claps">✦ 44 claps · Most praised of all published work</div>
       </div>
     </a>
   </div>
 
-  <!-- Other writing pieces -->
+  <!-- Other articles -->
   <div class="writing-grid">
-    <a href="https://medium.com/@vri1999" target="_blank" class="article-card reveal">
-      <div class="article-card-label">Medium · 2024</div>
-      <div class="article-card-title">On Data & Systems</div>
-      <div class="article-card-teaser">
-        Exploring how data infrastructure shapes organizational thinking and the hidden leverage points in data architecture.
-      </div>
+    <a class="article-card reveal" href="https://medium.com/legex/dont-put-all-your-eggs-in-one-basket-2188fda8c58f" target="_blank">
+      <div class="article-card-label">Legex · Jun 2020 · 58 Claps</div>
+      <div class="article-card-title">Don't Put All Your Eggs in One Basket</div>
+      <div class="article-card-teaser">"Do not save what is left after spending, but spend what is left after saving." Financial literacy through legal and economic lens.</div>
     </a>
 
-    <a href="https://medium.com/@vri1999" target="_blank" class="article-card reveal">
-      <div class="article-card-label">Medium · 2024</div>
-      <div class="article-card-title">Building for Scale</div>
-      <div class="article-card-teaser">
-        Notes on designing ML systems that grow gracefully with business complexity without collapsing.
-      </div>
+    <a class="article-card reveal" href="https://medium.com/legex/a-new-normal-3fef6bdf0c77" target="_blank">
+      <div class="article-card-label">Legex · May 2020 · 19 Claps</div>
+      <div class="article-card-title">A New Normal</div>
+      <div class="article-card-teaser">On normalising conversations that need to be had. Social commentary on the state of consent and accountability.</div>
     </a>
 
-    <a href="https://medium.com/@vri1999" target="_blank" class="article-card reveal">
-      <div class="article-card-label">Medium · 2023</div>
-      <div class="article-card-title">Reflections on Knowledge Graphs</div>
-      <div class="article-card-teaser">
-        How connected data structures unlock new possibilities in AI systems and reasoning engines.
-      </div>
+    <a class="article-card reveal" href="https://medium.com/legex/is-my-share-equal-to-yours-b604c98bdaf1" target="_blank">
+      <div class="article-card-label">Legex · Jul 2020</div>
+      <div class="article-card-title">Is My Share Equal to Yours?</div>
+      <div class="article-card-teaser">"Dreams don't work unless you do." On equal pay, gender economics, and the gap between policy and practice.</div>
     </a>
 
-    <a href="https://medium.com/@vri1999" target="_blank" class="article-card reveal">
-      <div class="article-card-label">Medium · 2023</div>
-      <div class="article-card-title">The Human Side of MLOps</div>
-      <div class="article-card-teaser">
-        Why organizational culture and communication matter as much as technical infrastructure in ML teams.
-      </div>
+    <a class="article-card reveal" href="https://vri1999.medium.com/the-evolution-of-television-and-its-debut-in-the-india-market-930071ca0538" target="_blank">
+      <div class="article-card-label">Medium · Oct 2020</div>
+      <div class="article-card-title">The Evolution of Television & Its Debut in the India Market</div>
+      <div class="article-card-teaser">A historical and market analysis tracing television from invention to OTT disruption in the Indian context.</div>
     </a>
   </div>
 </section>
 
 <!-- ============================================
-     SIDE B — WADY'S KITCHEN
+     SIDE B — Wady's Kitchen
      ============================================ -->
-<section id="side-b" class="reveal">
+<section id="side-b">
   <div class="vinyl-decoration">
     <div class="outer"></div>
     <div class="grooves"></div>
@@ -1200,19 +1215,17 @@ footer span {
   </div>
 
   <div class="section-header">
-    <span class="section-num">04 — Other Things</span>
+    <span class="section-num">06 — Side B</span>
     <div class="section-line"></div>
   </div>
-  <h2 class="section-title" style="font-style:italic">& Side B</h2>
+  <h2 class="section-title" style="font-style:italic">& Other Things</h2>
 
-  <p class="section-sub" style="max-width: 700px;">
-    During lockdown, my sister and I started <em>Wady's Kitchen</em> — she cooked, I did camera work. Five videos, 
-    a YouTube channel, an Instagram. It was a goof. It was also genuinely fun. Framing, lighting, narrative — 
-    it all mirrors data work.
+  <p class="sideb-intro reveal">
+    During lockdown, my sister and I started <em>Wady's Kitchen</em> — she cooked, I did the camera work. Five videos, a YouTube channel, an Instagram. It was a goof. It was also genuinely fun. I mostly noticed framing, lighting, and how a 4-minute video needs as much editing logic as a data pipeline.
   </p>
 
-  <div class="video-strip">
-    <div class="video-item reveal">
+  <div class="video-strip reveal">
+    <div class="video-item">
       <div class="video-thumb-wrap">
         <iframe src="https://www.youtube.com/embed/qM598Qho9J0?autoplay=0&mute=1&controls=0&rel=0" loading="lazy" allow="autoplay"></iframe>
         <div class="video-overlay"><div class="play-icon">▶</div></div>
@@ -1223,7 +1236,7 @@ footer span {
       </div>
     </div>
 
-    <div class="video-item reveal">
+    <div class="video-item">
       <div class="video-thumb-wrap">
         <iframe src="https://www.youtube.com/embed/uuDb3VNtLqU?autoplay=0&mute=1&controls=0&rel=0" loading="lazy" allow="autoplay"></iframe>
         <div class="video-overlay"><div class="play-icon">▶</div></div>
@@ -1234,7 +1247,7 @@ footer span {
       </div>
     </div>
 
-    <div class="video-item reveal">
+    <div class="video-item">
       <div class="video-thumb-wrap">
         <iframe src="https://www.youtube.com/embed/dEUjA8DhEYc?autoplay=0&mute=1&controls=0&rel=0" loading="lazy" allow="autoplay"></iframe>
         <div class="video-overlay"><div class="play-icon">▶</div></div>
@@ -1245,7 +1258,7 @@ footer span {
       </div>
     </div>
 
-    <div class="video-item reveal">
+    <div class="video-item">
       <div class="video-thumb-wrap">
         <iframe src="https://www.youtube.com/embed/McfNMiUFQbI?autoplay=0&mute=1&controls=0&rel=0" loading="lazy" allow="autoplay"></iframe>
         <div class="video-overlay"><div class="play-icon">▶</div></div>
@@ -1256,7 +1269,7 @@ footer span {
       </div>
     </div>
 
-    <div class="video-item reveal">
+    <div class="video-item">
       <div class="video-thumb-wrap">
         <iframe src="https://www.youtube.com/embed/n_OKmoraizM?autoplay=0&mute=1&controls=0&rel=0" loading="lazy" allow="autoplay"></iframe>
         <div class="video-overlay"><div class="play-icon">▶</div></div>
@@ -1270,25 +1283,19 @@ footer span {
 </section>
 
 <!-- ============================================
-     CONTACT — WITH VIDEO BACKGROUND
+     CONTACT
      ============================================ -->
 <section id="contact">
-  <!-- Background video (optional: replace src with your video URL) -->
-  <video class="contact-video-bg" autoplay muted loop playsinline>
-    <source src="https://media.giphy.com/media/3o6ZtpWz1gTdpjkxS0/giphy.mp4" type="video/mp4">
-  </video>
-
   <span class="contact-eyebrow">Let's Work Together</span>
   <h2 class="contact-title">
-    Let's <em>Connect</em>
+    Open to <em>Great</em><br>Opportunities
   </h2>
   <p class="contact-sub">
-    Building something meaningful? I'd like to hear about it. Available for consulting, 
-    full-time roles, and exciting collaborations in AI, data science, and systems thinking.
+    AI Architecture, Data Science, ML Engineering — if you're building something meaningful, I'd like to hear about it.
   </p>
 
   <a href="mailto:vridhi99@gmail.com" class="btn-primary" style="font-size:0.82rem; padding: 0.9rem 2.2rem;">
-    Get in Touch
+    vridhi99@gmail.com
   </a>
 
   <div class="contact-links">
@@ -1300,6 +1307,10 @@ footer span {
     </a>
     <a href="https://medium.com/@vri1999" target="_blank" class="contact-link">
       <span>⟶</span> Medium
+    </a>
+    <!-- ====== UPDATE RESUME LINK HERE ====== -->
+    <a href="https://drive.google.com/file/d/1pR4eTMWTr2HWwAdhVWH_v_cPjCWO0RaQ/view?usp=sharing" target="_blank" class="contact-link">
+      <span>⟶</span> Resume PDF
     </a>
   </div>
 </section>
@@ -1323,7 +1334,6 @@ document.addEventListener('mousemove', e => {
   dot.style.left = (mx - 4) + 'px';
   dot.style.top = (my - 4) + 'px';
 });
-
 function animateRing() {
   rx += (mx - rx - 16) * 0.12;
   ry += (my - ry - 16) * 0.12;
@@ -1386,6 +1396,7 @@ for (let i = 0; i < 80; i++) particles.push(new Particle());
 function animateParticles() {
   ctx.clearRect(0, 0, W, H);
   particles.forEach(p => { p.update(); p.draw(); });
+  // Draw connections
   particles.forEach((a, i) => {
     particles.slice(i + 1).forEach(b => {
       const dx = a.x - b.x, dy = a.y - b.y;
@@ -1419,41 +1430,35 @@ tabBtns.forEach(btn => {
 });
 
 /* ============================================
-   SCROLL REVEAL ANIMATIONS
+   SCROLL REVEAL
    ============================================ */
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
+    if (e.isIntersecting) e.target.classList.add('visible');
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.reveal, .project-card, .work-card, .skill-card, .article-card, .article-featured, .video-item').forEach(el => {
+  el.classList.add('reveal');
+  observer.observe(el);
+});
+
+/* ============================================
+   VIDEO HOVER — play on hover via iframe API
+   ============================================ */
+document.querySelectorAll('.video-item').forEach(item => {
+  const iframe = item.querySelector('iframe');
+  item.addEventListener('mouseenter', () => {
+    const src = iframe.src;
+    if (!src.includes('autoplay=1')) {
+      iframe.src = src.replace('autoplay=0', 'autoplay=1');
     }
   });
-}, { threshold: 0.1 });
-
-// Observe all elements with 'reveal' class
-document.querySelectorAll('.reveal').forEach(el => {
-  observer.observe(el);
+  item.addEventListener('mouseleave', () => {
+    const src = iframe.src;
+    iframe.src = src.replace('autoplay=1', 'autoplay=0');
+  });
 });
-
-// Also observe work cards individually
-document.querySelectorAll('.work-card').forEach(el => {
-  observer.observe(el);
-});
-
-// Observe video items
-document.querySelectorAll('.video-item').forEach(el => {
-  observer.observe(el);
-});
-
-// Observe project cards
-document.querySelectorAll('.project-card').forEach(el => {
-  observer.observe(el);
-});
-
-// Observe article cards
-document.querySelectorAll('.article-card, .article-featured').forEach(el => {
-  observer.observe(el);
-});
-
 </script>
 </body>
 </html>
