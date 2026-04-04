@@ -40,22 +40,22 @@
     }
 
     [data-theme="light"] {
-      --bg: #F9F5EF;
-      --bg2: #F2EBE0;
-      --bg3: #EDE3D5;
+      --bg: #EDE8DF;
+      --bg2: #E5DED3;
+      --bg3: #DDD4C6;
       --text: #2C1F0E;
-      --text-muted: #7A6248;
-      --text-dim: #B8A48C;
+      --text-muted: #6B5240;
+      --text-dim: #A08C76;
       --accent: #C4622D;
-      --accent-dim: rgba(196,98,45,0.12);
+      --accent-dim: rgba(196,98,45,0.10);
       --accent-glow: rgba(196,98,45,0.25);
-      --border: rgba(196,98,45,0.15);
-      --border-hover: rgba(196,98,45,0.4);
+      --border: rgba(196,98,45,0.18);
+      --border-hover: rgba(196,98,45,0.45);
       --pill-bg: rgba(196,98,45,0.08);
-      --card-bg: rgba(249,245,239,0.85);
-      --card-border: rgba(196,98,45,0.15);
+      --card-bg: rgba(237,232,223,0.80);
+      --card-border: rgba(196,98,45,0.18);
       --pillar-border: #C4622D;
-      --shadow-glow: 0 0 40px rgba(196,98,45,0.06);
+      --shadow-glow: 0 0 40px rgba(196,98,45,0.08);
     }
 
     /* ============================================
@@ -420,56 +420,425 @@
     }
 
     /* ============================================
-       CASE STUDIES — Editorial Scroll Reveal
+       EDUCATION — Click-expand cards with linked content
        ============================================ */
-    /* SECTION: PROJECTS / CASE STUDIES */
-    #projects {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
+    /* SECTION: EDUCATION */
+    #education { max-width: 1100px; margin: 0 auto; }
 
-    .case-studies { display: flex; flex-direction: column; gap: 4rem; }
+    .edu-cards { display: flex; flex-direction: column; gap: 2px; }
 
-    .case-study {
-      position: relative;
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .case-study.visible { opacity: 1; transform: translateY(0); }
-
-    .case-study-inner {
+    .edu-card {
       border: 1px solid var(--card-border);
       background: var(--card-bg);
-      padding: 3rem 3.5rem;
-      transition: box-shadow 0.4s ease, border-color 0.4s ease;
+      overflow: hidden;
+      transition: border-color 0.3s;
     }
-    .case-study-inner:hover {
-      box-shadow: var(--shadow-glow), 0 2px 40px rgba(0,0,0,0.15);
-      border-color: var(--border-hover);
-    }
+    .edu-card.active { border-color: var(--border-hover); }
+    .edu-card-minor { opacity: 0.75; }
+    .edu-card-minor.active { opacity: 1; }
 
-    .case-study-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 2.5rem;
-      flex-wrap: wrap;
+    .edu-card-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 2rem 3rem;
+      cursor: none;
+      transition: background 0.3s;
       gap: 1rem;
     }
+    .edu-card-header:hover { background: var(--bg3); }
 
-    .case-study-name {
+    .edu-left {
+      display: flex; align-items: center; gap: 1.5rem;
+    }
+
+    .edu-logo-wrap {
+      width: 52px; height: 52px;
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .edu-logo-letter {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+    }
+
+    .edu-institution {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+    .edu-degree {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+    .edu-badge {
+      display: inline-block;
+      margin-top: 0.4rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      background: var(--accent-dim);
+      border: 1px solid var(--border);
+      color: var(--accent);
+      border-radius: 2px;
+    }
+
+    .edu-right {
+      display: flex; align-items: center; gap: 1.5rem;
+      flex-shrink: 0;
+    }
+    .edu-period {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+    }
+    .edu-chevron {
+      font-size: 0.85rem;
+      color: var(--accent);
+      transition: transform 0.35s ease;
+    }
+    .edu-card.active .edu-chevron { transform: rotate(180deg); }
+
+    .edu-expand {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.55s cubic-bezier(0.4,0,0.2,1);
+    }
+    .edu-card.active .edu-expand { max-height: 700px; }
+
+    .edu-expand-inner {
+      padding: 0 3rem 2.5rem;
+      border-top: 1px solid var(--border);
+      margin-top: 0;
+      padding-top: 2rem;
+    }
+
+    .edu-detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .edu-detail-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+    .edu-detail-text {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    .edu-links-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .edu-repo-link {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.85rem 1rem;
+      border: 1px solid var(--border);
+      background: var(--accent-dim);
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+      cursor: none;
+    }
+    a.edu-repo-link:hover {
+      border-color: var(--border-hover);
+      background: rgba(10,186,181,0.12);
+      opacity: 1;
+    }
+    [data-theme="light"] a.edu-repo-link:hover { background: rgba(196,98,45,0.1); }
+
+    .edu-paper { cursor: default; }
+
+    .edu-repo-icon {
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      color: var(--accent);
+      margin-top: 1px;
+    }
+    .edu-repo-name {
+      display: block;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+    .edu-repo-desc {
+      display: block;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 760px) {
+      .edu-card-header { padding: 1.5rem; }
+      .edu-expand-inner { padding: 1.5rem; }
+      .edu-detail-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    /* ============================================
+       CASE STUDY CAROUSEL
+       ============================================ */
+    /* SECTION: PROJECTS / CASE STUDIES CAROUSEL */
+    #projects {
+      max-width: 100%;
+      overflow: hidden;
+    }
+    #projects .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 3rem;
+    }
+
+    /* Carousel wrapper */
+    .carousel-wrap {
+      position: relative;
+      margin-top: 1rem;
+    }
+
+    .carousel-track-outer {
+      overflow: hidden;
+      cursor: grab;
+      user-select: none;
+    }
+    .carousel-track-outer:active { cursor: grabbing; }
+
+    .carousel-track {
+      display: flex;
+      gap: 1.5rem;
+      transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+      will-change: transform;
+    }
+
+    .cs-card {
+      flex: 0 0 340px;
+      border: 1px solid var(--card-border);
+      background: var(--card-bg);
+      padding: 2rem;
+      position: relative;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      cursor: none;
+    }
+    .cs-card:hover {
+      border-color: var(--border-hover);
+      box-shadow: var(--shadow-glow);
+    }
+    .cs-card.active-card {
+      border-color: var(--accent);
+      box-shadow: 0 0 30px var(--accent-glow);
+    }
+
+    .cs-card-num {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: var(--accent);
+      opacity: 0.15;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .cs-card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
       font-weight: 400;
       color: var(--text);
-      line-height: 1.2;
+      line-height: 1.3;
+      margin-bottom: 1rem;
     }
 
-    .case-study-tags {
-      display: flex; gap: 0.5rem; flex-wrap: wrap;
-      align-items: flex-start;
+    .cs-card-tags {
+      display: flex; gap: 0.4rem; flex-wrap: wrap;
+      margin-bottom: 1.2rem;
     }
+
+    /* Carousel nav */
+    .carousel-nav {
+      display: flex; gap: 1rem; align-items: center;
+      margin-top: 2rem;
+      padding: 0 3rem;
+    }
+    .carousel-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: none;
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+    .carousel-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .carousel-dots {
+      display: flex; gap: 0.5rem; align-items: center;
+    }
+    .carousel-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--text-dim);
+      transition: background 0.3s, width 0.3s;
+      cursor: none;
+    }
+    .carousel-dot.active { background: var(--accent); width: 20px; border-radius: 3px; }
+
+    /* Project detail panel — slides in from right */
+    .project-panel {
+      position: fixed;
+      top: 0; right: -100%;
+      width: min(680px, 100vw);
+      height: 100vh;
+      background: var(--bg2);
+      border-left: 1px solid var(--border-hover);
+      z-index: 500;
+      overflow-y: auto;
+      transition: right 0.45s cubic-bezier(0.4,0,0.2,1);
+      padding: 3rem;
+    }
+    .project-panel.open { right: 0; }
+
+    .panel-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 499;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s;
+    }
+    .panel-overlay.open { opacity: 1; pointer-events: all; }
+
+    .panel-close {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      background: none; border: 1px solid var(--border);
+      color: var(--text-muted);
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: none; font-size: 1rem;
+      transition: all 0.2s;
+    }
+    .panel-close:hover { border-color: var(--accent); color: var(--accent); }
+
+    .panel-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .panel-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 1.25rem;
+    }
+    .panel-tags {
+      display: flex; gap: 0.5rem; flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .panel-pillars {
+      display: flex; flex-direction: column; gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .panel-pillar {
+      border-left: 2px solid var(--pillar-border);
+      padding: 1rem 1.25rem;
+      background: var(--accent-dim);
+    }
+    .panel-pillar-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+    .panel-pillar-text {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+
+    /* Architecture placeholder */
+    .panel-arch {
+      border: 1px dashed var(--border);
+      background: var(--bg3);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .panel-arch-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 0.5rem;
+    }
+    /* UPDATE HERE: When adding architecture diagrams, replace this placeholder */
+    .panel-arch-placeholder {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      margin-top: 0.5rem;
+    }
+
+    .panel-video-placeholder {
+      border: 1px dashed var(--border);
+      background: var(--bg3);
+      padding: 1.5rem;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .panel-video-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .panel-github-link {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .panel-github-link:hover { color: var(--accent); border-color: var(--accent); opacity: 1; }
+
     .tag-pill {
       font-family: 'DM Mono', monospace;
       font-size: 0.6rem;
@@ -480,89 +849,6 @@
       border: 1px solid var(--border);
       color: var(--accent);
       border-radius: 2px;
-    }
-
-    /* Four pillars grid */
-    .case-study-pillars {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-    }
-
-    .pillar {
-      border-left: 2px solid var(--pillar-border);
-      padding: 1.2rem 1.5rem;
-      background: var(--accent-dim);
-      opacity: 0;
-      transform: translateY(16px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-    .pillar.visible { opacity: 1; transform: translateY(0); }
-
-    /* Staggered delay per pillar */
-    .pillar:nth-child(1) { transition-delay: 0.05s; }
-    .pillar:nth-child(2) { transition-delay: 0.18s; }
-    .pillar:nth-child(3) { transition-delay: 0.31s; }
-    .pillar:nth-child(4) { transition-delay: 0.44s; }
-
-    .pillar-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.58rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.6rem;
-      display: block;
-    }
-    .pillar-text {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      line-height: 1.75;
-    }
-
-    .case-study-footer {
-      display: flex; align-items: center; justify-content: space-between;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--border);
-    }
-
-    .case-study-link {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 2px;
-      transition: color 0.2s, border-color 0.2s;
-    }
-    .case-study-link:hover {
-      color: var(--accent);
-      border-color: var(--accent);
-      opacity: 1;
-    }
-
-    /* Video placeholder for case studies with demo */
-    .video-placeholder {
-      margin-top: 1.5rem;
-      border: 1px dashed var(--border);
-      background: var(--bg3);
-      padding: 2rem;
-      text-align: center;
-    }
-    .video-placeholder-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-    }
-    .video-placeholder-icon {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-      opacity: 0.3;
     }
 
     /* ============================================
@@ -629,10 +915,10 @@
     }
 
     /* ============================================
-       & OTHER THINGS — Wady's Kitchen
+       BEYOND WORK — Wady's Kitchen
        ============================================ */
-    /* SECTION: OTHER THINGS / WADY'S KITCHEN */
-    #other-things { max-width: 1200px; margin: 0 auto; }
+    /* SECTION: BEYOND WORK / WADY'S KITCHEN */
+    #beyond-work { max-width: 1200px; margin: 0 auto; }
 
     .other-intro {
       max-width: 600px;
@@ -827,9 +1113,10 @@
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#work">Work</a></li>
+      <li><a href="#education">Education</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#writing">Writing</a></li>
-      <li><a href="#other-things">&amp; Other Things</a></li>
+      <li><a href="#beyond-work">Beyond Work</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <button id="theme-toggle" aria-label="Toggle theme">☽ Light</button>
@@ -940,383 +1227,347 @@
           </div>
         </div>
 
-        <div class="work-card reveal reveal-delay-4">
-          <div class="work-header">
-            <div>
-              <div class="work-company">ISB Hyderabad</div>
-              <div class="work-role">Merit Scholar — Advanced Management Program in Business Analytics</div>
-            </div>
-            <div class="work-period">2023 — 2024</div>
-          </div>
-          <div class="work-expand">
-            <div class="work-details">
-              <div class="work-detail-item">Awarded merit scholarship for academic excellence and professional achievement.</div>
-              <div class="work-detail-item">Focused on business analytics, strategy, and decision science — bridging technical depth with management thinking.</div>
-            </div>
-          </div>
-        </div>
-
       </div><!-- /work-cards -->
     </div>
   </section>
 
   <!-- ============================================
-       PROJECTS — Case Study Editorial Section
+       EDUCATION — Tabbed: ISB / Symbiosis / Tagore
+       Click to expand each card with linked content
        ============================================ -->
-  <!-- SECTION: PROJECTS / CASE STUDIES -->
+  <!-- SECTION: EDUCATION -->
   <section>
-    <div id="projects">
-      <p class="section-label reveal">Work</p>
-      <h2 class="section-title reveal reveal-delay-1">Selected<br /><em>case studies.</em></h2>
+    <div id="education">
+      <p class="section-label reveal">Education</p>
+      <h2 class="section-title reveal reveal-delay-1">Where I've<br /><em>learned to think.</em></h2>
       <div class="section-divider reveal reveal-delay-2"></div>
 
-      <div class="case-studies">
+      <div class="edu-cards reveal reveal-delay-3">
 
-        <!-- ——————————————————————————
-             PROJECT 1: Stock Market Anomaly Detection
-             —————————————————————————— -->
-        <article class="case-study" data-project="1">
-          <div class="case-study-inner">
-            <div class="case-study-header">
-              <h3 class="case-study-name">Stock Market Anomaly Detection</h3>
-              <div class="case-study-tags">
+        <!-- ISB Hyderabad -->
+        <div class="edu-card" data-edu="isb">
+          <div class="edu-card-header" onclick="toggleEdu('isb')">
+            <div class="edu-left">
+              <div class="edu-logo-wrap">
+                <span class="edu-logo-letter">ISB</span>
+              </div>
+              <div>
+                <div class="edu-institution">Indian School of Business, Hyderabad</div>
+                <div class="edu-degree">Advanced Management Program in Business Analytics</div>
+                <div class="edu-badge">Merit Scholarship</div>
+              </div>
+            </div>
+            <div class="edu-right">
+              <div class="edu-period">2023 — 2024</div>
+              <div class="edu-chevron" id="chevron-isb">↓</div>
+            </div>
+          </div>
+
+          <div class="edu-expand" id="expand-isb">
+            <div class="edu-expand-inner">
+              <div class="edu-detail-grid">
+                <div class="edu-detail-col">
+                  <p class="edu-detail-label">Focus Areas</p>
+                  <p class="edu-detail-text">Business analytics, decision science, AI strategy, and management frameworks — bridging technical depth with C-suite thinking.</p>
+                  <p class="edu-detail-label" style="margin-top:1.2rem;">Merit Award</p>
+                  <p class="edu-detail-text">Selected for merit-based scholarship among competitive cohort. Recognition of prior professional achievement and academic standing.</p>
+                </div>
+                <div class="edu-detail-col">
+                  <p class="edu-detail-label">Related GitHub Work</p>
+                  <div class="edu-links-list">
+                    <!-- UPDATE HERE: Add more ISB-related GitHub repos below -->
+                    <a class="edu-repo-link" href="https://github.com/Vridhi-Wadhawan/bank-marketing-mlops" target="_blank" rel="noopener">
+                      <span class="edu-repo-icon">⎇</span>
+                      <span>
+                        <span class="edu-repo-name">bank-marketing-mlops</span>
+                        <span class="edu-repo-desc">End-to-end MLOps pipeline — propensity modeling for campaign optimization</span>
+                      </span>
+                    </a>
+                    <a class="edu-repo-link" href="https://github.com/Vridhi-Wadhawan/business-intelligence-dashboard-tableau" target="_blank" rel="noopener">
+                      <span class="edu-repo-icon">⎇</span>
+                      <span>
+                        <span class="edu-repo-name">business-intelligence-dashboard-tableau</span>
+                        <span class="edu-repo-desc">Executive decision interface — multi-layer Tableau with drill-down KPIs</span>
+                      </span>
+                    </a>
+                    <a class="edu-repo-link" href="https://github.com/Vridhi-Wadhawan/product-segmentation-affinity-analysis" target="_blank" rel="noopener">
+                      <span class="edu-repo-icon">⎇</span>
+                      <span>
+                        <span class="edu-repo-name">product-segmentation-affinity-analysis</span>
+                        <span class="edu-repo-desc">Clustering + market basket analysis for strategy and pricing</span>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Symbiosis -->
+        <div class="edu-card" data-edu="symbiosis">
+          <div class="edu-card-header" onclick="toggleEdu('symbiosis')">
+            <div class="edu-left">
+              <div class="edu-logo-wrap">
+                <span class="edu-logo-letter">SIU</span>
+              </div>
+              <div>
+                <div class="edu-institution">Symbiosis International University</div>
+                <div class="edu-degree">Bachelor of Business Administration</div>
+                <!-- UPDATE HERE: Update degree name if different -->
+              </div>
+            </div>
+            <div class="edu-right">
+              <div class="edu-period">2018 — 2021</div>
+              <div class="edu-chevron" id="chevron-symbiosis">↓</div>
+            </div>
+          </div>
+
+          <div class="edu-expand" id="expand-symbiosis">
+            <div class="edu-expand-inner">
+              <div class="edu-detail-grid">
+                <div class="edu-detail-col">
+                  <p class="edu-detail-label">Focus Areas</p>
+                  <!-- UPDATE HERE: Update with your actual specialization / coursework -->
+                  <p class="edu-detail-text">Foundation in business strategy, economics, and management. Developed early interest in data-driven decision making and analytical problem solving.</p>
+
+                  <p class="edu-detail-label" style="margin-top:1.2rem;">Early Writing — Legex Collaboration</p>
+                  <p class="edu-detail-text">Wrote a series of published articles in collaboration with Legex during this period — exploring law, finance, and policy through an analytical lens.</p>
+                  <div class="edu-links-list" style="margin-top:1rem;">
+                    <a class="edu-repo-link" href="https://medium.com/legex/affair-shattering-the-grand-ambition-of-love-5fb71a867f36" target="_blank" rel="noopener">
+                      <span class="edu-repo-icon">✍</span>
+                      <span>
+                        <span class="edu-repo-name">The Affair</span>
+                        <span class="edu-repo-desc">On love, ambition, and the stories we tell ourselves — most praised piece</span>
+                      </span>
+                    </a>
+                    <a class="edu-repo-link" href="https://medium.com/legex/is-my-share-equal-to-yours-b604c98bdaf1" target="_blank" rel="noopener">
+                      <span class="edu-repo-icon">✍</span>
+                      <span>
+                        <span class="edu-repo-name">Is My Share Equal to Yours?</span>
+                        <span class="edu-repo-desc">A financial equity argument hiding in plain sight</span>
+                      </span>
+                    </a>
+                    <a class="edu-repo-link" href="https://medium.com/legex/dont-put-all-your-eggs-in-one-basket-2188fda8c58f" target="_blank" rel="noopener">
+                      <span class="edu-repo-icon">✍</span>
+                      <span>
+                        <span class="edu-repo-name">Don't Put All Your Eggs in One Basket</span>
+                        <span class="edu-repo-desc">The oldest strategy advice still being ignored</span>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+                <div class="edu-detail-col">
+                  <p class="edu-detail-label">Research Papers</p>
+                  <div class="edu-links-list">
+                    <!-- UPDATE HERE: Add actual research paper titles and links / Drive URLs below -->
+                    <div class="edu-repo-link edu-paper">
+                      <span class="edu-repo-icon">📄</span>
+                      <span>
+                        <span class="edu-repo-name">Research Paper I</span>
+                        <!-- UPDATE HERE: Replace with actual paper title and link -->
+                        <span class="edu-repo-desc">Unpublished — available on request</span>
+                      </span>
+                    </div>
+                    <div class="edu-repo-link edu-paper">
+                      <span class="edu-repo-icon">📄</span>
+                      <span>
+                        <span class="edu-repo-name">Research Paper II</span>
+                        <!-- UPDATE HERE: Replace with actual paper title and link -->
+                        <span class="edu-repo-desc">Unpublished — available on request</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tagore Public School (optional — kept minimal) -->
+        <div class="edu-card edu-card-minor" data-edu="tagore">
+          <div class="edu-card-header" onclick="toggleEdu('tagore')">
+            <div class="edu-left">
+              <div class="edu-logo-wrap">
+                <span class="edu-logo-letter">TPS</span>
+              </div>
+              <div>
+                <div class="edu-institution">Tagore Public School</div>
+                <div class="edu-degree">Senior Secondary — Science &amp; Mathematics</div>
+                <!-- UPDATE HERE: Update stream/board if needed -->
+              </div>
+            </div>
+            <div class="edu-right">
+              <div class="edu-period">— 2018</div>
+              <div class="edu-chevron" id="chevron-tagore">↓</div>
+            </div>
+          </div>
+
+          <div class="edu-expand" id="expand-tagore">
+            <div class="edu-expand-inner">
+              <p class="edu-detail-text">
+                <!-- UPDATE HERE: Add any notable achievements, board, percentage, or activities -->
+                Foundation years. Where curiosity became habit.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /edu-cards -->
+    </div>
+  </section>
+
+  <!-- ============================================
+       PROJECTS — Looping Carousel + Slide-in Detail Panel
+       Hover a card → click to open detail panel
+       ============================================ -->
+  <!-- SECTION: PROJECTS / CASE STUDIES CAROUSEL -->
+  <section style="padding-left:0; padding-right:0;">
+    <div id="projects">
+      <div class="section-inner">
+        <p class="section-label reveal">Work</p>
+        <h2 class="section-title reveal reveal-delay-1">Selected<br /><em>case studies.</em></h2>
+        <div class="section-divider reveal reveal-delay-2"></div>
+      </div>
+
+      <!-- Carousel -->
+      <div class="carousel-wrap reveal reveal-delay-3">
+        <div class="carousel-track-outer" id="carouselOuter">
+          <div class="carousel-track" id="carouselTrack">
+
+            <!-- CARD 1 -->
+            <div class="cs-card" data-index="0" onclick="openPanel(0)">
+              <div class="cs-card-num">01</div>
+              <div class="cs-card-name">Stock Market Anomaly Detection</div>
+              <div class="cs-card-tags">
                 <span class="tag-pill">Financial Markets</span>
                 <span class="tag-pill">ML</span>
                 <span class="tag-pill">Risk</span>
               </div>
+              <p style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--text-muted);line-height:1.7;">
+                Multi-method anomaly pipeline — Z-Score, Isolation Forest, LSTM, Autoencoder ensemble reducing false positives.
+              </p>
             </div>
 
-            <div class="case-study-pillars">
-              <div class="pillar">
-                <span class="pillar-label">Problem</span>
-                <p class="pillar-text">Market volatility creates noise that masks genuine signals. Traditional rule-based alerts flag too much or too little, leaving analysts chasing ghosts.</p>
-              </div>
-              <div class="pillar">
-                <span class="pillar-label">Insight</span>
-                <p class="pillar-text">Anomalies aren't just statistical outliers — they're narrative events. The question isn't what deviated, but why it matters in context.</p>
-              </div>
-              <div class="pillar">
-                <span class="pillar-label">System</span>
-                <p class="pillar-text">Built a multi-method detection pipeline comparing Z-Score, Isolation Forest, DBSCAN, LSTM, and Autoencoder models. Ensemble approach reduces false positives and surfaces converging signals.</p>
-              </div>
-              <div class="pillar">
-                <span class="pillar-label">Impact</span>
-                <p class="pillar-text">Produced a comparative framework that lets analysts choose detection sensitivity by use case — regulatory flagging vs. trading signal vs. risk audit.</p>
-              </div>
-            </div>
-
-            <div class="case-study-footer">
-              <a class="case-study-link" href="https://github.com/Vridhi-Wadhawan/stock-market-anomaly-detection" target="_blank" rel="noopener">
-                ↗ View on GitHub
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- ——————————————————————————
-             PROJECT 2: RAG Politics QA
-             —————————————————————————— -->
-        <article class="case-study" data-project="2">
-          <div class="case-study-inner">
-            <div class="case-study-header">
-              <h3 class="case-study-name">RAG Politics QA — LlamaIndex</h3>
-              <div class="case-study-tags">
+            <!-- CARD 2 -->
+            <div class="cs-card" data-index="1" onclick="openPanel(1)">
+              <div class="cs-card-num">02</div>
+              <div class="cs-card-name">RAG Politics QA — LlamaIndex</div>
+              <div class="cs-card-tags">
                 <span class="tag-pill">Generative AI</span>
                 <span class="tag-pill">RAG</span>
                 <span class="tag-pill">NLP</span>
               </div>
+              <p style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--text-muted);line-height:1.7;">
+                Production-grade RAG pipeline with query routing, chunk indexing, and source-attributed generation.
+              </p>
             </div>
 
-            <div class="case-study-pillars">
-              <div class="pillar">
-                <span class="pillar-label">Problem</span>
-                <p class="pillar-text">Political information is vast, contested, and source-dependent. Standard search returns results — it doesn't reason over them.</p>
-              </div>
-              <div class="pillar">
-                <span class="pillar-label">Insight</span>
-                <p class="pillar-text">The value isn't retrieval. It's attribution — knowing which document, which claim, which source supports a given answer.</p>
-              </div>
-              <div class="pillar">
-                <span class="pillar-label">System</span>
-                <p class="pillar-text">Engineered a Retrieval-Augmented Generation pipeline using LlamaIndex over a corpus of political documents. Query routing, chunk indexing, and context-aware generation with source grounding.</p>
-              </div>
-              <div class="pillar">
-                <span class="pillar-label">Impact</span>
-                <p class="pillar-text">Demonstrated production-grade RAG architecture applicable to any high-stakes, document-heavy domain — legal, regulatory, policy research.</p>
-              </div>
-            </div>
-
-            <!-- VIDEO PLACEHOLDER: Demo walkthrough coming soon -->
-            <!-- UPDATE HERE: VIDEO URL HERE — replace src below with actual mp4 or YouTube embed URL -->
-            <div class="video-placeholder">
-              <div class="video-placeholder-icon">▶</div>
-              <div class="video-placeholder-label">Demo walkthrough coming soon</div>
-            </div>
-
-            <div class="case-study-footer">
-              <a class="case-study-link" href="https://github.com/Vridhi-Wadhawan/rag-politics-qa-llamaindex" target="_blank" rel="noopener">
-                ↗ View on GitHub
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- ——————————————————————————
-             PROJECT 3: Business Intelligence Dashboard
-             —————————————————————————— -->
-        <article class="case-study" data-project="3">
-          <div class="case-study-inner">
-            <div class="case-study-header">
-              <h3 class="case-study-name">Business Intelligence Dashboard — Tableau</h3>
-              <div class="case-study-tags">
+            <!-- CARD 3 -->
+            <div class="cs-card" data-index="2" onclick="openPanel(2)">
+              <div class="cs-card-num">03</div>
+              <div class="cs-card-name">Business Intelligence Dashboard — Tableau</div>
+              <div class="cs-card-tags">
                 <span class="tag-pill">Analytics</span>
                 <span class="tag-pill">Strategy</span>
                 <span class="tag-pill">Visualization</span>
               </div>
+              <p style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--text-muted);line-height:1.7;">
+                Executive decision interface with drill-down KPIs, trend overlays, and segment filters.
+              </p>
             </div>
 
-            <div class="case-study-pillars">
-              <div class="pillar">
-                <span class="pillar-label">Problem</span>
-                <p class="pillar-text">Stakeholders were drowning in raw data exports. Decisions were being made on gut feel because the numbers weren't telling a story.</p>
-              </div>
-              <div class="pillar">
-                <span class="pillar-label">Insight</span>
-                <p class="pillar-text">A dashboard isn't a report. It's a decision interface. Design it around the question, not the data.</p>
-              </div>
-              <div class="pillar">
-                <span class="pillar-label">System</span>
-                <p class="pillar-text">Designed and built a multi-layer Tableau dashboard with drill-down KPIs, trend overlays, and segment filters. Data modeled upstream to ensure clean, query-ready structure.</p>
-              </div>
-              <div class="pillar">
-                <span class="pillar-label">Impact</span>
-                <p class="pillar-text">Transformed raw operational data into an executive-ready decision tool — the kind that shows up in boardrooms, not appendices.</p>
-              </div>
-            </div>
-
-            <div class="case-study-footer">
-              <a class="case-study-link" href="https://github.com/Vridhi-Wadhawan/business-intelligence-dashboard-tableau" target="_blank" rel="noopener">
-                ↗ View on GitHub
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- ——————————————————————————
-             PROJECT 4: Bank Marketing MLOps
-             —————————————————————————— -->
-        <article class="case-study" data-project="4">
-          <div class="case-study-inner">
-            <div class="case-study-header">
-              <h3 class="case-study-name">Bank Marketing MLOps</h3>
-              <div class="case-study-tags">
+            <!-- CARD 4 -->
+            <div class="cs-card" data-index="3" onclick="openPanel(3)">
+              <div class="cs-card-num">04</div>
+              <div class="cs-card-name">Bank Marketing MLOps</div>
+              <div class="cs-card-tags">
                 <span class="tag-pill">MLOps</span>
                 <span class="tag-pill">Prediction</span>
                 <span class="tag-pill">Pipeline</span>
               </div>
+              <p style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--text-muted);line-height:1.7;">
+                End-to-end pipeline: feature engineering → XGBoost/logistic → experiment tracking → deployment scaffold.
+              </p>
             </div>
 
-            <div class="case-study-pillars">
-              <div class="pillar">
-                <span class="pillar-label">Problem</span>
-                <p class="pillar-text">Banks run expensive outreach campaigns with low conversion rates. Without knowing who to call, every call is a lottery ticket.</p>
-              </div>
-              <div class="pillar">
-                <span class="pillar-label">Insight</span>
-                <p class="pillar-text">Propensity models only add value if they're deployed, monitored, and retrained — not left as notebooks in a repo.</p>
-              </div>
-              <div class="pillar">
-                <span class="pillar-label">System</span>
-                <p class="pillar-text">Built an end-to-end MLOps pipeline: feature engineering, model training (XGBoost/logistic), experiment tracking, and deployment scaffold with retraining triggers.</p>
-              </div>
-              <div class="pillar">
-                <span class="pillar-label">Impact</span>
-                <p class="pillar-text">Moved beyond model accuracy as a metric — demonstrated how ML creates business value only when it's operationalized, not just optimized.</p>
-              </div>
-            </div>
-
-            <div class="case-study-footer">
-              <a class="case-study-link" href="https://github.com/Vridhi-Wadhawan/bank-marketing-mlops" target="_blank" rel="noopener">
-                ↗ View on GitHub
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- ——————————————————————————
-             PROJECT 5: Product Segmentation & Affinity Analysis
-             —————————————————————————— -->
-        <article class="case-study" data-project="5">
-          <div class="case-study-inner">
-            <div class="case-study-header">
-              <h3 class="case-study-name">Product Segmentation &amp; Affinity Analysis</h3>
-              <div class="case-study-tags">
+            <!-- CARD 5 -->
+            <div class="cs-card" data-index="4" onclick="openPanel(4)">
+              <div class="cs-card-num">05</div>
+              <div class="cs-card-name">Product Segmentation &amp; Affinity Analysis</div>
+              <div class="cs-card-tags">
                 <span class="tag-pill">Strategy</span>
                 <span class="tag-pill">Customer Intelligence</span>
                 <span class="tag-pill">Clustering</span>
               </div>
+              <p style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--text-muted);line-height:1.7;">
+                K-Means + Apriori market basket analysis — cross-sell maps and segment profiles for pricing strategy.
+              </p>
             </div>
 
-            <div class="case-study-pillars">
-              <div class="pillar">
-                <span class="pillar-label">Problem</span>
-                <p class="pillar-text">One-size-fits-all product strategies ignore the natural clusters within any customer base — and leave revenue on the table.</p>
-              </div>
-              <div class="pillar">
-                <span class="pillar-label">Insight</span>
-                <p class="pillar-text">Segmentation without behavioral affinity is just demographics. The real signal is what people buy together and when.</p>
-              </div>
-              <div class="pillar">
-                <span class="pillar-label">System</span>
-                <p class="pillar-text">Combined K-Means/hierarchical clustering with market basket analysis (Apriori) to surface product affinities and segment-specific purchase patterns.</p>
-              </div>
-              <div class="pillar">
-                <span class="pillar-label">Impact</span>
-                <p class="pillar-text">Produced actionable segment profiles and cross-sell maps directly translatable into pricing, bundling, and campaign strategy — classic consulting output.</p>
-              </div>
-            </div>
-
-            <div class="case-study-footer">
-              <a class="case-study-link" href="https://github.com/Vridhi-Wadhawan/product-segmentation-affinity-analysis" target="_blank" rel="noopener">
-                ↗ View on GitHub
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- ——————————————————————————
-             PROJECT 6: Stock Forecasting MLOps
-             —————————————————————————— -->
-        <article class="case-study" data-project="6">
-          <div class="case-study-inner">
-            <div class="case-study-header">
-              <h3 class="case-study-name">Stock Forecasting MLOps</h3>
-              <div class="case-study-tags">
+            <!-- CARD 6 -->
+            <div class="cs-card" data-index="5" onclick="openPanel(5)">
+              <div class="cs-card-num">06</div>
+              <div class="cs-card-name">Stock Forecasting MLOps</div>
+              <div class="cs-card-tags">
                 <span class="tag-pill">Forecasting</span>
                 <span class="tag-pill">Time Series</span>
                 <span class="tag-pill">MLOps</span>
               </div>
+              <p style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--text-muted);line-height:1.7;">
+                Time-series system with drift detection, model versioning, scheduled retraining, prediction logging.
+              </p>
             </div>
 
-            <div class="case-study-pillars">
-              <div class="pillar">
-                <span class="pillar-label">Problem</span>
-                <p class="pillar-text">Stock price forecasting models are everywhere. Most exist as academic exercises — they break the moment market conditions shift.</p>
-              </div>
-              <div class="pillar">
-                <span class="pillar-label">Insight</span>
-                <p class="pillar-text">Forecast reliability isn't about the model architecture — it's about how quickly the system detects and adapts to drift.</p>
-              </div>
-              <div class="pillar">
-                <span class="pillar-label">System</span>
-                <p class="pillar-text">Built a time-series forecasting system with MLOps scaffolding: model versioning, drift detection hooks, scheduled retraining, and prediction logging.</p>
-              </div>
-              <div class="pillar">
-                <span class="pillar-label">Impact</span>
-                <p class="pillar-text">Shifted the framing from "can we predict prices?" to "can we build a system that knows when it's wrong?" — a fundamentally more production-honest approach.</p>
-              </div>
-            </div>
-
-            <!-- VIDEO PLACEHOLDER: Demo walkthrough coming soon -->
-            <!-- UPDATE HERE: VIDEO URL HERE — replace with actual mp4 or YouTube embed URL -->
-            <div class="video-placeholder">
-              <div class="video-placeholder-icon">▶</div>
-              <div class="video-placeholder-label">Demo walkthrough coming soon</div>
-            </div>
-
-            <div class="case-study-footer">
-              <a class="case-study-link" href="https://github.com/Vridhi-Wadhawan/stock-forecasting-mlops" target="_blank" rel="noopener">
-                ↗ View on GitHub
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- ——————————————————————————
-             PROJECT 7: Residential Complex Knowledge Graph
-             —————————————————————————— -->
-        <article class="case-study" data-project="7">
-          <div class="case-study-inner">
-            <div class="case-study-header">
-              <h3 class="case-study-name">Residential Complex Knowledge Graph</h3>
-              <div class="case-study-tags">
+            <!-- CARD 7 -->
+            <div class="cs-card" data-index="6" onclick="openPanel(6)">
+              <div class="cs-card-num">07</div>
+              <div class="cs-card-name">Residential Complex Knowledge Graph</div>
+              <div class="cs-card-tags">
                 <span class="tag-pill">Knowledge Engineering</span>
                 <span class="tag-pill">Graph DB</span>
                 <span class="tag-pill">AI</span>
               </div>
+              <p style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--text-muted);line-height:1.7;">
+                RDF/graph DB domain model — units, residents, amenities, transactions with queryable relationship edges.
+              </p>
             </div>
 
-            <div class="case-study-pillars">
-              <div class="pillar">
-                <span class="pillar-label">Problem</span>
-                <p class="pillar-text">Structured data about properties, residents, and relationships lives in silos. Queries that cross those silos require custom joins every time.</p>
-              </div>
-              <div class="pillar">
-                <span class="pillar-label">Insight</span>
-                <p class="pillar-text">Relationships are first-class data. A knowledge graph doesn't just store entities — it makes the connections queryable.</p>
-              </div>
-              <div class="pillar">
-                <span class="pillar-label">System</span>
-                <p class="pillar-text">Modeled a residential complex domain as a knowledge graph using RDF/graph DB principles. Entities: units, residents, amenities, transactions. Edges encode relationships and constraints.</p>
-              </div>
-              <div class="pillar">
-                <span class="pillar-label">Impact</span>
-                <p class="pillar-text">Demonstrated how graph-native thinking unlocks query patterns impossible in relational schemas — applicable to any domain with complex relational structures.</p>
-              </div>
-            </div>
-
-            <div class="case-study-footer">
-              <a class="case-study-link" href="https://github.com/Vridhi-Wadhawan/residential-complex-knowledge-graph" target="_blank" rel="noopener">
-                ↗ View on GitHub
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- ——————————————————————————
-             PROJECT 8: Deep Learning Models in Practice
-             —————————————————————————— -->
-        <article class="case-study" data-project="8">
-          <div class="case-study-inner">
-            <div class="case-study-header">
-              <h3 class="case-study-name">Deep Learning Models in Practice</h3>
-              <div class="case-study-tags">
+            <!-- CARD 8 -->
+            <div class="cs-card" data-index="7" onclick="openPanel(7)">
+              <div class="cs-card-num">08</div>
+              <div class="cs-card-name">Deep Learning Models in Practice</div>
+              <div class="cs-card-tags">
                 <span class="tag-pill">Deep Learning</span>
                 <span class="tag-pill">Applied AI</span>
                 <span class="tag-pill">Comparative Study</span>
               </div>
+              <p style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--text-muted);line-height:1.7;">
+                CNNs, RNNs, attention-based architectures compared — trade-offs documented across convergence, interpretability, compute.
+              </p>
             </div>
 
-            <div class="case-study-pillars">
-              <div class="pillar">
-                <span class="pillar-label">Problem</span>
-                <p class="pillar-text">Deep learning is often treated as a black box — teams pick architectures by cargo-culting papers, not by understanding fit.</p>
-              </div>
-              <div class="pillar">
-                <span class="pillar-label">Insight</span>
-                <p class="pillar-text">Architecture choice is a design decision, not a technical one. It should map to the structure of the problem, not the popularity of the paper.</p>
-              </div>
-              <div class="pillar">
-                <span class="pillar-label">System</span>
-                <p class="pillar-text">Implemented and compared multiple DL architectures (CNNs, RNNs, attention-based) across varied tasks. Documented trade-offs: convergence speed, data requirements, interpretability, compute cost.</p>
-              </div>
-              <div class="pillar">
-                <span class="pillar-label">Impact</span>
-                <p class="pillar-text">Built an internal reference framework for architecture selection — separating engineers who build models from those who design systems.</p>
-              </div>
-            </div>
+          </div><!-- /carousel-track -->
+        </div><!-- /carousel-track-outer -->
 
-            <div class="case-study-footer">
-              <a class="case-study-link" href="https://github.com/Vridhi-Wadhawan/deep-learning-models-in-practice" target="_blank" rel="noopener">
-                ↗ View on GitHub
-              </a>
-            </div>
-          </div>
-        </article>
-
-      </div><!-- /case-studies -->
+        <div class="carousel-nav" style="padding:0 3rem;">
+          <button class="carousel-btn" id="prevBtn" aria-label="Previous">←</button>
+          <button class="carousel-btn" id="nextBtn" aria-label="Next">→</button>
+          <div class="carousel-dots" id="carouselDots"></div>
+          <span style="margin-left:auto;font-family:'DM Mono',monospace;font-size:0.62rem;color:var(--text-dim);letter-spacing:0.1em;">
+            Click any card to explore
+          </span>
+        </div>
+      </div><!-- /carousel-wrap -->
     </div>
   </section>
+
+  <!-- Project Detail Panel (slides in on card click) -->
+  <div class="panel-overlay" id="panelOverlay" onclick="closePanel()"></div>
+  <div class="project-panel" id="projectPanel">
+    <button class="panel-close" onclick="closePanel()">✕</button>
+    <div id="panelContent"><!-- filled by JS --></div>
+  </div>
 
   <!-- ============================================
        WRITING / MEDIUM
@@ -1383,12 +1634,12 @@
   </section>
 
   <!-- ============================================
-       & OTHER THINGS — Wady's Kitchen
+       BEYOND WORK — Wady's Kitchen
        ============================================ -->
-  <!-- SECTION: OTHER THINGS / WADY'S KITCHEN -->
+  <!-- SECTION: BEYOND WORK / WADY'S KITCHEN -->
   <section>
-    <div id="other-things">
-      <p class="section-label reveal">&amp; Other Things</p>
+    <div id="beyond-work">
+      <p class="section-label reveal">Beyond Work</p>
       <h2 class="section-title reveal reveal-delay-1">
         Wady's<br /><em>Kitchen.</em>
       </h2>
@@ -1642,24 +1893,228 @@
     document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
     /* ——————————————————————————
-       CASE STUDY SCROLL REVEAL
-       Each .case-study triggers, then staggered .pillar reveals
+       EDUCATION — Click toggle
        —————————————————————————— */
-    const caseStudyObs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          // Stagger the pillars
-          const pillars = e.target.querySelectorAll('.pillar');
-          pillars.forEach((p, i) => {
-            setTimeout(() => p.classList.add('visible'), 180 + i * 140);
-          });
-          caseStudyObs.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.08 });
+    function toggleEdu(id) {
+      const card     = document.querySelector(`.edu-card[data-edu="${id}"]`);
+      const isActive = card.classList.contains('active');
+      // Close all
+      document.querySelectorAll('.edu-card').forEach(c => c.classList.remove('active'));
+      if (!isActive) card.classList.add('active');
+    }
 
-    document.querySelectorAll('.case-study').forEach(el => caseStudyObs.observe(el));
+    /* ——————————————————————————
+       PROJECT DATA — full copy for panel
+       —————————————————————————— */
+    const PROJECTS = [
+      {
+        name: 'Stock Market Anomaly Detection',
+        tags: ['Financial Markets','ML','Risk'],
+        problem: 'Market volatility creates noise that masks genuine signals. Traditional rule-based alerts flag too much or too little, leaving analysts chasing ghosts.',
+        insight: 'Anomalies aren\'t just statistical outliers — they\'re narrative events. The question isn\'t what deviated, but why it matters in context.',
+        system: 'Built a multi-method detection pipeline comparing Z-Score, Isolation Forest, DBSCAN, LSTM, and Autoencoder models. Ensemble approach reduces false positives and surfaces converging signals.',
+        impact: 'Produced a comparative framework that lets analysts choose detection sensitivity by use case — regulatory flagging vs. trading signal vs. risk audit.',
+        github: 'https://github.com/Vridhi-Wadhawan/stock-market-anomaly-detection',
+        video: false
+      },
+      {
+        name: 'RAG Politics QA — LlamaIndex',
+        tags: ['Generative AI','RAG','NLP'],
+        problem: 'Political information is vast, contested, and source-dependent. Standard search returns results — it doesn\'t reason over them.',
+        insight: 'The value isn\'t retrieval. It\'s attribution — knowing which document, which claim, which source supports a given answer.',
+        system: 'Engineered a Retrieval-Augmented Generation pipeline using LlamaIndex over a corpus of political documents. Query routing, chunk indexing, and context-aware generation with source grounding.',
+        impact: 'Demonstrated production-grade RAG architecture applicable to any high-stakes, document-heavy domain — legal, regulatory, policy research.',
+        github: 'https://github.com/Vridhi-Wadhawan/rag-politics-qa-llamaindex',
+        video: true
+      },
+      {
+        name: 'Business Intelligence Dashboard — Tableau',
+        tags: ['Analytics','Strategy','Visualization'],
+        problem: 'Stakeholders were drowning in raw data exports. Decisions were being made on gut feel because the numbers weren\'t telling a story.',
+        insight: 'A dashboard isn\'t a report. It\'s a decision interface. Design it around the question, not the data.',
+        system: 'Designed and built a multi-layer Tableau dashboard with drill-down KPIs, trend overlays, and segment filters. Data modeled upstream to ensure clean, query-ready structure.',
+        impact: 'Transformed raw operational data into an executive-ready decision tool — the kind that shows up in boardrooms, not appendices.',
+        github: 'https://github.com/Vridhi-Wadhawan/business-intelligence-dashboard-tableau',
+        video: false
+      },
+      {
+        name: 'Bank Marketing MLOps',
+        tags: ['MLOps','Prediction','Pipeline'],
+        problem: 'Banks run expensive outreach campaigns with low conversion rates. Without knowing who to call, every call is a lottery ticket.',
+        insight: 'Propensity models only add value if they\'re deployed, monitored, and retrained — not left as notebooks in a repo.',
+        system: 'Built an end-to-end MLOps pipeline: feature engineering, model training (XGBoost/logistic), experiment tracking, and deployment scaffold with retraining triggers.',
+        impact: 'Moved beyond model accuracy as a metric — demonstrated how ML creates business value only when it\'s operationalized, not just optimized.',
+        github: 'https://github.com/Vridhi-Wadhawan/bank-marketing-mlops',
+        video: false
+      },
+      {
+        name: 'Product Segmentation & Affinity Analysis',
+        tags: ['Strategy','Customer Intelligence','Clustering'],
+        problem: 'One-size-fits-all product strategies ignore the natural clusters within any customer base — and leave revenue on the table.',
+        insight: 'Segmentation without behavioral affinity is just demographics. The real signal is what people buy together and when.',
+        system: 'Combined K-Means/hierarchical clustering with market basket analysis (Apriori) to surface product affinities and segment-specific purchase patterns.',
+        impact: 'Produced actionable segment profiles and cross-sell maps directly translatable into pricing, bundling, and campaign strategy — classic consulting output.',
+        github: 'https://github.com/Vridhi-Wadhawan/product-segmentation-affinity-analysis',
+        video: false
+      },
+      {
+        name: 'Stock Forecasting MLOps',
+        tags: ['Forecasting','Time Series','MLOps'],
+        problem: 'Stock price forecasting models are everywhere. Most exist as academic exercises — they break the moment market conditions shift.',
+        insight: 'Forecast reliability isn\'t about the model architecture — it\'s about how quickly the system detects and adapts to drift.',
+        system: 'Built a time-series forecasting system with MLOps scaffolding: model versioning, drift detection hooks, scheduled retraining, and prediction logging.',
+        impact: 'Shifted the framing from "can we predict prices?" to "can we build a system that knows when it\'s wrong?" — a fundamentally more production-honest approach.',
+        github: 'https://github.com/Vridhi-Wadhawan/stock-forecasting-mlops',
+        video: true
+      },
+      {
+        name: 'Residential Complex Knowledge Graph',
+        tags: ['Knowledge Engineering','Graph DB','AI'],
+        problem: 'Structured data about properties, residents, and relationships lives in silos. Queries that cross those silos require custom joins every time.',
+        insight: 'Relationships are first-class data. A knowledge graph doesn\'t just store entities — it makes the connections queryable.',
+        system: 'Modeled a residential complex domain as a knowledge graph using RDF/graph DB principles. Entities: units, residents, amenities, transactions. Edges encode relationships and constraints.',
+        impact: 'Demonstrated how graph-native thinking unlocks query patterns impossible in relational schemas — applicable to any domain with complex relational structures.',
+        github: 'https://github.com/Vridhi-Wadhawan/residential-complex-knowledge-graph',
+        video: false
+      },
+      {
+        name: 'Deep Learning Models in Practice',
+        tags: ['Deep Learning','Applied AI','Comparative Study'],
+        problem: 'Deep learning is often treated as a black box — teams pick architectures by cargo-culting papers, not by understanding fit.',
+        insight: 'Architecture choice is a design decision, not a technical one. It should map to the structure of the problem, not the popularity of the paper.',
+        system: 'Implemented and compared multiple DL architectures (CNNs, RNNs, attention-based) across varied tasks. Documented trade-offs: convergence speed, data requirements, interpretability, compute cost.',
+        impact: 'Built an internal reference framework for architecture selection — separating engineers who build models from those who design systems.',
+        github: 'https://github.com/Vridhi-Wadhawan/deep-learning-models-in-practice',
+        video: false
+      }
+    ];
+
+    /* ——————————————————————————
+       CAROUSEL
+       —————————————————————————— */
+    const track  = document.getElementById('carouselTrack');
+    const outer  = document.getElementById('carouselOuter');
+    const dotsEl = document.getElementById('carouselDots');
+    const cards  = Array.from(track.querySelectorAll('.cs-card'));
+    const CARD_W = 340 + 24; // card width + gap
+    let currentIdx = 0;
+    let autoTimer;
+
+    // Build dots
+    cards.forEach((_, i) => {
+      const d = document.createElement('div');
+      d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      d.addEventListener('click', () => goTo(i));
+      dotsEl.appendChild(d);
+    });
+
+    // Add left padding so first card isn't flush
+    track.style.paddingLeft = '3rem';
+    track.style.paddingRight = '3rem';
+
+    function goTo(idx) {
+      currentIdx = ((idx % cards.length) + cards.length) % cards.length;
+      track.style.transform = `translateX(calc(-${currentIdx * CARD_W}px))`;
+      // Update dots
+      document.querySelectorAll('.carousel-dot').forEach((d,i) => {
+        d.classList.toggle('active', i === currentIdx);
+      });
+      // Update card highlight
+      cards.forEach((c,i) => c.classList.toggle('active-card', i === currentIdx));
+    }
+
+    function startAuto() {
+      clearInterval(autoTimer);
+      autoTimer = setInterval(() => goTo(currentIdx + 1), 3200);
+    }
+
+    document.getElementById('prevBtn').addEventListener('click', () => { goTo(currentIdx - 1); startAuto(); });
+    document.getElementById('nextBtn').addEventListener('click', () => { goTo(currentIdx + 1); startAuto(); });
+
+    // Drag to scroll
+    let dragStart = 0, dragging = false;
+    outer.addEventListener('mousedown', e => { dragStart = e.clientX; dragging = true; clearInterval(autoTimer); });
+    outer.addEventListener('mousemove', e => { if (dragging) e.preventDefault(); });
+    outer.addEventListener('mouseup', e => {
+      if (!dragging) return;
+      dragging = false;
+      const diff = dragStart - e.clientX;
+      if (Math.abs(diff) > 40) goTo(currentIdx + (diff > 0 ? 1 : -1));
+      startAuto();
+    });
+    outer.addEventListener('mouseleave', () => { if (dragging) { dragging = false; startAuto(); } });
+
+    // Pause on hover
+    outer.addEventListener('mouseenter', () => clearInterval(autoTimer));
+    outer.addEventListener('mouseleave', () => startAuto());
+
+    goTo(0);
+    startAuto();
+
+    /* ——————————————————————————
+       PROJECT PANEL
+       —————————————————————————— */
+    const panel   = document.getElementById('projectPanel');
+    const overlay = document.getElementById('panelOverlay');
+    const content = document.getElementById('panelContent');
+
+    function openPanel(idx) {
+      const p = PROJECTS[idx];
+      const tagHTML = p.tags.map(t => `<span class="tag-pill">${t}</span>`).join('');
+      const videoHTML = p.video ? `
+        <div class="panel-video-placeholder">
+          <!-- UPDATE HERE: VIDEO URL HERE — replace with mp4 or YouTube embed URL -->
+          <div style="font-size:1.2rem;opacity:0.3;margin-bottom:0.4rem;">▶</div>
+          <div class="panel-video-label">Demo walkthrough coming soon</div>
+        </div>` : '';
+
+      content.innerHTML = `
+        <p class="panel-eyebrow">Case Study</p>
+        <h2 class="panel-title">${p.name}</h2>
+        <div class="panel-tags">${tagHTML}</div>
+
+        <div class="panel-pillars">
+          <div class="panel-pillar">
+            <span class="panel-pillar-label">Problem</span>
+            <p class="panel-pillar-text">${p.problem}</p>
+          </div>
+          <div class="panel-pillar">
+            <span class="panel-pillar-label">Insight</span>
+            <p class="panel-pillar-text">${p.insight}</p>
+          </div>
+          <div class="panel-pillar">
+            <span class="panel-pillar-label">System</span>
+            <p class="panel-pillar-text">${p.system}</p>
+          </div>
+          <div class="panel-pillar">
+            <span class="panel-pillar-label">Impact</span>
+            <p class="panel-pillar-text">${p.impact}</p>
+          </div>
+        </div>
+
+        <!-- UPDATE HERE: Add system architecture image URL below -->
+        <div class="panel-arch">
+          <p class="panel-arch-label">System Architecture</p>
+          <p class="panel-arch-placeholder">Diagram coming soon — drop an image URL in the comment above</p>
+        </div>
+
+        ${videoHTML}
+
+        <a class="panel-github-link" href="${p.github}" target="_blank" rel="noopener">↗ View on GitHub</a>
+      `;
+      panel.classList.add('open');
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePanel() {
+      panel.classList.remove('open');
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // ESC key closes panel
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
 
     /* ——————————————————————————
        YOUTUBE — Hover to unmute autoplay
