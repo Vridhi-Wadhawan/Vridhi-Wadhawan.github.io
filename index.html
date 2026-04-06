@@ -2069,6 +2069,17 @@
     function openPanel(idx) {
       const p = PROJECTS[idx];
       const tagHTML = p.tags.map(t => `<span class="tag-pill">${t}</span>`).join('');
+        // Logic for architecture image
+      const archHTML = p.image ? `
+        <div class="panel-arch">
+          <p class="panel-arch-label">System Architecture</p>
+          <img src="${p.image}" alt="${p.name} Architecture" style="width:100%; border-radius:8px; margin-top:12px; border: 1px solid rgba(255,255,255,0.1); display:block;">
+        </div>` : `    
+        <div class="panel-arch">
+          <p class="panel-arch-label">System Architecture</p>
+          <p class="panel-arch-placeholder">Case study documentation in progress</p>
+      </div>`;
+        
       const videoHTML = p.video ? `
         <div class="panel-video-placeholder">
           <!-- UPDATE HERE: VIDEO URL HERE — replace with mp4 or YouTube embed URL -->
@@ -2106,6 +2117,7 @@
           <p class="panel-arch-placeholder">Diagram coming soon — drop an image URL in the comment above</p>
         </div>
 
+        ${archHTML}
         ${videoHTML}
 
         <a class="panel-github-link" href="${p.github}" target="_blank" rel="noopener">↗ View on GitHub</a>
