@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vridhi Wadhawan — AI & Data Professional</title>
+  <!-- FAVICON: VW monogram — update color if theme changes -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23080C0C'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-size='13' font-weight='400' fill='%230ABAB5' letter-spacing='0'>VW</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet" />
@@ -39,24 +41,24 @@
       --shadow-glow: 0 0 40px rgba(10,186,181,0.08);
     }
 
-    [data-theme="light"] {
-      --bg: #EDE8DF;
-      --bg2: #E5DED3;
-      --bg3: #DDD4C6;
-      --text: #2C1F0E;
-      --text-muted: #6B5240;
-      --text-dim: #A08C76;
-      --accent: #C4622D;
-      --accent-dim: rgba(196,98,45,0.10);
-      --accent-glow: rgba(196,98,45,0.25);
-      --border: rgba(196,98,45,0.18);
-      --border-hover: rgba(196,98,45,0.45);
-      --pill-bg: rgba(196,98,45,0.08);
-      --card-bg: rgba(237,232,223,0.80);
-      --card-border: rgba(196,98,45,0.18);
-      --pillar-border: #C4622D;
-      --shadow-glow: 0 0 40px rgba(196,98,45,0.08);
-    }
+[data-theme="light"] {
+  --bg: #F2EDE4;
+  --bg2: #EBE4D8;
+  --bg3: #E3D9C8;
+  --text: #2C1F0E;
+  --text-muted: #6B5240;
+  --text-dim: #A08C76;
+  --accent: #C4622D;
+  --accent-dim: rgba(196,98,45,0.10);
+  --accent-glow: rgba(196,98,45,0.25);
+  --border: rgba(196,98,45,0.18);
+  --border-hover: rgba(196,98,45,0.45);
+  --pill-bg: rgba(196,98,45,0.08);
+  --card-bg: rgba(232,224,208,0.80);
+  --card-border: rgba(196,98,45,0.18);
+  --pillar-border: #C4622D;
+  --shadow-glow: 0 0 40px rgba(196,98,45,0.08);
+}
 
     /* ============================================
        RESET & BASE
@@ -80,26 +82,26 @@
     /* ============================================
        CUSTOM CURSOR — Tiffany Blue Glow
        ============================================ */
-    #cursor-dot {
-      width: 8px; height: 8px;
-      background: var(--tiffany);
-      border-radius: 50%;
-      position: fixed; top: 0; left: 0;
-      pointer-events: none; z-index: 9999;
-      transform: translate(-50%, -50%);
-      transition: transform 0.08s ease;
-      box-shadow: 0 0 12px var(--tiffany), 0 0 24px var(--tiffany-glow);
-    }
-    #cursor-ring {
-      width: 32px; height: 32px;
-      border: 1px solid var(--tiffany);
-      border-radius: 50%;
-      position: fixed; top: 0; left: 0;
-      pointer-events: none; z-index: 9998;
-      transform: translate(-50%, -50%);
-      transition: transform 0.18s ease, width 0.2s, height 0.2s, opacity 0.2s;
-      opacity: 0.6;
-    }
+   #cursor-dot {
+  width: 8px; height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.08s ease, background 0.4s ease;
+  box-shadow: 0 0 12px var(--accent), 0 0 24px var(--accent-glow);
+}
+#cursor-ring {
+  width: 32px; height: 32px;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.18s ease, width 0.2s, height 0.2s, opacity 0.2s, border-color 0.4s ease;
+  opacity: 0.6;
+}
     body:has(a:hover) #cursor-ring,
     body:has(button:hover) #cursor-ring { width: 48px; height: 48px; opacity: 0.9; }
 
@@ -117,7 +119,7 @@
       border-bottom: 1px solid var(--border);
       transition: background 0.4s ease;
     }
-    [data-theme="light"] nav { background: rgba(249,245,239,0.8); }
+    [data-theme="light"] nav { background: rgba(237,232,223,0.88); }
 
     .nav-name {
       font-family: 'Syne', sans-serif;
@@ -125,7 +127,9 @@
       font-size: 0.95rem;
       letter-spacing: 0.08em;
       color: var(--text);
+      text-decoration: none;
     }
+    .nav-name:hover { opacity: 1; }
     .nav-name span { color: var(--accent); }
 
     .nav-links {
@@ -160,19 +164,33 @@
        HERO — Particle Canvas + Typed Tagline
        ============================================ */
     /* SECTION: HERO */
-    #hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex; align-items: center;
-      padding: 0 3rem;
-      overflow: hidden;
-    }
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 0 3rem;
+  overflow: hidden;
+}
 
-    #particle-canvas {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      opacity: 0.55;
-    }
+#hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 220px;
+  background: linear-gradient(to bottom, transparent, var(--bg));
+  z-index: 3;
+  pointer-events: none;
+}
+
+#particle-canvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  opacity: 0.75;
+  pointer-events: none;
+}
+
 
     .hero-content {
       position: relative; z-index: 2;
@@ -420,181 +438,199 @@
     }
 
     /* ============================================
-       EDUCATION — Click-expand cards with linked content
+       EDUCATION — Timeline, hover-reveal details
        ============================================ */
     /* SECTION: EDUCATION */
-    #education { max-width: 1100px; margin: 0 auto; }
+    #education { max-width: 900px; margin: 0 auto; }
 
-    .edu-cards { display: flex; flex-direction: column; gap: 2px; }
-
-    .edu-card {
-      border: 1px solid var(--card-border);
-      background: var(--card-bg);
-      overflow: hidden;
-      transition: border-color 0.3s;
+    .edu-timeline {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      padding-left: 1.5rem;
     }
-    .edu-card.active { border-color: var(--border-hover); }
-    .edu-card-minor { opacity: 0.75; }
-    .edu-card-minor.active { opacity: 1; }
+    /* Vertical line */
+    .edu-timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px; bottom: 8px;
+      width: 1px;
+      background: var(--border);
+    }
 
-    .edu-card-header {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 2rem 3rem;
-      cursor: none;
+    .edu-row {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 0 3rem;
+      padding: 2.5rem 0 2.5rem 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      transition: opacity 0.3s;
+    }
+    .edu-row:last-child { border-bottom: none; }
+
+    /* Dot on timeline */
+    .edu-row::before {
+      content: '';
+      position: absolute;
+      left: -4px; top: 2.9rem;
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 1.5px solid var(--accent);
       transition: background 0.3s;
-      gap: 1rem;
     }
-    .edu-card-header:hover { background: var(--bg3); }
+    .edu-row:hover::before { background: var(--accent); }
 
-    .edu-left {
-      display: flex; align-items: center; gap: 1.5rem;
+    /* Dim siblings on hover */
+    .edu-timeline:has(.edu-row:hover) .edu-row:not(:hover) {
+      opacity: 0.45;
     }
 
-    .edu-logo-wrap {
-      width: 52px; height: 52px;
-      border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
+    .edu-meta {
+      padding-left: 1.5rem;
+      padding-top: 0.15rem;
     }
-    .edu-logo-letter {
+    .edu-year {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      color: var(--text-dim);
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+    }
+    .edu-abbr {
       font-family: 'Syne', sans-serif;
-      font-size: 0.6rem;
+      font-size: 0.7rem;
       font-weight: 800;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.08em;
       color: var(--accent);
+      opacity: 0.5;
     }
 
-    .edu-institution {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.05rem;
-      font-weight: 700;
+    .edu-body {}
+
+    .edu-inst-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 400;
       color: var(--text);
-      margin-bottom: 0.2rem;
+      line-height: 1.2;
+      margin-bottom: 0.3rem;
     }
-    .edu-degree {
+
+    .edu-prog {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Details visible always but subtle; emphasised on hover */
+    .edu-details {
       font-family: 'DM Mono', monospace;
       font-size: 0.7rem;
       color: var(--text-muted);
-      letter-spacing: 0.05em;
+      line-height: 1.8;
+      opacity: 0.55;
+      transform: translateY(4px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
     }
-    .edu-badge {
+    .edu-row:hover .edu-details {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .edu-highlight {
       display: inline-block;
-      margin-top: 0.4rem;
+      margin-top: 0.5rem;
       font-family: 'DM Mono', monospace;
-      font-size: 0.55rem;
-      letter-spacing: 0.1em;
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      padding: 0.2rem 0.6rem;
+      padding: 0.25rem 0.7rem;
       background: var(--accent-dim);
       border: 1px solid var(--border);
       color: var(--accent);
       border-radius: 2px;
     }
 
-    .edu-right {
-      display: flex; align-items: center; gap: 1.5rem;
-      flex-shrink: 0;
-    }
-    .edu-period {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--text-dim);
-      letter-spacing: 0.08em;
-    }
-    .edu-chevron {
-      font-size: 0.85rem;
-      color: var(--accent);
-      transition: transform 0.35s ease;
-    }
-    .edu-card.active .edu-chevron { transform: rotate(180deg); }
-
-    .edu-expand {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.55s cubic-bezier(0.4,0,0.2,1);
-    }
-    .edu-card.active .edu-expand { max-height: 700px; }
-
-    .edu-expand-inner {
-      padding: 0 3rem 2.5rem;
-      border-top: 1px solid var(--border);
-      margin-top: 0;
-      padding-top: 2rem;
+    @media (max-width: 700px) {
+      .edu-row { grid-template-columns: 1fr; gap: 0.5rem; }
+      .edu-timeline::before { display: none; }
+      .edu-row::before { display: none; }
+      .edu-meta { padding-left: 0; }
     }
 
-    .edu-detail-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-    }
+    /* ============================================
+       RESEARCH PAPERS — Minimal intellectual cards
+       ============================================ */
+    /* SECTION: RESEARCH PAPERS */
+   /* ============================================
+   RESEARCH PAPERS
+   ============================================ */
+#research { max-width: 900px; margin: 0 auto; }
 
-    .edu-detail-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.6rem;
-    }
-    .edu-detail-text {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      line-height: 1.8;
-    }
+.research-cards { display: flex; flex-direction: column; }
 
-    .edu-links-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
+.research-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--border);
+  gap: 2rem;
+  transition: padding-left 0.3s ease, opacity 0.3s;
+  cursor: default;
+}
+.research-card:first-child { border-top: 1px solid var(--border); }
+.research-cards:has(.research-card:hover) .research-card:not(:hover) { opacity: 0.45; }
+.research-card:hover { padding-left: 1rem; }
 
-    .edu-repo-link {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.75rem;
-      padding: 0.85rem 1rem;
-      border: 1px solid var(--border);
-      background: var(--accent-dim);
-      text-decoration: none;
-      transition: border-color 0.2s, background 0.2s;
-      cursor: none;
-    }
-    a.edu-repo-link:hover {
-      border-color: var(--border-hover);
-      background: rgba(10,186,181,0.12);
-      opacity: 1;
-    }
-    [data-theme="light"] a.edu-repo-link:hover { background: rgba(196,98,45,0.1); }
+.research-paper-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--text);
+  transition: color 0.2s;
+}
+.research-card:hover .research-paper-title { color: var(--accent); }
 
-    .edu-paper { cursor: default; }
+.research-paper-desc {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+  line-height: 1.6;
+}
 
-    .edu-repo-icon {
-      font-size: 0.85rem;
-      flex-shrink: 0;
-      color: var(--accent);
-      margin-top: 1px;
-    }
-    .edu-repo-name {
-      display: block;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--text);
-      margin-bottom: 0.2rem;
-    }
-    .edu-repo-desc {
-      display: block;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
+.research-arrow {
+  font-size: 0.8rem;
+  color: var(--accent);
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.research-card:hover .research-arrow { opacity: 1; }
 
-    @media (max-width: 760px) {
-      .edu-card-header { padding: 1.5rem; }
-      .edu-expand-inner { padding: 1.5rem; }
-      .edu-detail-grid { grid-template-columns: 1fr; gap: 2rem; }
-    }
+.research-preview {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, opacity 0.4s ease;
+  opacity: 0;
+}
+.research-card:hover .research-preview {
+  max-height: 400px;
+  opacity: 1;
+}
+.research-preview img {
+  width: 100%;
+  max-width: 480px;
+  margin-top: 1rem;
+  border: 1px solid var(--border);
+  display: block;
+}
 
     /* ============================================
        CASE STUDY CAROUSEL
@@ -705,30 +741,40 @@
     }
     .carousel-dot.active { background: var(--accent); width: 20px; border-radius: 3px; }
 
-    /* Project detail panel — slides in from right */
-    .project-panel {
-      position: fixed;
-      top: 0; right: -100%;
-      width: min(680px, 100vw);
-      height: 100vh;
-      background: var(--bg2);
-      border-left: 1px solid var(--border-hover);
-      z-index: 500;
-      overflow-y: auto;
-      transition: right 0.45s cubic-bezier(0.4,0,0.2,1);
-      padding: 3rem;
-    }
-    .project-panel.open { right: 0; }
-
+/* Project detail modal — centered */
     .panel-overlay {
       position: fixed; inset: 0;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0,0,0,0.75);
       z-index: 499;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.4s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
     }
     .panel-overlay.open { opacity: 1; pointer-events: all; }
+
+    .project-panel {
+      position: relative;
+      width: 100%;
+      max-width: 760px;
+      max-height: 88vh;
+      background: var(--bg2);
+      border: 1px solid var(--border-hover);
+      z-index: 500;
+      overflow-y: auto;
+      padding: 3rem;
+      border-radius: 2px;
+      transform: translateY(24px) scale(0.98);
+      opacity: 0;
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.4s ease;
+    }
+    .project-panel.open {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
 
     .panel-close {
       position: absolute; top: 1.5rem; right: 1.5rem;
@@ -916,6 +962,7 @@
 
     /* ============================================
        BEYOND WORK — Wady's Kitchen
+       Clean videos, no background container
        ============================================ */
     /* SECTION: BEYOND WORK / WADY'S KITCHEN */
     #beyond-work { max-width: 1200px; margin: 0 auto; }
@@ -928,33 +975,91 @@
       line-height: 1.9;
       margin-bottom: 3rem;
     }
-
     .videos-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-    .videos-grid .video-item:first-child {
-      grid-column: span 2;
-    }
+      grid-template-columns: 2fr 1fr;
+      gap: 1rem;}
+    /* Big video */
+    .videos-grid .video-item:nth-child(1) {
+      grid-column: 1;
+      grid-row: 1 / span 2;}
 
+/* Right column */
+    .videos-grid .video-item:nth-child(2) {
+      grid-column: 2;
+      grid-row: 1;
+    }
+    .videos-grid .video-item:nth-child(3) {
+      grid-column: 2;
+      grid-row: 2;}
+/* Bottom row */
+    .videos-grid .video-item:nth-child(4) {
+      grid-column: 1;
+      grid-row: 3;
+    }
+    .videos-grid .video-item:nth-child(5) {
+      grid-column: 2;
+      grid-row: 3;
+    }
+    /* UPDATE HERE: Video items — no bg container, clean embed */
     .video-item {
       position: relative;
-      background: var(--bg3);
-      border: 1px solid var(--card-border);
       overflow: hidden;
+      /* No background, no border — clean embed */
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1),
+                  box-shadow 0.35s ease,
+                  opacity 0.35s ease;
+    }
+
+    /* Netflix-style: siblings dim when one is hovered */
+    .videos-grid:has(.video-item:hover) .video-item:not(:hover) {
+      opacity: 0.55;
+      transform: scale(0.98);
+      align-items: start;
+    }
+    .video-item:hover {
+      transform: scale(1.06);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px var(--border-hover);
+      z-index: 2;
     }
 
     .video-thumb-wrap {
       position: relative;
-      padding-bottom: 56.25%; /* 16:9 */
+      aspect-ratio: 16 / 9;
       overflow: hidden;
+      background: var(--bg3); /* Only shown before load */
     }
     .video-thumb-wrap iframe {
+      position: absolute; 
+      inset: 0;
+      width: 100%; 
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Thumbnail overlay — shown until hover */
+    .video-thumb-img {
       position: absolute; inset: 0;
       width: 100%; height: 100%;
-      border: none;
+      object-fit: cover;
+      transition: opacity 0.3s;
+      z-index: 1;
     }
+    .video-play-icon {
+      position: absolute;
+      inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 2;
+      transition: opacity 0.3s;
+    }
+    .video-play-icon svg {
+      width: 44px; height: 44px;
+      fill: rgba(255,255,255,0.85);
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+    }
+    /* When video is loaded (hovering), hide overlay */
+    .video-item.playing .video-thumb-img,
+    .video-item.playing .video-play-icon { opacity: 0; pointer-events: none; }
 
     /* ============================================
        CONTACT
@@ -967,15 +1072,13 @@
       padding: 8rem 3rem;
     }
 
-    /* UPDATE HERE: Replace with your video URL if desired */
-    #contact-bg-video {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      opacity: 0.06;
-      z-index: 0;
-    }
-
+#contact-canvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  opacity: 0.7;
+  z-index: 0;
+  pointer-events: none;
+}
     .contact-inner {
       position: relative; z-index: 1;
       max-width: 700px;
@@ -1000,8 +1103,10 @@
     }
 
     .contact-links {
-      display: flex; gap: 2rem; justify-content: center;
+      display: flex; gap: 1rem; justify-content: center;
       flex-wrap: wrap;
+      max-width: 640px;
+      margin: 0 auto;
     }
 
     .contact-link {
@@ -1035,27 +1140,27 @@
     }
 
     /* ============================================
-       FOOTER
-       ============================================ */
-    footer {
-      padding: 2rem 3rem;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .footer-copy {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.1em;
-      color: var(--text-dim);
-    }
-    .footer-sig {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 0.9rem;
-      color: var(--text-dim);
-    }
+   FOOTER
+   ============================================ */
+footer {
+  padding: 2rem 3rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-copy {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+}
+.footer-sig {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+}
 
     /* ============================================
        ANIMATIONS
@@ -1077,25 +1182,45 @@
        MOBILE RESPONSIVE
        ============================================ */
     @media (max-width: 900px) {
-      nav { padding: 1.2rem 1.5rem; }
-      .nav-links { gap: 1.5rem; }
-      section { padding: 5rem 1.5rem; }
-      #hero { padding: 0 1.5rem; }
-      #about { grid-template-columns: 1fr; gap: 3rem; }
-      .about-photo-wrap { max-width: 300px; }
-      .case-study-pillars { grid-template-columns: 1fr; }
-      .videos-grid { grid-template-columns: 1fr 1fr; }
-      .videos-grid .video-item:first-child { grid-column: span 2; }
-      .case-study-inner { padding: 2rem 1.5rem; }
-    }
+  nav { padding: 1.2rem 1.5rem; }
+  .nav-links { gap: 1.5rem; }
+  section { padding: 5rem 1.5rem; }
+  #hero { padding: 0 1.5rem; }
+  #about { grid-template-columns: 1fr; gap: 3rem; }
+  .about-photo-wrap { max-width: 300px; }
+  .videos-grid { grid-template-columns: 1fr 1fr; }
+  .videos-grid .video-item:first-child { grid-column: span 2; }
+  .edu-timeline { padding-left: 1.5rem; }
+  .edu-timeline::before { left: 0; }
+  .edu-row::before { left: -4px; }
+  .work-card { padding: 2rem 1.5rem; }
+  #work, #education, #research, #writing { max-width: 100%; }
+}
 
-    @media (max-width: 600px) {
-      .nav-links { display: none; }
-      .videos-grid { grid-template-columns: 1fr; }
-      .videos-grid .video-item:first-child { grid-column: span 1; }
-      .contact-links { flex-direction: column; align-items: center; }
-      footer { flex-direction: column; gap: 0.75rem; text-align: center; }
-    }
+@media (max-width: 600px) {
+  html { font-size: 95%; }
+  .nav-links { display: none; }
+  .hero-name { font-size: clamp(2.8rem, 12vw, 4rem); }
+  .section-title { font-size: clamp(2rem, 8vw, 3rem); }
+  .videos-grid { grid-template-columns: 1fr; }
+  .videos-grid .video-item:first-child { grid-column: span 1; }
+  .contact-links { flex-direction: column; align-items: center; }
+  .contact-links .contact-link { width: 100%; max-width: 280px; text-align: center; }
+  footer { flex-direction: column; gap: 1rem; text-align: center; }
+  .footer-sig { text-align: center; }
+  .edu-row { grid-template-columns: 1fr; padding: 1.75rem 0; }
+  .edu-meta { padding-left: 1.5rem; }
+  .edu-body { padding-left: 1.5rem; }
+  .work-card { padding: 1.5rem 1rem; }
+  .cs-card { flex: 0 0 280px; }
+  #hero { min-height: 100svh; }
+}
+
+/* Zoom / large text handling */
+@media (max-width: 1100px) {
+  .hero-name { font-size: clamp(3rem, 6vw, 5.5rem); }
+  #about { gap: 3rem; }
+}
   </style>
 </head>
 <body>
@@ -1109,14 +1234,14 @@
        ============================================ -->
   <!-- SECTION: NAV -->
   <nav>
-    <div class="nav-name">V<span>.</span>W</div>
+    <a href="#" class="nav-name">V<span>.</span>W</a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#work">Work</a></li>
       <li><a href="#education">Education</a></li>
+      <li><a href="#research">Research</a></li>
       <li><a href="#projects">Projects</a></li>
-      <li><a href="#writing">Writing</a></li>
-      <li><a href="#beyond-work">Beyond Work</a></li>
+      <li><a href="#writing">Beyond Work</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <button id="theme-toggle" aria-label="Toggle theme">☽ Light</button>
@@ -1185,7 +1310,7 @@
   <!-- SECTION: WORK -->
   <section>
     <div id="work">
-      <p class="section-label reveal">Experience</p>
+      <p class="section-label reveal">Work</p>
       <h2 class="section-title reveal reveal-delay-1">Where I've<br /><em>built things.</em></h2>
       <div class="section-divider reveal reveal-delay-2"></div>
 
@@ -1232,8 +1357,8 @@
   </section>
 
   <!-- ============================================
-       EDUCATION — Tabbed: ISB / Symbiosis / Tagore
-       Click to expand each card with linked content
+       EDUCATION SECTION
+       Hover a row to emphasise details. No links inside.
        ============================================ -->
   <!-- SECTION: EDUCATION -->
   <section>
@@ -1242,178 +1367,106 @@
       <h2 class="section-title reveal reveal-delay-1">Where I've<br /><em>learned to think.</em></h2>
       <div class="section-divider reveal reveal-delay-2"></div>
 
-      <div class="edu-cards reveal reveal-delay-3">
+      <!-- EDITABLE TEXT START — Education entries -->
+      <div class="edu-timeline reveal reveal-delay-3">
 
-        <!-- ISB Hyderabad -->
-        <div class="edu-card" data-edu="isb">
-          <div class="edu-card-header" onclick="toggleEdu('isb')">
-            <div class="edu-left">
-              <div class="edu-logo-wrap">
-                <span class="edu-logo-letter">ISB</span>
-              </div>
-              <div>
-                <div class="edu-institution">Indian School of Business, Hyderabad</div>
-                <div class="edu-degree">Advanced Management Program in Business Analytics</div>
-                <div class="edu-badge">Merit Scholarship</div>
-              </div>
-            </div>
-            <div class="edu-right">
-              <div class="edu-period">2023 — 2024</div>
-              <div class="edu-chevron" id="chevron-isb">↓</div>
-            </div>
+        <!-- ISB -->
+        <div class="edu-row">
+          <div class="edu-meta">
+            <div class="edu-year">2025 — Current</div>
+            <div class="edu-abbr">ISB</div>
           </div>
-
-          <div class="edu-expand" id="expand-isb">
-            <div class="edu-expand-inner">
-              <div class="edu-detail-grid">
-                <div class="edu-detail-col">
-                  <p class="edu-detail-label">Focus Areas</p>
-                  <p class="edu-detail-text">Business analytics, decision science, AI strategy, and management frameworks — bridging technical depth with C-suite thinking.</p>
-                  <p class="edu-detail-label" style="margin-top:1.2rem;">Merit Award</p>
-                  <p class="edu-detail-text">Selected for merit-based scholarship among competitive cohort. Recognition of prior professional achievement and academic standing.</p>
-                </div>
-                <div class="edu-detail-col">
-                  <p class="edu-detail-label">Related GitHub Work</p>
-                  <div class="edu-links-list">
-                    <!-- UPDATE HERE: Add more ISB-related GitHub repos below -->
-                    <a class="edu-repo-link" href="https://github.com/Vridhi-Wadhawan/bank-marketing-mlops" target="_blank" rel="noopener">
-                      <span class="edu-repo-icon">⎇</span>
-                      <span>
-                        <span class="edu-repo-name">bank-marketing-mlops</span>
-                        <span class="edu-repo-desc">End-to-end MLOps pipeline — propensity modeling for campaign optimization</span>
-                      </span>
-                    </a>
-                    <a class="edu-repo-link" href="https://github.com/Vridhi-Wadhawan/business-intelligence-dashboard-tableau" target="_blank" rel="noopener">
-                      <span class="edu-repo-icon">⎇</span>
-                      <span>
-                        <span class="edu-repo-name">business-intelligence-dashboard-tableau</span>
-                        <span class="edu-repo-desc">Executive decision interface — multi-layer Tableau with drill-down KPIs</span>
-                      </span>
-                    </a>
-                    <a class="edu-repo-link" href="https://github.com/Vridhi-Wadhawan/product-segmentation-affinity-analysis" target="_blank" rel="noopener">
-                      <span class="edu-repo-icon">⎇</span>
-                      <span>
-                        <span class="edu-repo-name">product-segmentation-affinity-analysis</span>
-                        <span class="edu-repo-desc">Clustering + market basket analysis for strategy and pricing</span>
-                      </span>
-                    </a>
-                  </div>
-                </div>
-              </div>
+          <div class="edu-body">
+            <div class="edu-inst-name">Indian School of Business, Hyderabad</div>
+            <div class="edu-prog">Advanced Management Program in Business Analytics</div>
+            <div class="edu-details">
+              Awarded a 40% Merit-Based Scholarship — selected among a competitive cohort. Recognition of prior professional achievement and academic standing.
             </div>
+            <span class="edu-highlight">40% Merit Scholarship</span>
           </div>
         </div>
 
         <!-- Symbiosis -->
-        <div class="edu-card" data-edu="symbiosis">
-          <div class="edu-card-header" onclick="toggleEdu('symbiosis')">
-            <div class="edu-left">
-              <div class="edu-logo-wrap">
-                <span class="edu-logo-letter">SIU</span>
-              </div>
-              <div>
-                <div class="edu-institution">Symbiosis International University</div>
-                <div class="edu-degree">Bachelor of Business Administration</div>
-                <!-- UPDATE HERE: Update degree name if different -->
-              </div>
-            </div>
-            <div class="edu-right">
-              <div class="edu-period">2018 — 2021</div>
-              <div class="edu-chevron" id="chevron-symbiosis">↓</div>
-            </div>
+        <div class="edu-row">
+          <div class="edu-meta">
+            <div class="edu-year">2018 — 2021</div>
+            <div class="edu-abbr">SCMS</div>
           </div>
-
-          <div class="edu-expand" id="expand-symbiosis">
-            <div class="edu-expand-inner">
-              <div class="edu-detail-grid">
-                <div class="edu-detail-col">
-                  <p class="edu-detail-label">Focus Areas</p>
-                  <!-- UPDATE HERE: Update with your actual specialization / coursework -->
-                  <p class="edu-detail-text">Foundation in business strategy, economics, and management. Developed early interest in data-driven decision making and analytical problem solving.</p>
-
-                  <p class="edu-detail-label" style="margin-top:1.2rem;">Early Writing — Legex Collaboration</p>
-                  <p class="edu-detail-text">Wrote a series of published articles in collaboration with Legex during this period — exploring law, finance, and policy through an analytical lens.</p>
-                  <div class="edu-links-list" style="margin-top:1rem;">
-                    <a class="edu-repo-link" href="https://medium.com/legex/affair-shattering-the-grand-ambition-of-love-5fb71a867f36" target="_blank" rel="noopener">
-                      <span class="edu-repo-icon">✍</span>
-                      <span>
-                        <span class="edu-repo-name">The Affair</span>
-                        <span class="edu-repo-desc">On love, ambition, and the stories we tell ourselves — most praised piece</span>
-                      </span>
-                    </a>
-                    <a class="edu-repo-link" href="https://medium.com/legex/is-my-share-equal-to-yours-b604c98bdaf1" target="_blank" rel="noopener">
-                      <span class="edu-repo-icon">✍</span>
-                      <span>
-                        <span class="edu-repo-name">Is My Share Equal to Yours?</span>
-                        <span class="edu-repo-desc">A financial equity argument hiding in plain sight</span>
-                      </span>
-                    </a>
-                    <a class="edu-repo-link" href="https://medium.com/legex/dont-put-all-your-eggs-in-one-basket-2188fda8c58f" target="_blank" rel="noopener">
-                      <span class="edu-repo-icon">✍</span>
-                      <span>
-                        <span class="edu-repo-name">Don't Put All Your Eggs in One Basket</span>
-                        <span class="edu-repo-desc">The oldest strategy advice still being ignored</span>
-                      </span>
-                    </a>
-                  </div>
-                </div>
-                <div class="edu-detail-col">
-                  <p class="edu-detail-label">Research Papers</p>
-                  <div class="edu-links-list">
-                    <!-- UPDATE HERE: Add actual research paper titles and links / Drive URLs below -->
-                    <div class="edu-repo-link edu-paper">
-                      <span class="edu-repo-icon">📄</span>
-                      <span>
-                        <span class="edu-repo-name">Research Paper I</span>
-                        <!-- UPDATE HERE: Replace with actual paper title and link -->
-                        <span class="edu-repo-desc">Unpublished — available on request</span>
-                      </span>
-                    </div>
-                    <div class="edu-repo-link edu-paper">
-                      <span class="edu-repo-icon">📄</span>
-                      <span>
-                        <span class="edu-repo-name">Research Paper II</span>
-                        <!-- UPDATE HERE: Replace with actual paper title and link -->
-                        <span class="edu-repo-desc">Unpublished — available on request</span>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          <div class="edu-body">
+            <div class="edu-inst-name">Symbiosis Centre of Management Studies, Noida</div>
+            <div class="edu-prog">Bachelor of Business Administration — Specialization in Business Analytics</div>
+            <div class="edu-details">
+              CGPA: 8.40 / 10
             </div>
           </div>
         </div>
 
-        <!-- Tagore Public School (optional — kept minimal) -->
-        <div class="edu-card edu-card-minor" data-edu="tagore">
-          <div class="edu-card-header" onclick="toggleEdu('tagore')">
-            <div class="edu-left">
-              <div class="edu-logo-wrap">
-                <span class="edu-logo-letter">TPS</span>
-              </div>
-              <div>
-                <div class="edu-institution">Tagore Public School</div>
-                <div class="edu-degree">Senior Secondary — Science &amp; Mathematics</div>
-                <!-- UPDATE HERE: Update stream/board if needed -->
-              </div>
-            </div>
-            <div class="edu-right">
-              <div class="edu-period">— 2018</div>
-              <div class="edu-chevron" id="chevron-tagore">↓</div>
-            </div>
+        <!-- Tagore -->
+        <div class="edu-row">
+          <div class="edu-meta">
+            <div class="edu-year">— 2018</div>
+            <div class="edu-abbr">TIS</div>
           </div>
-
-          <div class="edu-expand" id="expand-tagore">
-            <div class="edu-expand-inner">
-              <p class="edu-detail-text">
-                <!-- UPDATE HERE: Add any notable achievements, board, percentage, or activities -->
-                Foundation years. Where curiosity became habit.
-              </p>
+          <div class="edu-body">
+            <div class="edu-inst-name">Tagore International School, Vasant Vihar</div>
+            <div class="edu-prog">Senior Secondary — Commerce</div>
+            <div class="edu-details">
+              Class 12th (Commerce) — 89.75%&nbsp;&nbsp;·&nbsp;&nbsp;Class 10th — 91.20%
             </div>
           </div>
         </div>
 
-      </div><!-- /edu-cards -->
+      </div><!-- /edu-timeline -->
+      <!-- EDITABLE TEXT END -->
+
+    </div>
+  </section>
+
+  <!-- ============================================
+       RESEARCH PAPERS
+       After Education, before Systems
+       ============================================ -->
+  <!-- SECTION: RESEARCH PAPERS -->
+  <section>
+    <div id="research">
+      <p class="section-label reveal">Research</p>
+      <h2 class="section-title reveal reveal-delay-1">
+        Ideas I've<br /><em>put to paper.</em>
+      </h2>
+      <div class="section-divider reveal reveal-delay-2"></div>
+
+      <!-- EDITABLE TEXT START — Research papers. Update titles and descriptions. -->
+      <div class="research-cards reveal reveal-delay-3">
+
+  <!-- Paper 1 -->
+  <a class="research-card" href="https://github.com/Vridhi-Wadhawan/social-media-advertising-impact" target="_blank" rel="noopener">
+    <div>
+      <div class="research-paper-title">Social Media Advertising Impact on Consumer Perception</div>
+      <div class="research-paper-desc">Investigates how social media ad exposure shapes purchasing intent and brand perception across demographic segments.</div>
+      <div class="research-preview">
+      <img src="https://raw.githubusercontent.com/Vridhi-Wadhawan/social-media-advertising-impact/main/consumer-preception-model.png"
+           alt="Consumer Perception Model" loading="lazy" />
+         </div>
+    </div>
+    <span class="research-arrow">↗</span>
+  </a>
+
+  <!-- Paper 2 -->
+  <a class="research-card" href="https://github.com/Vridhi-Wadhawan/organizational-value-alignment-diagnostic" target="_blank" rel="noopener">
+    <div>
+      <div class="research-paper-title">Organizational Value Alignment Diagnostic</div>
+      <div class="research-paper-desc">A diagnostic framework for measuring alignment between stated organizational values and operational behaviour.</div>
+        <div class="research-preview">
+          <img src="https://raw.githubusercontent.com/Vridhi-Wadhawan/organizational-value-alignment-diagnostic/main/conceptual-framework.png"
+           alt="Conceptual Framework" loading="lazy" />
+         </div>
+    </div>
+    <span class="research-arrow">↗</span>
+  </a>
+
+</div><!-- /research-cards -->
+      <!-- EDITABLE TEXT END -->
+
     </div>
   </section>
 
@@ -1425,8 +1478,8 @@
   <section style="padding-left:0; padding-right:0;">
     <div id="projects">
       <div class="section-inner">
-        <p class="section-label reveal">Work</p>
-        <h2 class="section-title reveal reveal-delay-1">Selected<br /><em>case studies.</em></h2>
+        <p class="section-label reveal">Projects</p>
+        <h2 class="section-title reveal reveal-delay-1">Systems I've<br /><em>built.</em></h2>
         <div class="section-divider reveal reveal-delay-2"></div>
       </div>
 
@@ -1446,8 +1499,8 @@
               </div>
               <p style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--text-muted);line-height:1.7;">
                 Multi-method anomaly pipeline — Z-Score, Isolation Forest, LSTM, Autoencoder ensemble reducing false positives.
-              </p> 
-              </div>
+              </p>
+            </div>
 
             <!-- CARD 2 -->
             <div class="cs-card" data-index="1" onclick="openPanel(1)">
@@ -1562,11 +1615,12 @@
     </div>
   </section>
 
-  <!-- Project Detail Panel (slides in on card click) -->
-  <div class="panel-overlay" id="panelOverlay" onclick="closePanel()"></div>
-  <div class="project-panel" id="projectPanel">
-    <button class="panel-close" onclick="closePanel()">✕</button>
-    <div id="panelContent"><!-- filled by JS --></div>
+<!-- Project Detail Modal (centered) -->
+  <div class="panel-overlay" id="panelOverlay" onclick="closePanel()">
+    <div class="project-panel" id="projectPanel" onclick="event.stopPropagation()">
+      <button class="panel-close" onclick="closePanel()">✕</button>
+      <div id="panelContent"><!-- filled by JS --></div>
+    </div>
   </div>
 
   <!-- ============================================
@@ -1575,7 +1629,7 @@
   <!-- SECTION: WRITING -->
   <section>
     <div id="writing">
-      <p class="section-label reveal">Writing</p>
+      <p class="section-label reveal">Beyond Work</p>
       <h2 class="section-title reveal reveal-delay-1">
         Words I've<br /><em>put out there.</em>
       </h2>
@@ -1649,84 +1703,66 @@
         Co-created a content brand with my sister during lockdown — handled creative direction, camera work, and storytelling. Five episodes, one kitchen, endless iterations on what makes something worth watching.
       </p>
 
-      <!-- UPDATE HERE: Add or replace YouTube video URLs below -->
-      <div class="videos-grid reveal reveal-delay-3">
+      <!-- UPDATE HERE: Add or replace YouTube video URLs and thumbnail IDs below -->
+      <!-- VIDEO IDs: qM598Qho9J0, McfNMiUFQbI, n_OKmoraizM, dEUjA8DhEYc, uuDb3VNtLqU -->
+      <div class="videos-grid reveal reveal-delay-3"><!-- LEFT SIDE -->
+  <div class="video-left">
 
-        <!-- Video 1 — Featured (spans 2 columns) -->
-        <div class="video-item">
-          <div class="video-thumb-wrap">
-            <!-- Hover to unmute autoplay via JS -->
-            <iframe
-              data-src="https://www.youtube.com/embed/qM598Qho9J0?autoplay=1&mute=1&loop=1&playlist=qM598Qho9J0&controls=0"
-              title="Wady's Kitchen Episode 1"
-              allow="autoplay; encrypted-media"
-              allowfullscreen
-              loading="lazy"
-            ></iframe>
-          </div>
+    <!-- BIG VIDEO (Video 1) -->
+    <div class="video-item" data-videoid="qM598Qho9J0">
+      <div class="video-thumb-wrap">
+        <img class="video-thumb-img" src="https://img.youtube.com/vi/qM598Qho9J0/mqdefault.jpg" />
+        <div class="video-play-icon">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
         </div>
-
-        <!-- Video 2 -->
-        <div class="video-item">
-          <div class="video-thumb-wrap">
-            <iframe
-              data-src="https://www.youtube.com/embed/McfNMiUFQbI?autoplay=1&mute=1&loop=1&playlist=McfNMiUFQbI&controls=0"
-              title="Wady's Kitchen Episode 2"
-              allow="autoplay; encrypted-media"
-              allowfullscreen
-              loading="lazy"
-            ></iframe>
-          </div>
-        </div>
-
-        <!-- Video 3 -->
-        <div class="video-item">
-          <div class="video-thumb-wrap">
-            <iframe
-              data-src="https://www.youtube.com/embed/n_OKmoraizM?autoplay=1&mute=1&loop=1&playlist=n_OKmoraizM&controls=0"
-              title="Wady's Kitchen Episode 3"
-              allow="autoplay; encrypted-media"
-              allowfullscreen
-              loading="lazy"
-            ></iframe>
-          </div>
-        </div>
-
-        <!-- Video 4 -->
-        <div class="video-item">
-          <div class="video-thumb-wrap">
-            <iframe
-              data-src="https://www.youtube.com/embed/dEUjA8DhEYc?autoplay=1&mute=1&loop=1&playlist=dEUjA8DhEYc&controls=0"
-              title="Wady's Kitchen Episode 4"
-              allow="autoplay; encrypted-media"
-              allowfullscreen
-              loading="lazy"
-            ></iframe>
-          </div>
-        </div>
-
-        <!-- Video 5 -->
-        <div class="video-item">
-          <div class="video-thumb-wrap">
-            <iframe
-              data-src="https://www.youtube.com/embed/uuDb3VNtLqU?autoplay=1&mute=1&loop=1&playlist=uuDb3VNtLqU&controls=0"
-              title="Wady's Kitchen Episode 5"
-              allow="autoplay; encrypted-media"
-              allowfullscreen
-              loading="lazy"
-            ></iframe>
-          </div>
-        </div>
-
-      </div><!-- /videos-grid -->
+      </div>
     </div>
-  </section>
 
+    <!-- BOTTOM 2 VIDEOS -->
+    <div class="video-bottom-grid">
+
+      <div class="video-item" data-videoid="n_OKmoraizM">
+        <div class="video-thumb-wrap">
+          <img class="video-thumb-img" src="https://img.youtube.com/vi/n_OKmoraizM/mqdefault.jpg" />
+        </div>
+      </div>
+
+      <div class="video-item" data-videoid="dEUjA8DhEYc">
+        <div class="video-thumb-wrap">
+          <img class="video-thumb-img" src="https://img.youtube.com/vi/dEUjA8DhEYc/mqdefault.jpg" />
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- RIGHT SIDE -->
+  <div class="video-right">
+
+    <div class="video-item" data-videoid="McfNMiUFQbI">
+      <div class="video-thumb-wrap">
+        <img class="video-thumb-img" src="https://img.youtube.com/vi/McfNMiUFQbI/mqdefault.jpg" />
+      </div>
+    </div>
+
+  <div class="video-item" data-videoid="uuDb3VNtLqU">
+      <div class="video-thumb-wrap">
+        <img class="video-thumb-img" src="https://img.youtube.com/vi/uuDb3VNtLqU/mqdefault.jpg" />
+      </div>
+    </div>
+
+  </div><!-- /video-right -->
+</div><!-- /videos-grid -->
+    </div><!-- /beyond-work -->
+  </section>
   <!-- ============================================
        CONTACT
        ============================================ -->
   <!-- SECTION: CONTACT -->
   <section id="contact">
+    <canvas id="contact-canvas" aria-hidden="true"></canvas>
+
     <!-- UPDATE HERE: Replace with an actual background video URL if desired -->
     <!-- <video id="contact-bg-video" autoplay muted loop playsinline src="YOUR_VIDEO_URL_HERE"></video> -->
 
@@ -1736,16 +1772,18 @@
         Let's make<br />something<br /><em>remarkable.</em>
       </h2>
       <p class="contact-sub reveal reveal-delay-2">
-        Open to consulting, strategy, AI/ML roles, and graduate programs.<br />
-        I respond within 24 hours.
+        <span id="contact-typed"></span>
+        <span class="typed-cursor">|</span>
       </p>
       <div class="contact-links reveal reveal-delay-3">
         <!-- UPDATE HERE: Confirm or update email address -->
         <a class="contact-link primary" href="mailto:vridhi99@gmail.com">vridhi99@gmail.com</a>
         <!-- UPDATE HERE: Confirm LinkedIn URL -->
-        <a class="contact-link" href="https://www.linkedin.com/in/vridhi-wadhawan/" target="_blank" rel="noopener">LinkedIn</a>
-        <!-- UPDATE HERE: Replace with your latest resume Drive link -->
-        <a class="contact-link" href="https://drive.google.com/file/d/1pR4eTMWTr2HWwAdhVWH_v_cPjCWO0RaQ/view" target="_blank" rel="noopener">Resume ↓</a>
+        <a class="contact-link" href="https://www.linkedin.com/in/vridhi-wadhawan/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <!-- UPDATE HERE: Replace with your latest resume Drive link (view) -->
+        <a class="contact-link" href="https://drive.google.com/file/d/1pR4eTMWTr2HWwAdhVWH_v_cPjCWO0RaQ/view" target="_blank" rel="noopener">View Resume ↗</a>
+        <!-- UPDATE HERE: Replace with direct download link for resume (e.g. Drive direct download URL) -->
+        <a class="contact-link" href="https://drive.google.com/uc?export=download&id=1pR4eTMWTr2HWwAdhVWH_v_cPjCWO0RaQ" target="_blank" rel="noopener" download>Download ↓</a>
       </div>
     </div>
   </section>
@@ -1753,10 +1791,12 @@
   <!-- ============================================
        FOOTER
        ============================================ -->
-  <footer>
-    <span class="footer-copy">© 2024 Vridhi Wadhawan. All rights reserved.</span>
-    <span class="footer-sig">Making data speak. Building systems that listen.</span>
-  </footer>
+  <!-- EDITABLE TEXT START — footer -->
+<footer>
+  <span class="footer-copy">© 2024 Vridhi Wadhawan. All rights reserved.</span>
+  <span class="footer-sig">Making data speak. Building systems that listen.</span>
+</footer>
+  <!-- EDITABLE TEXT END -->
 
 
   <!-- ============================================
@@ -1801,8 +1841,9 @@
     const canvas = document.getElementById('particle-canvas');
     const ctx    = canvas.getContext('2d');
     let particles = [];
-    const PARTICLE_COUNT = 80;
-    const CONNECTION_DIST = 140;
+    const isDark = () => document.documentElement.getAttribute('data-theme') !== 'light';
+    const PARTICLE_COUNT = isDark() ? 280 : 150;
+    const CONNECTION_DIST = isDark() ? 200 : 160;
 
     function resize() {
       canvas.width  = canvas.offsetWidth;
@@ -1832,14 +1873,14 @@
 
     function drawParticles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      const isDark = html.dataset.theme === 'dark';
-      const color  = isDark ? '10,186,181' : '196,98,45';
+      const dark = html.dataset.theme === 'dark';
+      const particleColor = dark ? '10,186,181' : '196,98,45';
 
       particles.forEach(p => {
         p.update();
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${color}, 0.7)`;
+        ctx.fillStyle = `rgba(${particleColor}, ${dark ? 0.75 : 0.85})`;
         ctx.fill();
       });
 
@@ -1853,8 +1894,8 @@
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(${color}, ${alpha})`;
-            ctx.lineWidth   = 0.6;
+            ctx.strokeStyle = `rgba(${particleColor}, ${dark ? alpha * 1.4 : alpha*2.2})`;
+            ctx.lineWidth   = dark ? 0.8 : 1.0;
             ctx.stroke();
           }
         }
@@ -1877,6 +1918,34 @@
       }
     }
     setTimeout(typeChar, 1200);
+    /* ——————————————————————————
+    // Contact typed animation
+       —————————————————————————— */
+const contactEl = document.getElementById('contact-typed');
+const contactPhrase = "Open to consulting, strategy, AI/ML and roles. I respond within 24 hours.";
+let contactI = 0;
+let contactStarted = false;
+
+function typeContact() {
+  if (contactI < contactPhrase.length) {
+    contactEl.textContent += contactPhrase[contactI];
+    contactI++;
+    setTimeout(typeContact, 38);
+  }
+}
+
+// Only start typing when contact section scrolls into view
+const contactObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !contactStarted) {
+      contactStarted = true;
+      setTimeout(typeContact, 400);
+    }
+  });
+}, { threshold: 0.3 });
+
+const contactSection = document.getElementById('contact');
+if (contactSection) contactObserver.observe(contactSection);
 
     /* ——————————————————————————
        SCROLL REVEAL — General .reveal elements
@@ -1892,19 +1961,44 @@
 
     document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
-    /* ——————————————————————————
-       EDUCATION — Click toggle
+      /* ——————————————————————————
+       VIDEO — Thumbnail-first, inject iframe on hover only
+       Zero autoplay on page load
        —————————————————————————— */
-    function toggleEdu(id) {
-      const card     = document.querySelector(`.edu-card[data-edu="${id}"]`);
-      const isActive = card.classList.contains('active');
-      // Close all
-      document.querySelectorAll('.edu-card').forEach(c => c.classList.remove('active'));
-      if (!isActive) card.classList.add('active');
-    }
+    document.querySelectorAll('.video-item[data-videoid]').forEach(item => {
+      const vid   = item.dataset.videoid;
+      const wrap  = item.querySelector('.video-thumb-wrap');
+      let loaded  = false;
+
+      function injectVideo() {
+        if (loaded) return;
+        loaded = true;
+        item.classList.add('playing');
+        const iframe = document.createElement('iframe');
+        // UPDATE HERE: autoplay=1&mute=0 = plays with sound on hover
+        iframe.src = `https://www.youtube.com/embed/${vid}?autoplay=1&mute=0&controls=1&rel=0`;
+        iframe.setAttribute('allow', 'autoplay; encrypted-media');
+        iframe.setAttribute('allowfullscreen', '');
+        iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none;';
+        wrap.appendChild(iframe);
+      }
+
+      function ejectVideo() {
+        if (!loaded) return;
+        loaded = false;
+        item.classList.remove('playing');
+        const iframe = wrap.querySelector('iframe');
+        if (iframe) iframe.remove();
+      }
+
+      item.addEventListener('mouseenter', injectVideo);
+      item.addEventListener('mouseleave', ejectVideo);
+    });
 
     /* ——————————————————————————
-       PROJECT DATA — full copy for panel
+       PROJECT DATA
+       UPDATE HERE: Edit project copy, tags, github links, and video flag below.
+       Each entry maps 1:1 to a carousel card by array index (0–7).
        —————————————————————————— */
     const PROJECTS = [
       {
@@ -1914,8 +2008,8 @@
         insight: 'Anomalies aren\'t just statistical outliers — they\'re narrative events. The question isn\'t what deviated, but why it matters in context.',
         system: 'Built a multi-method detection pipeline comparing Z-Score, Isolation Forest, DBSCAN, LSTM, and Autoencoder models. Ensemble approach reduces false positives and surfaces converging signals.',
         impact: 'Produced a comparative framework that lets analysts choose detection sensitivity by use case — regulatory flagging vs. trading signal vs. risk audit.',
-        image: 'https://raw.githubusercontent.com/Vridhi-Wadhawan/stock-market-anomaly-detection/main/workflow_diagram.png',
         github: 'https://github.com/Vridhi-Wadhawan/stock-market-anomaly-detection',
+  arch: 'https://raw.githubusercontent.com/Vridhi-Wadhawan/stock-market-anomaly-detection/main/workflow_diagram.png',
         video: false
       },
       {
@@ -1924,9 +2018,9 @@
         problem: 'Political information is vast, contested, and source-dependent. Standard search returns results — it doesn\'t reason over them.',
         insight: 'The value isn\'t retrieval. It\'s attribution — knowing which document, which claim, which source supports a given answer.',
         system: 'Engineered a Retrieval-Augmented Generation pipeline using LlamaIndex over a corpus of political documents. Query routing, chunk indexing, and context-aware generation with source grounding.',
-        impact: 'Demonstrated production-grade RAG architecture applicable to any high-stakes, document-heavy domain — legal, regulatory, policy.',
-        image: 'https://raw.githubusercontent.com/Vridhi-Wadhawan/rag-politics-qa-llamaindex/main/rag_architecture.png',
+        impact: 'Demonstrated production-grade RAG architecture applicable to any high-stakes, document-heavy domain — legal, regulatory, policy research.',
         github: 'https://github.com/Vridhi-Wadhawan/rag-politics-qa-llamaindex',
+        arch: 'https://raw.githubusercontent.com/Vridhi-Wadhawan/rag-politics-qa-llamaindex/main/rag_architecture.png',
         video: false
       },
       {
@@ -1936,9 +2030,9 @@
         insight: 'A dashboard isn\'t a report. It\'s a decision interface. Design it around the question, not the data.',
         system: 'Designed and built a multi-layer Tableau dashboard with drill-down KPIs, trend overlays, and segment filters. Data modeled upstream to ensure clean, query-ready structure.',
         impact: 'Transformed raw operational data into an executive-ready decision tool — the kind that shows up in boardrooms, not appendices.',
-        image: 'https://raw.githubusercontent.com/Vridhi-Wadhawan/rag-politics-qa-llamaindex/main/rag_architecture.png',
         github: 'https://github.com/Vridhi-Wadhawan/business-intelligence-dashboard-tableau',
-        video: false
+        arch: null,
+  video: false
       },
       {
         name: 'Bank Marketing MLOps',
@@ -1947,9 +2041,10 @@
         insight: 'Propensity models only add value if they\'re deployed, monitored, and retrained — not left as notebooks in a repo.',
         system: 'Built an end-to-end MLOps pipeline: feature engineering, model training (XGBoost/logistic), experiment tracking, and deployment scaffold with retraining triggers.',
         impact: 'Moved beyond model accuracy as a metric — demonstrated how ML creates business value only when it\'s operationalized, not just optimized.',
-        image: 'https://raw.githubusercontent.com/Vridhi-Wadhawan/bank-marketing-mlops/main/architecture.png',
         github: 'https://github.com/Vridhi-Wadhawan/bank-marketing-mlops',
-        video: true
+  arch: 'https://raw.githubusercontent.com/Vridhi-Wadhawan/bank-marketing-mlops/main/architecture.png',
+  demo: 'https://www.youtube.com/embed/YOUR_VIDEO_ID_HERE',
+        video: false
       },
       {
         name: 'Product Segmentation & Affinity Analysis',
@@ -1958,9 +2053,9 @@
         insight: 'Segmentation without behavioral affinity is just demographics. The real signal is what people buy together and when.',
         system: 'Combined K-Means/hierarchical clustering with market basket analysis (Apriori) to surface product affinities and segment-specific purchase patterns.',
         impact: 'Produced actionable segment profiles and cross-sell maps directly translatable into pricing, bundling, and campaign strategy — classic consulting output.',
-        image: 'https://raw.githubusercontent.com/Vridhi-Wadhawan/product-segmentation-affinity-analysis/main/affinity_segmentation_flow.png',
         github: 'https://github.com/Vridhi-Wadhawan/product-segmentation-affinity-analysis',
-        video: false
+  arch: 'https://raw.githubusercontent.com/Vridhi-Wadhawan/product-segmentation-affinity-analysis/main/affinity_segmentation_flow.png',     
+  video: false
       },
       {
         name: 'Stock Forecasting MLOps',
@@ -1969,8 +2064,9 @@
         insight: 'Forecast reliability isn\'t about the model architecture — it\'s about how quickly the system detects and adapts to drift.',
         system: 'Built a time-series forecasting system with MLOps scaffolding: model versioning, drift detection hooks, scheduled retraining, and prediction logging.',
         impact: 'Shifted the framing from "can we predict prices?" to "can we build a system that knows when it\'s wrong?" — a fundamentally more production-honest approach.',
-        image: 'https://raw.githubusercontent.com/Vridhi-Wadhawan/stock-forecasting-mlops/main/architecture.png',
         github: 'https://github.com/Vridhi-Wadhawan/stock-forecasting-mlops',
+  arch: 'https://raw.githubusercontent.com/Vridhi-Wadhawan/stock-forecasting-mlops/main/architecture.png',
+  demo: 'https://www.youtube.com/embed/YOUR_VIDEO_ID_HERE',
         video: true
       },
       {
@@ -1980,8 +2076,8 @@
         insight: 'Relationships are first-class data. A knowledge graph doesn\'t just store entities — it makes the connections queryable.',
         system: 'Modeled a residential complex domain as a knowledge graph using RDF/graph DB principles. Entities: units, residents, amenities, transactions. Edges encode relationships and constraints.',
         impact: 'Demonstrated how graph-native thinking unlocks query patterns impossible in relational schemas — applicable to any domain with complex relational structures.',
-        image: 'https://raw.githubusercontent.com/Vridhi-Wadhawan/residential-complex-knowledge-graph/main/residential_complex_ontology.jpeg',
         github: 'https://github.com/Vridhi-Wadhawan/residential-complex-knowledge-graph',
+  arch: 'https://raw.githubusercontent.com/Vridhi-Wadhawan/residential-complex-knowledge-graph/main/residential_complex_ontology.jpeg',
         video: false
       },
       {
@@ -1991,8 +2087,8 @@
         insight: 'Architecture choice is a design decision, not a technical one. It should map to the structure of the problem, not the popularity of the paper.',
         system: 'Implemented and compared multiple DL architectures (CNNs, RNNs, attention-based) across varied tasks. Documented trade-offs: convergence speed, data requirements, interpretability, compute cost.',
         impact: 'Built an internal reference framework for architecture selection — separating engineers who build models from those who design systems.',
-        image: 'https://raw.githubusercontent.com/Vridhi-Wadhawan/deep-learning-models-in-practice/main/architecture.png',
         github: 'https://github.com/Vridhi-Wadhawan/deep-learning-models-in-practice',
+  arch: 'https://raw.githubusercontent.com/Vridhi-Wadhawan/deep-learning-models-in-practice/main/architecture.png',
         video: false
       }
     ];
@@ -2069,28 +2165,39 @@
     function openPanel(idx) {
       const p = PROJECTS[idx];
       const tagHTML = p.tags.map(t => `<span class="tag-pill">${t}</span>`).join('');
-        // Logic for architecture image
-      const archHTML = p.image ? `
-        <div class="panel-arch">
-          <p class="panel-arch-label">System Architecture</p>
-          <img src="${p.image}" alt="${p.name} Architecture" style="width:100%; border-radius:8px; margin-top:12px; border: 1px solid rgba(255,255,255,0.1); display:block;">
-        </div>` : `    
-        <div class="panel-arch">
-          <p class="panel-arch-label">System Architecture</p>
-          <p class="panel-arch-placeholder">Case study documentation in progress</p>
-      </div>`;
-        
-      const videoHTML = p.video ? `
-        <div class="panel-video-placeholder">
-          <!-- UPDATE HERE: VIDEO URL HERE — replace with mp4 or YouTube embed URL -->
-          <div style="font-size:1.2rem;opacity:0.3;margin-bottom:0.4rem;">▶</div>
-          <div class="panel-video-label">Demo walkthrough coming soon</div>
-        </div>` : '';
+      const videoHTML = p.demo ? `
+    <div class="panel-arch" style="padding:0;overflow:hidden;">
+         <p class="panel-arch-label" style="padding:1rem 1rem 0;">Demo Walkthrough</p>
+         <div style="position:relative;padding-bottom:56.25%;height:0;margin-top:0.75rem;">
+             <iframe src="${p.demo}" style="position:absolute;inset:0;width:100%;height:100%;border:none;"
+          allow="autoplay;encrypted-media" allowfullscreen loading="lazy"></iframe>
+     </div>
+    </div>` : '';
 
-      content.innerHTML = `
-        <p class="panel-eyebrow">Case Study</p>
+content.innerHTML = `
+        <p class="panel-eyebrow">System</p>
         <h2 class="panel-title">${p.name}</h2>
         <div class="panel-tags">${tagHTML}</div>
+
+        ${p.video && p.demo ? `
+        <div class="panel-arch" style="padding:0;overflow:hidden;margin-bottom:2rem;">
+          <p class="panel-arch-label" style="padding:1rem 1rem 0;">Demo Walkthrough</p>
+          <div style="position:relative;padding-bottom:56.25%;height:0;margin-top:0.75rem;">
+            <iframe src="${p.demo}" style="position:absolute;inset:0;width:100%;height:100%;border:none;"
+              allow="autoplay;encrypted-media" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>` : ''}
+
+        ${p.arch
+          ? `<div class="panel-arch">
+               <p class="panel-arch-label">System Architecture</p>
+               <img src="${p.arch}" alt="System architecture diagram" style="width:100%;margin-top:0.75rem;display:block;border:1px solid var(--border);" loading="lazy" />
+             </div>`
+          : `<div class="panel-arch">
+               <p class="panel-arch-label">System Architecture</p>
+               <p class="panel-arch-placeholder">Diagram coming soon</p>
+             </div>`
+        }
 
         <div class="panel-pillars">
           <div class="panel-pillar">
@@ -2098,7 +2205,7 @@
             <p class="panel-pillar-text">${p.problem}</p>
           </div>
           <div class="panel-pillar">
-            <span class="panel-pillar-label">Insight</span>
+            <span class="panel-pillar-label">Approach</span>
             <p class="panel-pillar-text">${p.insight}</p>
           </div>
           <div class="panel-pillar">
@@ -2111,50 +2218,89 @@
           </div>
         </div>
 
-        <!-- UPDATE HERE: Add system architecture image URL below -->
-        <div class="panel-arch">
-          <p class="panel-arch-label">System Architecture</p>
-          <p class="panel-arch-placeholder">Diagram coming soon — drop an image URL in the comment above</p>
-        </div>
-
-        ${archHTML}
-        ${videoHTML}
-
         <a class="panel-github-link" href="${p.github}" target="_blank" rel="noopener">↗ View on GitHub</a>
       `;
-      panel.classList.add('open');
       overlay.classList.add('open');
+      panel.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
 
     function closePanel() {
-      panel.classList.remove('open');
       overlay.classList.remove('open');
+      panel.classList.remove('open');
       document.body.style.overflow = '';
     }
 
     // ESC key closes panel
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
 
-    /* ——————————————————————————
-       YOUTUBE — Hover to unmute autoplay
-       Load iframes lazily; on hover swap muted param
+/* ——————————————————————————
+       CONTACT SECTION PARTICLES
        —————————————————————————— */
-    document.querySelectorAll('.video-item iframe[data-src]').forEach(iframe => {
-      // Load src immediately (muted autoplay)
-      iframe.src = iframe.dataset.src;
+    const contactCanvas = document.getElementById('contact-canvas');
+    const contactCtx    = contactCanvas.getContext('2d');
+    let contactParticles = [];
+    const CONTACT_COUNT = 100;
+    const CONTACT_DIST  = 150;
 
-      const item = iframe.closest('.video-item');
+    function resizeContact() {
+      contactCanvas.width  = contactCanvas.offsetWidth;
+      contactCanvas.height = contactCanvas.offsetHeight;
+    }
+    resizeContact();
+    window.addEventListener('resize', resizeContact);
 
-      item.addEventListener('mouseenter', () => {
-        // Unmute: remove mute=1, add mute=0
-        iframe.src = iframe.dataset.src.replace('mute=1', 'mute=0');
+    class ContactParticle {
+      constructor() { this.reset(); }
+      reset() {
+        this.x  = Math.random() * contactCanvas.width;
+        this.y  = Math.random() * contactCanvas.height;
+        this.vx = (Math.random() - 0.5) * 0.18;
+        this.vy = (Math.random() - 0.5) * 0.18;
+        this.r  = Math.random() * 1.2 + 0.4;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0 || this.x > contactCanvas.width)  this.vx *= -1;
+        if (this.y < 0 || this.y > contactCanvas.height) this.vy *= -1;
+      }
+    }
+
+    for (let i = 0; i < CONTACT_COUNT; i++) contactParticles.push(new ContactParticle());
+
+    function drawContactParticles() {
+      contactCtx.clearRect(0, 0, contactCanvas.width, contactCanvas.height);
+      const dark = html.dataset.theme === 'dark';
+      const col  = dark ? '10,186,181' : '196,98,45';
+
+      contactParticles.forEach(p => {
+        p.update();
+        contactCtx.beginPath();
+        contactCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      contactCtx.fillStyle = `rgba(${col}, ${dark ? 0.7 : 0.95})`;
+        contactCtx.fill();
       });
 
-      item.addEventListener('mouseleave', () => {
-        iframe.src = iframe.dataset.src; // restore muted
-      });
-    });
+      for (let i = 0; i < contactParticles.length; i++) {
+        for (let j = i + 1; j < contactParticles.length; j++) {
+          const dx   = contactParticles[i].x - contactParticles[j].x;
+          const dy   = contactParticles[i].y - contactParticles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < CONTACT_DIST) {
+            const alpha = (1 - dist / CONTACT_DIST) * (dark ? 0.6 : 1.0);
+            contactCtx.beginPath();
+            contactCtx.moveTo(contactParticles[i].x, contactParticles[i].y);
+            contactCtx.lineTo(contactParticles[j].x, contactParticles[j].y);
+            contactCtx.strokeStyle = `rgba(${col}, ${alpha})`;
+            contactCtx.lineWidth   = dark ? 0.6 : 1.1;
+            contactCtx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(drawContactParticles);
+    }
+    drawContactParticles();
 
     /* ——————————————————————————
        NAV active link highlight on scroll
