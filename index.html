@@ -187,7 +187,7 @@
 #particle-canvas {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
-  opacity: 0.75;
+  opacity: 0.55;
   pointer-events: none;
 }
 
@@ -683,7 +683,20 @@
       border-color: var(--accent);
       box-shadow: 0 0 30px var(--accent-glow);
     }
-
+.cs-card-demo-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.5rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      border-radius: 2px;
+      opacity: 0.6;
+    }
     .cs-card-num {
       font-family: 'Cormorant Garamond', serif;
       font-size: 3.5rem;
@@ -756,10 +769,10 @@
     }
     .panel-overlay.open { opacity: 1; pointer-events: all; }
 
-    .project-panel {
+.project-panel {
       position: relative;
       width: 100%;
-      max-width: 760px;
+      max-width: 860px;
       max-height: 88vh;
       background: var(--bg2);
       border: 1px solid var(--border-hover);
@@ -770,6 +783,14 @@
       transform: translateY(24px) scale(0.98);
       opacity: 0;
       transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.4s ease;
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent) transparent;
+    }
+    .project-panel::-webkit-scrollbar { width: 3px; }
+    .project-panel::-webkit-scrollbar-track { background: transparent; }
+    .project-panel::-webkit-scrollbar-thumb {
+      background: var(--accent);
+      border-radius: 2px;
     }
     .project-panel.open {
       transform: translateY(0) scale(1);
@@ -834,11 +855,22 @@
     }
 
     /* Architecture placeholder */
-    .panel-arch {
-      border: 1px dashed var(--border);
-      background: var(--bg3);
-      padding: 2rem;
+.panel-arch {
       margin-bottom: 2rem;
+    }
+    .panel-arch img {
+      width: 100%;
+      margin-top: 0.75rem;
+      display: block;
+      border: 1px solid var(--border);
+    }
+    .panel-arch-placeholder {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      margin-top: 0.5rem;
+      padding: 1.5rem;
+      border: 1px dashed var(--border);
       text-align: center;
     }
     .panel-arch-label {
@@ -1530,8 +1562,9 @@ footer {
               </p>
             </div>
 
-            <!-- CARD 4 -->
+           <!-- CARD 4 -->
             <div class="cs-card" data-index="3" onclick="openPanel(3)">
+              <span class="cs-card-demo-badge">▶ Demo</span>
               <div class="cs-card-num">04</div>
               <div class="cs-card-name">Bank Marketing MLOps</div>
               <div class="cs-card-tags">
@@ -1560,6 +1593,7 @@ footer {
 
             <!-- CARD 6 -->
             <div class="cs-card" data-index="5" onclick="openPanel(5)">
+              <span class="cs-card-demo-badge">▶ Demo</span>
               <div class="cs-card-num">06</div>
               <div class="cs-card-name">Stock Forecasting MLOps</div>
               <div class="cs-card-tags">
@@ -1643,7 +1677,7 @@ footer {
         <a class="article-item reveal" href="https://medium.com/legex/affair-shattering-the-grand-ambition-of-love-5fb71a867f36" target="_blank" rel="noopener">
           <div>
             <div class="article-title">
-              "The Affair"
+              The Affair
               <span class="article-featured">Featured</span>
             </div>
             <div class="article-hook">On love, ambition, and the stories we tell ourselves</div>
@@ -1653,7 +1687,7 @@ footer {
 
         <a class="article-item reveal reveal-delay-1" href="https://medium.com/legex/is-my-share-equal-to-yours-b604c98bdaf1" target="_blank" rel="noopener">
           <div>
-            <div class="article-title">"Is My Share Equal to Yours?"</div>
+            <div class="article-title">Is My Share Equal to Yours?</div>
             <div class="article-hook">A financial equity argument hiding in plain sight</div>
           </div>
           <span class="article-arrow">↗</span>
@@ -1661,7 +1695,7 @@ footer {
 
         <a class="article-item reveal reveal-delay-2" href="https://medium.com/legex/dont-put-all-your-eggs-in-one-basket-2188fda8c58f" target="_blank" rel="noopener">
           <div>
-            <div class="article-title">"Don't Put All Your Eggs in One Basket"</div>
+            <div class="article-title">Don't Put All Your Eggs in One Basket</div>
             <div class="article-hook">The oldest strategy advice still being ignored</div>
           </div>
           <span class="article-arrow">↗</span>
@@ -1669,7 +1703,7 @@ footer {
 
         <a class="article-item reveal reveal-delay-3" href="https://vri1999.medium.com/the-evolution-of-television-and-its-debut-in-the-india-market-930071ca0538" target="_blank" rel="noopener">
           <div>
-            <div class="article-title">"The Evolution of Television in India"</div>
+            <div class="article-title">The Evolution of Television in India</div>
             <div class="article-hook">A market lens on how a nation changed channels</div>
           </div>
           <span class="article-arrow">↗</span>
@@ -1677,7 +1711,7 @@ footer {
 
         <a class="article-item reveal reveal-delay-4" href="https://medium.com/legex/a-new-normal-3fef6bdf0c77" target="_blank" rel="noopener">
           <div>
-            <div class="article-title">"A New Normal"</div>
+            <div class="article-title">A New Normal</div>
             <div class="article-hook">What the pandemic quietly rewrote</div>
           </div>
           <span class="article-arrow">↗</span>
@@ -2032,7 +2066,8 @@ if (contactSection) contactObserver.observe(contactSection);
         impact: 'Transformed raw operational data into an executive-ready decision tool — the kind that shows up in boardrooms, not appendices.',
         github: 'https://github.com/Vridhi-Wadhawan/business-intelligence-dashboard-tableau',
         arch: null,
-  video: false
+        video: false,
+        noArch: true
       },
       {
         name: 'Bank Marketing MLOps',
@@ -2044,7 +2079,7 @@ if (contactSection) contactObserver.observe(contactSection);
         github: 'https://github.com/Vridhi-Wadhawan/bank-marketing-mlops',
   arch: 'https://raw.githubusercontent.com/Vridhi-Wadhawan/bank-marketing-mlops/main/architecture.png',
   demo: 'https://www.youtube.com/embed/YOUR_VIDEO_ID_HERE',
-        video: false
+        video: true
       },
       {
         name: 'Product Segmentation & Affinity Analysis',
@@ -2104,27 +2139,55 @@ if (contactSection) contactObserver.observe(contactSection);
     let currentIdx = 0;
     let autoTimer;
 
-    // Build dots
-    cards.forEach((_, i) => {
-      const d = document.createElement('div');
-      d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-      d.addEventListener('click', () => goTo(i));
-      dotsEl.appendChild(d);
-    });
+    // Clone cards before and after for infinite loop
+    const clonesBefore = cards.map(c => { const cl = c.cloneNode(true); cl.removeAttribute('onclick'); return cl; });
+    const clonesAfter  = cards.map(c => { const cl = c.cloneNode(true); cl.removeAttribute('onclick'); return cl; });
+    clonesBefore.reverse().forEach(cl => track.insertBefore(cl, track.firstChild));
+    clonesAfter.forEach(cl => track.appendChild(cl));
 
     // Add left padding so first card isn't flush
     track.style.paddingLeft = '3rem';
     track.style.paddingRight = '3rem';
 
+    // Start at first real card (offset by clones)
+    const TOTAL = cards.length;
+    currentIdx = TOTAL; // start after the cloned set
+    track.style.transition = 'none';
+    track.style.transform = `translateX(calc(-${currentIdx * CARD_W}px))`;
+
+    // Build dots (only for real cards)
+    cards.forEach((_, i) => {
+      const d = document.createElement('div');
+      d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      d.addEventListener('click', () => goTo(i + TOTAL));
+      dotsEl.appendChild(d);
+    });
+
     function goTo(idx) {
-      currentIdx = ((idx % cards.length) + cards.length) % cards.length;
+      currentIdx = idx;
+      track.style.transition = 'transform 0.5s cubic-bezier(0.4,0,0.2,1)';
       track.style.transform = `translateX(calc(-${currentIdx * CARD_W}px))`;
-      // Update dots
+
+      // Update dots based on real index
+      const realIdx = ((currentIdx - TOTAL) % TOTAL + TOTAL) % TOTAL;
       document.querySelectorAll('.carousel-dot').forEach((d,i) => {
-        d.classList.toggle('active', i === currentIdx);
+        d.classList.toggle('active', i === realIdx);
       });
-      // Update card highlight
-      cards.forEach((c,i) => c.classList.toggle('active-card', i === currentIdx));
+      cards.forEach((c,i) => c.classList.toggle('active-card', i === realIdx));
+
+      // When transition ends, silently jump if we've gone into clones
+      track.addEventListener('transitionend', function onEnd() {
+        track.removeEventListener('transitionend', onEnd);
+        if (currentIdx >= TOTAL * 2) {
+          currentIdx = TOTAL + (currentIdx - TOTAL * 2);
+          track.style.transition = 'none';
+          track.style.transform = `translateX(calc(-${currentIdx * CARD_W}px))`;
+        } else if (currentIdx < TOTAL) {
+          currentIdx = TOTAL + currentIdx;
+          track.style.transition = 'none';
+          track.style.transform = `translateX(calc(-${currentIdx * CARD_W}px))`;
+        }
+      });
     }
 
     function startAuto() {
@@ -2175,7 +2238,7 @@ if (contactSection) contactObserver.observe(contactSection);
     </div>` : '';
 
 content.innerHTML = `
-        <p class="panel-eyebrow">System</p>
+        <p class="panel-eyebrow">Project ${String(idx + 1).padStart(2, '0')}</p>
         <h2 class="panel-title">${p.name}</h2>
         <div class="panel-tags">${tagHTML}</div>
 
@@ -2191,8 +2254,9 @@ content.innerHTML = `
         ${p.arch
           ? `<div class="panel-arch">
                <p class="panel-arch-label">System Architecture</p>
-               <img src="${p.arch}" alt="System architecture diagram" style="width:100%;margin-top:0.75rem;display:block;border:1px solid var(--border);" loading="lazy" />
+               <img src="${p.arch}" alt="System architecture diagram" loading="lazy" />
              </div>`
+          : p.noArch ? ''
           : `<div class="panel-arch">
                <p class="panel-arch-label">System Architecture</p>
                <p class="panel-arch-placeholder">Diagram coming soon</p>
@@ -2224,10 +2288,10 @@ content.innerHTML = `
       panel.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
-
+    
     function closePanel() {
-      overlay.classList.remove('open');
       panel.classList.remove('open');
+      overlay.classList.remove('open');
       document.body.style.overflow = '';
     }
 
