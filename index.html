@@ -11,6 +11,23 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet" />
 
   <style>
+    /* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--near-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--tiffany);
+  border-radius: 0px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--tiffany-glow);
+}
     /* ============================================
        DESIGN TOKENS — DO NOT CHANGE
        ============================================ */
@@ -39,25 +56,27 @@
       --card-border: rgba(10,186,181,0.12);
       --pillar-border: var(--tiffany);
       --shadow-glow: 0 0 40px rgba(10,186,181,0.08);
+      --bg-rgb: 8,12,12;
     }
 
 [data-theme="light"] {
-  --bg: #F2EDE4;
-  --bg2: #EBE4D8;
-  --bg3: #E3D9C8;
-  --text: #2C1F0E;
-  --text-muted: #6B5240;
-  --text-dim: #A08C76;
-  --accent: #C4622D;
-  --accent-dim: rgba(196,98,45,0.10);
-  --accent-glow: rgba(196,98,45,0.25);
-  --border: rgba(196,98,45,0.18);
-  --border-hover: rgba(196,98,45,0.45);
-  --pill-bg: rgba(196,98,45,0.08);
-  --card-bg: rgba(232,224,208,0.80);
-  --card-border: rgba(196,98,45,0.18);
-  --pillar-border: #C4622D;
-  --shadow-glow: 0 0 40px rgba(196,98,45,0.08);
+  --bg: #F5EFE6;
+  --bg2: #EDE4D5;
+  --bg3: #E3D6C2;
+  --text: #2E1F0F;
+  --text-muted: #7A5C42;
+  --text-dim: #B09A82;
+  --accent: #C4845A;
+  --accent-dim: rgba(196,132,90,0.10);
+  --accent-glow: rgba(196,132,90,0.25);
+  --border: rgba(196,132,90,0.18);
+  --border-hover: rgba(196,132,90,0.45);
+  --pill-bg: rgba(196,132,90,0.08);
+  --card-bg: rgba(237,228,213,0.82);
+  --card-border: rgba(196,132,90,0.18);
+  --pillar-border: #C4845A;
+  --shadow-glow: 0 0 40px rgba(196,132,90,0.08);
+  --bg-rgb: 245,239,230;
 }
 
     /* ============================================
@@ -191,7 +210,6 @@
   pointer-events: none;
 }
 
-
     .hero-content {
       position: relative; z-index: 2;
       max-width: 900px;
@@ -248,17 +266,30 @@
        SECTION BASE STYLES
        ============================================ */
     section {
-      padding: 7rem 3rem;
+      padding: 9rem 3rem;
     }
 
     .section-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1rem;
-    }
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.section-label::before {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: var(--accent);
+  opacity: 0.55;
+  flex-shrink: 0;
+}
 
     .section-title {
       font-family: 'Cormorant Garamond', serif;
@@ -1007,41 +1038,21 @@
       line-height: 1.9;
       margin-bottom: 3rem;
     }
-    .videos-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 1rem;}
-    /* Big video */
-    .videos-grid .video-item:nth-child(1) {
-      grid-column: 1;
-      grid-row: 1 / span 2;}
 
-/* Right column */
-    .videos-grid .video-item:nth-child(2) {
-      grid-column: 2;
-      grid-row: 1;
-    }
-    .videos-grid .video-item:nth-child(3) {
-      grid-column: 2;
-      grid-row: 2;}
-/* Bottom row */
-    .videos-grid .video-item:nth-child(4) {
-      grid-column: 1;
-      grid-row: 3;
-    }
-    .videos-grid .video-item:nth-child(5) {
-      grid-column: 2;
-      grid-row: 3;
-    }
-    /* UPDATE HERE: Video items — no bg container, clean embed */
-    .video-item {
-      position: relative;
-      overflow: hidden;
-      /* No background, no border — clean embed */
-      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1),
-                  box-shadow 0.35s ease,
-                  opacity 0.35s ease;
-    }
+.videos-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.75rem;
+}
+
+/* Top row — 2 equal halves */
+.videos-grid .video-item:nth-child(1) { grid-column: 1 / 4; grid-row: 1; }
+.videos-grid .video-item:nth-child(2) { grid-column: 4 / 7; grid-row: 1; }
+
+/* Bottom row — small | BIG | small */
+.videos-grid .video-item:nth-child(3) { grid-column: 1 / 3; grid-row: 2; }
+.videos-grid .video-item:nth-child(4) { grid-column: 3 / 5; grid-row: 2; }
+.videos-grid .video-item:nth-child(5) { grid-column: 5 / 7; grid-row: 2; }
 
     /* Netflix-style: siblings dim when one is hovered */
     .videos-grid:has(.video-item:hover) .video-item:not(:hover) {
@@ -1142,16 +1153,19 @@
     }
 
     .contact-link {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      border: 1px solid var(--border);
-      padding: 0.85rem 2rem;
-      border-radius: 2px;
-      transition: all 0.3s ease;
-    }
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 0.85rem 2rem;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
     .contact-link:hover {
       color: var(--accent);
       border-color: var(--accent);
@@ -1246,6 +1260,12 @@ footer {
   .work-card { padding: 1.5rem 1rem; }
   .cs-card { flex: 0 0 280px; }
   #hero { min-height: 100svh; }
+  #particle-canvas { opacity: 0.12; }
+  .hero-content {
+    background: rgba(var(--bg-rgb), 0.48);
+    padding: 1.5rem 1.25rem;
+    border-radius: 3px;
+  }
 }
 
 /* Zoom / large text handling */
@@ -1320,17 +1340,23 @@ footer {
     <div class="about-text">
       <p class="section-label reveal">About</p>
       <h2 class="section-title reveal reveal-delay-1">
-        I build systems that<br /><em>turn data into decisions.</em>
+        Building systems that<br /><em>turn data into decisions.</em>
       </h2>
       <div class="section-divider reveal reveal-delay-2"></div>
       <p class="reveal reveal-delay-2">
-        Currently at the intersection of <strong>AI, financial services, and business strategy</strong>. Former consultant at Deloitte's DDAI team (Global Financial Services), building ML pipelines and data products for enterprise clients. Before that, early product and data hire at <strong>Vitrina AI</strong> — a Stanford SRI-incubated startup reshaping the global content industry.
+        Currently at the intersection of <strong>AI, financial services, and business strategy</strong>. Building structured, decision-grade systems out of fragmented, real-world data.
+      </p>
+      <p class="reveal reveal-delay-2">
+        Former Analyst at <strong>Deloitte's Global Financial Services Team</strong>, focused on consolidating fragmented client data across regions into a unified, access-controlled system of record, improving data integrity, visibility, and cross-border alignment. 
       </p>
       <p class="reveal reveal-delay-3">
-        ISB Hyderabad merit scholar in the <strong>Advanced Management Program in Business Analytics</strong>. I think in systems, communicate in stories, and believe that the most powerful thing a model can do is help a human make a better decision.
+        Prior to this, was an early hire at <strong>Vitrina AI</strong> — a Stanford SRI-incubated startup reshaping the global content industry where worked on structuring a fragmented, referral-driven media and entertainment ecosystem — mapping company and content intelligence into a connected data layer to enable better discovery and decision-making.
+      </p>
+      <p class="reveal reveal-delay-3">
+        Currently at <strong>Indian School of Business Hyderabad </strong> under a merit scholarship, pursuing Advanced Management Program in Business Analytics, and building models and pipelines designed for real-world business applications.
       </p>
       <p class="reveal reveal-delay-4">
-        Targeting roles at the edge of <strong>data, strategy, and product</strong> — MBB, FAANG, luxury innovation, and top graduate programs.
+        Focused on building systems that enable better decisions, not just better models.
       </p>
       <a class="about-cta reveal reveal-delay-5" href="#contact">Get in touch →</a>
     </div>
@@ -1355,7 +1381,7 @@ footer {
               <div class="work-company">Deloitte USI</div>
               <div class="work-role">Analyst — DDAI, Global Financial Services</div>
             </div>
-            <div class="work-period">2022 — Present</div>
+            <div class="work-period">2022 — 2025</div>
           </div>
           <div class="work-expand">
             <div class="work-details">
@@ -1428,7 +1454,7 @@ footer {
             <div class="edu-inst-name">Symbiosis Centre of Management Studies, Noida</div>
             <div class="edu-prog">Bachelor of Business Administration — Specialization in Business Analytics</div>
             <div class="edu-details">
-              CGPA: 8.40 / 10
+              CGPA: 8.40 
             </div>
           </div>
         </div>
@@ -1474,7 +1500,7 @@ footer {
   <a class="research-card" href="https://github.com/Vridhi-Wadhawan/social-media-advertising-impact" target="_blank" rel="noopener">
     <div>
       <div class="research-paper-title">Social Media Advertising Impact on Consumer Perception</div>
-      <div class="research-paper-desc">Investigates how social media ad exposure shapes purchasing intent and brand perception across demographic segments.</div>
+      <div class="research-paper-desc">Analyzes how advertising exposure influences purchase intent and brand perception, using engagement and conversion signals to identify what drives effectiveness across campaigns.</div>
       <div class="research-preview">
       <img src="https://raw.githubusercontent.com/Vridhi-Wadhawan/social-media-advertising-impact/main/consumer-preception-model.png"
            alt="Consumer Perception Model" loading="lazy" />
@@ -1487,7 +1513,7 @@ footer {
   <a class="research-card" href="https://github.com/Vridhi-Wadhawan/organizational-value-alignment-diagnostic" target="_blank" rel="noopener">
     <div>
       <div class="research-paper-title">Organizational Value Alignment Diagnostic</div>
-      <div class="research-paper-desc">A diagnostic framework for measuring alignment between stated organizational values and operational behaviour.</div>
+      <div class="research-paper-desc">Built a framework to measure gaps between stated organizational values and actual behaviour, translating qualitative principles into actionable insights.</div>
         <div class="research-preview">
           <img src="https://raw.githubusercontent.com/Vridhi-Wadhawan/organizational-value-alignment-diagnostic/main/conceptual-framework.png"
            alt="Conceptual Framework" loading="lazy" />
@@ -1677,10 +1703,11 @@ footer {
         <a class="article-item reveal" href="https://medium.com/legex/affair-shattering-the-grand-ambition-of-love-5fb71a867f36" target="_blank" rel="noopener">
           <div>
             <div class="article-title">
-              The Affair
+              Affair: Shattering The Grand Ambition Of Love            
               <span class="article-featured">Featured</span>
             </div>
-            <div class="article-hook">On love, ambition, and the stories we tell ourselves</div>
+            <div class="article-hook">
+              Explained — Section 497 of the Indian Penal Code: Adultery <br> When relationships blur into ambition, clarity is often the first thing lost. </div>
           </div>
           <span class="article-arrow">↗</span>
         </a>
@@ -1688,7 +1715,7 @@ footer {
         <a class="article-item reveal reveal-delay-1" href="https://medium.com/legex/is-my-share-equal-to-yours-b604c98bdaf1" target="_blank" rel="noopener">
           <div>
             <div class="article-title">Is My Share Equal to Yours?</div>
-            <div class="article-hook">A financial equity argument hiding in plain sight</div>
+            <div class="article-hook">Equal doesn’t always mean fair — especially when money, expectations, and perception collide.</div>
           </div>
           <span class="article-arrow">↗</span>
         </a>
@@ -1696,7 +1723,7 @@ footer {
         <a class="article-item reveal reveal-delay-2" href="https://medium.com/legex/dont-put-all-your-eggs-in-one-basket-2188fda8c58f" target="_blank" rel="noopener">
           <div>
             <div class="article-title">Don't Put All Your Eggs in One Basket</div>
-            <div class="article-hook">The oldest strategy advice still being ignored</div>
+            <div class="article-hook">Diversification is simple in theory — discipline is where it breaks.</div>
           </div>
           <span class="article-arrow">↗</span>
         </a>
@@ -1704,7 +1731,7 @@ footer {
         <a class="article-item reveal reveal-delay-3" href="https://vri1999.medium.com/the-evolution-of-television-and-its-debut-in-the-india-market-930071ca0538" target="_blank" rel="noopener">
           <div>
             <div class="article-title">The Evolution of Television in India</div>
-            <div class="article-hook">A market lens on how a nation changed channels</div>
+            <div class="article-hook">From Doordarshan to streaming — a market shaped as much by consumers as by content.</div>
           </div>
           <span class="article-arrow">↗</span>
         </a>
@@ -1712,7 +1739,7 @@ footer {
         <a class="article-item reveal reveal-delay-4" href="https://medium.com/legex/a-new-normal-3fef6bdf0c77" target="_blank" rel="noopener">
           <div>
             <div class="article-title">A New Normal</div>
-            <div class="article-hook">What the pandemic quietly rewrote</div>
+            <div class="article-hook">The pandemic didn’t just disrupt routines — it redefined what we consider normal.</div>
           </div>
           <span class="article-arrow">↗</span>
         </a>
@@ -1734,59 +1761,52 @@ footer {
       <div class="section-divider reveal reveal-delay-2"></div>
 
       <p class="other-intro reveal reveal-delay-2">
-        Co-created a content brand with my sister during lockdown — handled creative direction, camera work, and storytelling. Five episodes, one kitchen, endless iterations on what makes something worth watching.
+        Co-created a small video series during lockdown, handling creative direction, filming, and editing across five episodes. A hands-on exploration of building something from scratch — from idea to execution.<br>
+        Five episodes, one kitchen, endless iterations on what makes something worth watching.
       </p>
 
       <!-- UPDATE HERE: Add or replace YouTube video URLs and thumbnail IDs below -->
       <!-- VIDEO IDs: qM598Qho9J0, McfNMiUFQbI, n_OKmoraizM, dEUjA8DhEYc, uuDb3VNtLqU -->
-      <div class="videos-grid reveal reveal-delay-3"><!-- LEFT SIDE -->
-  <div class="video-left">
+<div class="videos-grid reveal reveal-delay-3">
 
-    <!-- BIG VIDEO (Video 1) -->
-    <div class="video-item" data-videoid="qM598Qho9J0">
-      <div class="video-thumb-wrap">
-        <img class="video-thumb-img" src="https://img.youtube.com/vi/qM598Qho9J0/mqdefault.jpg" />
-        <div class="video-play-icon">
-          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-        </div>
+  <!-- Video 1 — big -->
+  <div class="video-item" data-videoid="qM598Qho9J0">
+    <div class="video-thumb-wrap">
+      <img class="video-thumb-img" src="https://img.youtube.com/vi/qM598Qho9J0/mqdefault.jpg" />
+      <div class="video-play-icon">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
       </div>
     </div>
-
-    <!-- BOTTOM 2 VIDEOS -->
-    <div class="video-bottom-grid">
-
-      <div class="video-item" data-videoid="n_OKmoraizM">
-        <div class="video-thumb-wrap">
-          <img class="video-thumb-img" src="https://img.youtube.com/vi/n_OKmoraizM/mqdefault.jpg" />
-        </div>
-      </div>
-
-      <div class="video-item" data-videoid="dEUjA8DhEYc">
-        <div class="video-thumb-wrap">
-          <img class="video-thumb-img" src="https://img.youtube.com/vi/dEUjA8DhEYc/mqdefault.jpg" />
-        </div>
-      </div>
-
-    </div>
-
   </div>
 
-  <!-- RIGHT SIDE -->
-  <div class="video-right">
-
-    <div class="video-item" data-videoid="McfNMiUFQbI">
-      <div class="video-thumb-wrap">
-        <img class="video-thumb-img" src="https://img.youtube.com/vi/McfNMiUFQbI/mqdefault.jpg" />
-      </div>
-    </div>
-
+  <!-- Video 2 -->
   <div class="video-item" data-videoid="uuDb3VNtLqU">
-      <div class="video-thumb-wrap">
-        <img class="video-thumb-img" src="https://img.youtube.com/vi/uuDb3VNtLqU/mqdefault.jpg" />
-      </div>
+    <div class="video-thumb-wrap">
+      <img class="video-thumb-img" src="https://img.youtube.com/vi/uuDb3VNtLqU/mqdefault.jpg" />
     </div>
+  </div>
 
-  </div><!-- /video-right -->
+  <!-- Video 3 -->
+  <div class="video-item" data-videoid="dEUjA8DhEYc">
+    <div class="video-thumb-wrap">
+      <img class="video-thumb-img" src="https://img.youtube.com/vi/dEUjA8DhEYc/mqdefault.jpg" />
+    </div>
+  </div>
+
+  <!-- Video 4 -->
+  <div class="video-item" data-videoid="McfNMiUFQbI">
+    <div class="video-thumb-wrap">
+      <img class="video-thumb-img" src="https://img.youtube.com/vi/McfNMiUFQbI/mqdefault.jpg" />
+    </div>
+  </div>
+
+  <!-- Video 5 -->
+  <div class="video-item" data-videoid="n_OKmoraizM">
+    <div class="video-thumb-wrap">
+      <img class="video-thumb-img" src="https://img.youtube.com/vi/n_OKmoraizM/mqdefault.jpg" />
+    </div>
+  </div>
+
 </div><!-- /videos-grid -->
     </div><!-- /beyond-work -->
   </section>
@@ -1803,21 +1823,42 @@ footer {
     <div class="contact-inner">
       <p class="section-label reveal">Contact</p>
       <h2 class="contact-title reveal reveal-delay-1">
-        Let's make<br />something<br /><em>remarkable.</em>
-      </h2>
+        Let's make <br /><em><span id="contact-word"></span>
+          <span class="typed-cursor">|</span></em>
+        </h2>
       <p class="contact-sub reveal reveal-delay-2">
         <span id="contact-typed"></span>
-        <span class="typed-cursor">|</span>
       </p>
       <div class="contact-links reveal reveal-delay-3">
+          <!-- UPDATE HERE: Confirm LinkedIn URL -->
+          <a class="contact-link" href="https://www.linkedin.com/in/vridhi-wadhawan/" target="_blank" rel="noopener">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;">
+      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+      <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+    </svg>
+    LinkedIn
+  </a>
         <!-- UPDATE HERE: Confirm or update email address -->
-        <a class="contact-link primary" href="mailto:vridhi99@gmail.com">vridhi99@gmail.com</a>
-        <!-- UPDATE HERE: Confirm LinkedIn URL -->
-        <a class="contact-link" href="https://www.linkedin.com/in/vridhi-wadhawan/" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a class="contact-link" href="mailto:vridhi99@gmail.com">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="flex-shrink:0;">
+      <rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/>
+    </svg>
+    vridhi99@gmail.com
+  </a>
+          <!-- UPDATE HERE: Confirm GitHub URL -->
+  <a class="contact-link" href="https://github.com/Vridhi-Wadhawan" target="_blank" rel="noopener">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;">
+      <path d="M12 2C6.477 2 2 6.484 2 12.021c0 4.428 2.865 8.184 6.839 9.504.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.026 2.747-1.026.546 1.378.202 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.2 22 16.447 22 12.021 22 6.484 17.523 2 12 2z"/>
+    </svg>
+    GitHub
+  </a>
         <!-- UPDATE HERE: Replace with your latest resume Drive link (view) -->
-        <a class="contact-link" href="https://drive.google.com/file/d/1pR4eTMWTr2HWwAdhVWH_v_cPjCWO0RaQ/view" target="_blank" rel="noopener">View Resume ↗</a>
-        <!-- UPDATE HERE: Replace with direct download link for resume (e.g. Drive direct download URL) -->
-        <a class="contact-link" href="https://drive.google.com/uc?export=download&id=1pR4eTMWTr2HWwAdhVWH_v_cPjCWO0RaQ" target="_blank" rel="noopener" download>Download ↓</a>
+        <a class="contact-link primary" href="https://drive.google.com/uc?export=download&id=1pR4eTMWTr2HWwAdhVWH_v_cPjCWO0RaQ" target="_blank" rel="noopener" download>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="flex-shrink:0;">
+      <path d="M12 3v13M5 14l7 7 7-7"/><path d="M3 21h18"/>
+    </svg>
+    Resume
+  </a>
       </div>
     </div>
   </section>
@@ -1941,46 +1982,92 @@ footer {
     /* ——————————————————————————
        TYPED TAGLINE
        —————————————————————————— */
-    const tagline = "Making data speak. Building systems that listen.";
-    const typedEl = document.getElementById('typed-text');
-    let ti = 0;
+const taglines = [
+  "Making data speak. Building systems that listen.",
+  "Where strategy meets machine learning.",
+  "Turning fragmented data into decisions."
+];
+const typedEl = document.getElementById('typed-text');
+let tPhrase = 0, tChar = 0, tDeleting = false;
 
-    function typeChar() {
-      if (ti < tagline.length) {
-        typedEl.textContent += tagline[ti++];
-        setTimeout(typeChar, 45 + Math.random() * 30);
-      }
+function typeLoop() {
+  const current = taglines[tPhrase];
+
+  if (!tDeleting) {
+    typedEl.textContent = current.slice(0, ++tChar);
+    if (tChar === current.length) {
+      tDeleting = true;
+      setTimeout(typeLoop, 2000);
+      return;
     }
-    setTimeout(typeChar, 1200);
-    /* ——————————————————————————
-    // Contact typed animation
-       —————————————————————————— */
-const contactEl = document.getElementById('contact-typed');
-const contactPhrase = "Open to consulting, strategy, AI/ML and roles. I respond within 24 hours.";
-let contactI = 0;
-let contactStarted = false;
-
-function typeContact() {
-  if (contactI < contactPhrase.length) {
-    contactEl.textContent += contactPhrase[contactI];
-    contactI++;
-    setTimeout(typeContact, 38);
+    setTimeout(typeLoop, 45 + Math.random() * 25);
+  } else {
+    typedEl.textContent = current.slice(0, --tChar);
+    if (tChar === 0) {
+      tDeleting = false;
+      tPhrase = (tPhrase + 1) % taglines.length;
+      setTimeout(typeLoop, 400);
+      return;
+    }
+    setTimeout(typeLoop, 18);
   }
 }
+setTimeout(typeLoop, 1200);
+/* ——————————————————————————
+   CONTACT WORD CYCLING ANIMATION
+   —————————————————————————— */
+(function() {
+  const wordEl = document.getElementById('contact-word');
+  if (!wordEl) return;
 
-// Only start typing when contact section scrolls into view
-const contactObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting && !contactStarted) {
-      contactStarted = true;
-      setTimeout(typeContact, 400);
+  const phrases = ['something remarkable.', 'something real.', 'systems that matter.'];
+  let phraseIdx = 0;
+  let charIdx   = 0;
+  let deleting  = false;
+  let started   = false;
+
+  function tick() {
+    const current = phrases[phraseIdx];
+
+    if (!deleting) {
+      // Typing forward
+      charIdx++;
+      wordEl.textContent = current.slice(0, charIdx);
+      if (charIdx === current.length) {
+        // Fully typed — pause 2s then start deleting
+        deleting = true;
+        setTimeout(tick, 2000);
+        return;
+      }
+      setTimeout(tick, 72);
+    } else {
+      // Backspacing
+      charIdx--;
+      wordEl.textContent = current.slice(0, charIdx);
+      if (charIdx === 0) {
+        // Fully deleted — move to next phrase
+        deleting  = false;
+        phraseIdx = (phraseIdx + 1) % phrases.length;
+        setTimeout(tick, 400);
+        return;
+      }
+      setTimeout(tick, 38);
     }
-  });
-}, { threshold: 0.3 });
+  }
 
-const contactSection = document.getElementById('contact');
-if (contactSection) contactObserver.observe(contactSection);
+  // Only fire when section scrolls into view
+  const contactSection = document.getElementById('contact');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !started) {
+        started = true;
+        setTimeout(tick, 600);
+      }
+    });
+  }, { threshold: 0.3 });
 
+  if (contactSection) obs.observe(contactSection);
+})();
     /* ——————————————————————————
        SCROLL REVEAL — General .reveal elements
        —————————————————————————— */
@@ -2342,7 +2429,7 @@ content.innerHTML = `
         p.update();
         contactCtx.beginPath();
         contactCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      contactCtx.fillStyle = `rgba(${col}, ${dark ? 0.7 : 0.95})`;
+        contactCtx.fillStyle = `rgba(${col}, ${dark ? 0.4 : 0.85})`;
         contactCtx.fill();
       });
 
@@ -2352,7 +2439,7 @@ content.innerHTML = `
           const dy   = contactParticles[i].y - contactParticles[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < CONTACT_DIST) {
-            const alpha = (1 - dist / CONTACT_DIST) * (dark ? 0.6 : 1.0);
+            const alpha = (1 - dist / CONTACT_DIST) * (dark ? 0.3 : 0.9);
             contactCtx.beginPath();
             contactCtx.moveTo(contactParticles[i].x, contactParticles[i].y);
             contactCtx.lineTo(contactParticles[j].x, contactParticles[j].y);
