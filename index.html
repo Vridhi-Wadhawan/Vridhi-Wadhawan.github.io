@@ -1235,8 +1235,15 @@ footer {
   #hero { padding: 0 1.5rem; }
   #about { grid-template-columns: 1fr; gap: 3rem; }
   .about-photo-wrap { max-width: 300px; }
-  .videos-grid { grid-template-columns: 1fr 1fr; }
-  .videos-grid .video-item:first-child { grid-column: span 2; }
+  .videos-grid { 
+    grid-template-columns: 1fr 1fr; 
+    gap: 1.5rem;
+  }
+  /* This resets the laptop-specific positioning */
+  .videos-grid .video-item { 
+    grid-column: auto !important; 
+    grid-row: auto !important; 
+  }  
   .edu-timeline { padding-left: 1.5rem; }
   .edu-timeline::before { left: 0; }
   .edu-row::before { left: -4px; }
@@ -1249,8 +1256,15 @@ footer {
   .nav-links { display: none; }
   .hero-name { font-size: clamp(2.8rem, 12vw, 4rem); }
   .section-title { font-size: clamp(2rem, 8vw, 3rem); }
-  .videos-grid { grid-template-columns: 1fr; }
-  .videos-grid .video-item:first-child { grid-column: span 1; }
+  .videos-grid { 
+    grid-template-columns: 1fr; 
+    gap: 2rem;
+  }
+  /* Ensures every video takes up the full width of the phone */
+  .videos-grid .video-item { 
+    grid-column: auto !important; 
+    grid-row: auto !important; 
+  }  
   .contact-links { flex-direction: column; align-items: center; }
   .contact-links .contact-link { width: 100%; max-width: 280px; text-align: center; }
   footer { flex-direction: column; gap: 1rem; text-align: center; }
