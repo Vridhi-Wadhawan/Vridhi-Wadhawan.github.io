@@ -390,11 +390,51 @@
   opacity: 0.3;
   z-index: 0;
 }
-.about-photo-wrap .deco-tl {
+ .about-photo-wrap .deco-tl {
   position: absolute; top: -20px; left: -20px;
   width: 90px; height: 90px;
   border: 1px solid var(--accent);
   opacity: 0.25;
+  z-index: 0;
+  pointer-events: none;
+}
+.about-photo-wrap .deco-tl-2 {
+  position: absolute; top: -34px; left: -34px;
+  width: 60px; height: 60px;
+  border: 1px solid var(--accent);
+  opacity: 0.12;
+  z-index: 0;
+  pointer-events: none;
+}
+.about-photo-wrap .deco-tl-3 {
+  position: absolute; top: -8px; left: -8px;
+  width: 50px; height: 50px;
+  border: 1px solid var(--border);
+  opacity: 0.15;
+  z-index: 0;
+  pointer-events: none;
+}
+.about-photo-wrap .deco-br {
+  position: absolute; bottom: -20px; right: -20px;
+  width: 90px; height: 90px;
+  border: 1px solid var(--accent);
+  opacity: 0.25;
+  z-index: 0;
+  pointer-events: none;
+}
+.about-photo-wrap .deco-br-2 {
+  position: absolute; bottom: -34px; right: -34px;
+  width: 60px; height: 60px;
+  border: 1px solid var(--accent);
+  opacity: 0.12;
+  z-index: 0;
+  pointer-events: none;
+}
+.about-photo-wrap .deco-br-3 {
+  position: absolute; bottom: -8px; right: -8px;
+  width: 50px; height: 50px;
+  border: 1px solid var(--border);
+  opacity: 0.15;
   z-index: 0;
   pointer-events: none;
 }
@@ -407,6 +447,7 @@
   z-index: 0;
   pointer-events: none;
 }
+
     /* UPDATE HERE: Replace src with your actual photo URL */
     .about-photo {
       width: 100%;
@@ -1403,9 +1444,14 @@ footer {
        ============================================ -->
   <!-- SECTION: ABOUT -->
   <section id="about">
-    <div class="about-photo-wrap reveal">
-        <div class="deco-tl"></div>
-        <div class="deco-mid"></div>
+<div class="about-photo-wrap reveal">
+  <div class="deco-tl"></div>
+  <div class="deco-tl-2"></div>
+  <div class="deco-tl-3"></div>
+  <div class="deco-br"></div>
+  <div class="deco-br-2"></div>
+  <div class="deco-br-3"></div>
+  <div class="deco-mid"></div>
       <!-- UPDATE HERE: Replace src with your high-res blazer photo URL -->
       <!-- Photo: https://drive.google.com/file/d/18MxIlCkP-2i6uzlaiIWChRY8Dl4mjn9E/view -->
       <img
@@ -2479,10 +2525,44 @@ content.innerHTML = `
         <a class="panel-github-link" href="${p.github}" target="_blank" rel="noopener">↗ View on GitHub</a>
       `;
       overlay.classList.add('open');
-      panel.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-    
+  panel.classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  if (p.video && p.demo) {
+    setTimeout(() => {
+      const wrap = document.getElementById('demo-video-wrap');
+      const thumb = document.getElementById('demo-thumb');
+      const playIcon = document.getElementById('demo-play-icon');
+      if (!wrap) return;
+      let demoLoaded = false;
+
+      wrap.addEventListener('mouseenter', () => {
+        if (demoLoaded) return;
+        demoLoaded = true;
+        thumb.style.opacity = '0';
+        playIcon.style.opacity = '0';
+        const iframe = document.createElement('iframe');
+        iframe.src = `${p.demo}?autoplay=1&mute=0&controls=1&rel=0`;
+        iframe.setAttribute('allow', 'autoplay; encrypted-media');
+        iframe.setAttribute('allowfullscreen', '');
+        iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none;z-index:3;';
+        wrap.appendChild(iframe);
+      });
+
+      wrap.addEventListener('mouseleave', () => {
+        if (!demoLoaded) return;
+        demoLoaded = false;
+        thumb.style.opacity = '1';
+        playIcon.style.opacity = '1';
+        const iframe = wrap.querySelector('iframe');
+        if (iframe) {
+          iframe.src = '';
+          iframe.remove();
+        }
+      });
+    }, 100);
+  }
+}   
     function closePanel() {
       panel.classList.remove('open');
       overlay.classList.remove('open');
