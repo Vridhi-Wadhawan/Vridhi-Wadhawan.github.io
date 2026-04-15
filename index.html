@@ -1929,6 +1929,17 @@ footer {
     animateCursor();
 
     /* ——————————————————————————
+   CURSOR CLICK SOUND
+   —————————————————————————— */
+const clickSound = new Audio('./click.mp3');
+clickSound.volume = 0.35;
+
+document.addEventListener('click', () => {
+  clickSound.currentTime = 0;
+  clickSound.play().catch(() => {});
+});
+
+    /* ——————————————————————————
        THEME TOGGLE
        —————————————————————————— */
     const html   = document.documentElement;
