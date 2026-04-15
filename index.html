@@ -93,7 +93,44 @@
       transition: background 0.4s ease, color 0.4s ease;
       overflow-x: hidden;
       line-height: 1.6;
+        text-align: justify;
+        text-justify: inter-word;
     }
+    h1, h2, h3,
+.section-label,
+.hero-eyebrow,
+.hero-name,
+.hero-tagline,
+.hero-tags,
+.work-company,
+.work-role,
+.work-period,
+.edu-inst-name,
+.edu-prog,
+.edu-year,
+.edu-abbr,
+.contact-title,
+.contact-links,
+.nav-links,
+.nav-name,
+.panel-title,
+.panel-eyebrow,
+.footer-copy,
+.footer-sig,
+.cs-card-name,
+.cs-card-num,
+.cs-card p,
+.cs-card-tags,
+.tag-pill,
+.research-paper-title,
+.article-title {
+  text-align: left;
+}
+
+#contact .contact-sub,
+#contact .section-label {
+  text-align: center;
+}
 
     a { color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
     a:hover { opacity: 0.75; }
@@ -338,20 +375,37 @@
       position: relative;
     }
     .about-photo-wrap::before {
-      content: '';
-      position: absolute; inset: -12px;
-      border: 1px solid var(--border);
-      border-radius: 2px;
-      z-index: 0;
-    }
-    .about-photo-wrap::after {
-      content: '';
-      position: absolute; bottom: -20px; right: -20px;
-      width: 120px; height: 120px;
-      border: 1px solid var(--accent);
-      opacity: 0.3;
-      z-index: 0;
-    }
+  content: '';
+  position: absolute; inset: -12px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  z-index: 0;
+}
+.about-photo-wrap::after {
+  content: '';
+  position: absolute; bottom: -20px; right: -20px;
+  width: 120px; height: 120px;
+  border: 1px solid var(--accent);
+  opacity: 0.3;
+  z-index: 0;
+}
+.about-photo-wrap .deco-tl {
+  position: absolute; top: -20px; left: -20px;
+  width: 90px; height: 90px;
+  border: 1px solid var(--accent);
+  opacity: 0.25;
+  z-index: 0;
+  pointer-events: none;
+}
+.about-photo-wrap .deco-mid {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%; height: 55%;
+  border: 1px solid var(--border);
+  opacity: 0.18;
+  z-index: 0;
+  pointer-events: none;
+}
     /* UPDATE HERE: Replace src with your actual photo URL */
     .about-photo {
       width: 100%;
@@ -442,7 +496,14 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
-
+.work-hook {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-top: 0.85rem;
+  opacity: 0.75;
+}
     .work-expand {
       max-height: 0;
       overflow: hidden;
@@ -1234,7 +1295,7 @@ footer {
   section { padding: 5rem 1.5rem; }
   #hero { padding: 0 1.5rem; }
   #about { grid-template-columns: 1fr; gap: 3rem; }
-  .about-photo-wrap { max-width: 300px; }
+  .about-photo-wrap { max-width: 300px; margin: 0 auto; }
   .videos-grid { 
     grid-template-columns: 1fr 1fr; 
     gap: 1.5rem;
@@ -1342,6 +1403,8 @@ footer {
   <!-- SECTION: ABOUT -->
   <section id="about">
     <div class="about-photo-wrap reveal">
+        <div class="deco-tl"></div>
+        <div class="deco-mid"></div>
       <!-- UPDATE HERE: Replace src with your high-res blazer photo URL -->
       <!-- Photo: https://drive.google.com/file/d/18MxIlCkP-2i6uzlaiIWChRY8Dl4mjn9E/view -->
       <img
@@ -1399,6 +1462,7 @@ footer {
             </div>
             <div class="work-period">2022 — 2025</div>
           </div>
+          <p class="work-hook">Building ML systems and data pipelines for global financial services clients.</p>
           <div class="work-expand">
             <div class="work-details">
               <div class="work-detail-item">Consolidated fragmented client data across regions into a unified, access-controlled system of record — improving data integrity and cross-border visibility for global financial services clients.</div>
@@ -1423,6 +1487,7 @@ footer {
             </div>
             <div class="work-period">2021 — 2022</div>
           </div>
+          <p class="work-hook">Early hire structuring the global content intelligence layer for a Stanford SRI-incubated platform.</p>
           <div class="work-expand">
             <div class="work-details">
 
