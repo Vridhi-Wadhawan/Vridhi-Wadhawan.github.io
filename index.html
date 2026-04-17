@@ -60,23 +60,23 @@
     }
 
 [data-theme="light"] {
-  --bg: #F5EFE6;
-  --bg2: #EDE4D5;
-  --bg3: #E3D6C2;
-  --text: #2E1F0F;
-  --text-muted: #7A5C42;
-  --text-dim: #B09A82;
-  --accent: #C4845A;
-  --accent-dim: rgba(196,132,90,0.10);
-  --accent-glow: rgba(196,132,90,0.25);
-  --border: rgba(196,132,90,0.18);
-  --border-hover: rgba(196,132,90,0.45);
-  --pill-bg: rgba(196,132,90,0.08);
-  --card-bg: rgba(237,228,213,0.82);
-  --card-border: rgba(196,132,90,0.18);
-  --pillar-border: #C4845A;
-  --shadow-glow: 0 0 40px rgba(196,132,90,0.08);
-  --bg-rgb: 245,239,230;
+  --bg: #E8E0D0;
+  --bg2: #DED5C4;
+  --bg3: #D4C9B5;
+  --text: #1A1208;
+  --text-muted: #4A3A28;
+  --text-dim: #8A7660;
+  --accent: #A0521E;
+  --accent-dim: rgba(160,82,30,0.10);
+  --accent-glow: rgba(160,82,30,0.22);
+  --border: rgba(160,82,30,0.15);
+  --border-hover: rgba(160,82,30,0.40);
+  --pill-bg: rgba(160,82,30,0.07);
+  --card-bg: rgba(220,211,196,0.90);
+  --card-border: rgba(160,82,30,0.15);
+  --pillar-border: #A0521E;
+  --shadow-glow: 0 0 40px rgba(160,82,30,0.07);
+  --bg-rgb: 232,224,208;
 }
 
     /* ============================================
@@ -372,82 +372,30 @@
       align-items: center;
     }
 
-    .about-photo-wrap {
-      position: relative;
-    }
-    .about-photo-wrap::before {
+   .about-photo-wrap {
+  position: relative;
+}
+
+.about-photo-wrap::before {
   content: '';
-  position: absolute; inset: -12px;
+  position: absolute;
+  inset: -1px;
   border: 1px solid var(--border);
   border-radius: 2px;
   z-index: 0;
 }
+
 .about-photo-wrap::after {
   content: '';
-  position: absolute; bottom: -20px; right: -20px;
-  width: 120px; height: 120px;
-  border: 1px solid var(--accent);
-  opacity: 0.3;
+  position: absolute;
+  top: 16px;
+  left: -16px;
+  width: 1px;
+  height: 40%;
+  background: var(--accent);
+  opacity: 0.5;
   z-index: 0;
 }
- .about-photo-wrap .deco-tl {
-  position: absolute; top: -20px; left: -20px;
-  width: 90px; height: 90px;
-  border: 1px solid var(--accent);
-  opacity: 0.25;
-  z-index: 0;
-  pointer-events: none;
-}
-.about-photo-wrap .deco-tl-2 {
-  position: absolute; top: -34px; left: -34px;
-  width: 60px; height: 60px;
-  border: 1px solid var(--accent);
-  opacity: 0.12;
-  z-index: 0;
-  pointer-events: none;
-}
-.about-photo-wrap .deco-tl-3 {
-  position: absolute; top: -8px; left: -8px;
-  width: 50px; height: 50px;
-  border: 1px solid var(--border);
-  opacity: 0.15;
-  z-index: 0;
-  pointer-events: none;
-}
-.about-photo-wrap .deco-br {
-  position: absolute; bottom: -20px; right: -20px;
-  width: 90px; height: 90px;
-  border: 1px solid var(--accent);
-  opacity: 0.25;
-  z-index: 0;
-  pointer-events: none;
-}
-.about-photo-wrap .deco-br-2 {
-  position: absolute; bottom: -34px; right: -34px;
-  width: 60px; height: 60px;
-  border: 1px solid var(--accent);
-  opacity: 0.12;
-  z-index: 0;
-  pointer-events: none;
-}
-.about-photo-wrap .deco-br-3 {
-  position: absolute; bottom: -8px; right: -8px;
-  width: 50px; height: 50px;
-  border: 1px solid var(--border);
-  opacity: 0.15;
-  z-index: 0;
-  pointer-events: none;
-}
-.about-photo-wrap .deco-mid {
-  position: absolute; top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 60%; height: 55%;
-  border: 1px solid var(--border);
-  opacity: 0.18;
-  z-index: 0;
-  pointer-events: none;
-}
-
     /* UPDATE HERE: Replace src with your actual photo URL */
     .about-photo {
       width: 100%;
@@ -634,14 +582,14 @@
       text-transform: uppercase;
     }
     .edu-abbr {
-      font-family: 'Syne', sans-serif;
-      font-size: 0.7rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      color: var(--accent);
-      opacity: 0.5;
-    }
-
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  opacity: 1;
+  text-transform: uppercase;
+}
     .edu-body {}
 
     .edu-inst-name {
@@ -1354,22 +1302,52 @@ footer {
   #work, #education, #research, #writing { max-width: 100%; }
 }
 
+/* Outside and ABOVE the media query */
+.hamburger { display: none; }
+
 @media (max-width: 600px) {
   html { font-size: 95%; }
   .nav-links { display: none; }
+  .nav-links.open { 
+    display: flex; 
+    flex-direction: column; 
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(8,12,12,0.97);
+    backdrop-filter: blur(12px);
+    z-index: 99;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+  }
+  .nav-links.open a {
+    font-size: 1.2rem;
+    letter-spacing: 0.15em;
+  }
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: none;
+    z-index: 101;
+    padding: 4px;
+  }
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 1px;
+    background: var(--text-muted);
+    transition: all 0.3s ease;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
   .hero-name { font-size: clamp(2.8rem, 12vw, 4rem); }
   .section-title { font-size: clamp(2rem, 8vw, 3rem); }
-  .videos-grid { 
-    grid-template-columns: 1fr; 
-    gap: 2rem;
-  }
-  /* Ensures every video takes up the full width of the phone */
-  .videos-grid .video-item { 
-    grid-column: auto !important; 
-    grid-row: auto !important; 
-  }  
-  .contact-links { flex-direction: column; align-items: center; }
-  .contact-links .contact-link { width: 100%; max-width: 280px; text-align: center; }
+  .videos-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .videos-grid .video-item { grid-column: auto !important; grid-row: auto !important; }
+  .contact-links { flex-direction: column; align-items: center; width: 100%; }
+  .contact-links .contact-link { width: 100%; max-width: 320px; text-align: center; justify-content: center; }
   footer { flex-direction: column; gap: 1rem; text-align: center; }
   .footer-sig { text-align: center; }
   .edu-row { grid-template-columns: 1fr; padding: 1.75rem 0; }
@@ -1415,7 +1393,12 @@ footer {
       <li><a href="#writing">Beyond Work</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <button id="theme-toggle" aria-label="Toggle theme">☽ Light</button>
+      <div style="display:flex; align-items:center; gap:1rem;">
+        <button id="theme-toggle" aria-label="Toggle theme">☽ Light</button>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
   </nav>
 
   <!-- ============================================
@@ -1432,9 +1415,9 @@ footer {
       </p>
       <div class="hero-tags">
         <span class="hero-tag">Deloitte USI</span>
-        <span class="hero-tag">Vitrina AI</span>
-        <span class="hero-tag">ISB Hyderabad</span>
-        <span class="hero-tag">ML · MLOps · Strategy</span>
+        <span class="hero-tag">Vitrina AI · Stanford SRI</span>
+        <span class="hero-tag">ISB Hyderabad · Merit Scholar</span>
+        <span class="hero-tag">AI . MLOps . Strategy </span>
       </div>
     </div>
   </section>
@@ -1470,19 +1453,19 @@ footer {
       </h2>
       <div class="section-divider reveal reveal-delay-2"></div>
       <p class="reveal reveal-delay-2">
-        I work at the intersection of <strong>business strategy, financial services, and AI</strong> — where the hard problem isn't building the model, it's making sure the system holds up when it meets reality.
+          I work at the intersection of <strong>business strategy, financial services, and AI</strong> — where the hard problem isn't building the model, it's designing the system that makes the right decision at the right moment.
       </p>
       <p class="reveal reveal-delay-2">
-        At <strong>Deloitte's Global Financial Services team</strong>, I spent 2+ years consolidating fragmented client data across regions and geographies into a unified, access-controlled system of record — the kind of work where data integrity isn't a nice-to-have, it's the entire point. Recognised with two <strong>Spot Awards</strong> and the <strong>Amazing Addition Award</strong> for FY 2023–24.
+          At <strong>Deloitte's Global Financial Services team</strong>, I translated fragmented, cross-border client data into unified systems of record that financial decision-making could actually depend on. Not cleaned datasets — decision infrastructure. Recognised with two <strong>Spot Awards</strong> and the <strong>Amazing Addition Award</strong> for FY 2023–24.
       </p>
       <p class="reveal reveal-delay-3">
-        Before that, I was an early hire at <strong>Vitrina AI</strong> — a Stanford SRI-incubated startup rebuilding how the global media and entertainment industry discovers and licenses content. I built the intelligence layer: mapping <strong>200+ companies</strong>, structuring <strong>1,200+ data points</strong> for algorithm training, and delivering market intelligence directly to the founder. Early-stage consulting before it had a title.
+        Before that, I was an early hire at <strong>Vitrina AI</strong> — a Stanford SRI-incubated startup rebuilding how the global media industry discovers and licenses content. I designed the intelligence layer: mapping <strong>200+ companies</strong>, structuring <strong>1,200+ data points</strong> for algorithm training, delivering market intelligence directly to the founder. Strategy work before it had a title.
       </p>
       <p class="reveal reveal-delay-3">
-        Currently at the <strong>Indian School of Business, Hyderabad</strong> on a <strong>merit scholarship</strong> — formalising what I've always done intuitively: translating ambiguous business problems into structured, deployable systems.
+        Currently at the <strong>Indian School of Business, Hyderabad</strong> on a <strong>40% merit scholarship</strong> — sharpening the frameworks I use to translate ambiguous business problems into structured, deployable systems.
       </p>
       <p class="reveal reveal-delay-4">
-        I don't just build models. I build systems that get used.
+  I don't just build models. I design systems that get used, decisions that hold, and frameworks that survive contact with reality.
       </p>
       <a class="about-cta reveal reveal-delay-5" href="#contact">Get in touch →</a>
     </div>
@@ -1505,22 +1488,25 @@ footer {
           <div class="work-header">
             <div>
               <div class="work-company">Deloitte USI</div>
-              <div class="work-role">Analyst — DDAI, Global Financial Services</div>
+              <div class="work-role">Analyst — Digital, Data, Analytics and Innovation (DDAI), Global Financial Services (GFS)
+              </div>
             </div>
             <div class="work-period">2022 — 2025</div>
           </div>
-          <p class="work-hook">Building ML systems and data pipelines for global financial services clients.</p>
+          <p class="work-hook">
+          Built decision infrastructure for global financial services clients — where data integrity isn't a deliverable, it's the foundation every decision depends on
+        </p>
           <div class="work-expand">
             <div class="work-details">
-              <div class="work-detail-item">Consolidated fragmented client data across regions into a unified, access-controlled system of record — improving data integrity and cross-border visibility for global financial services clients.</div>
+              <div class="work-detail-item">Consolidated fragmented, cross-border client data into a unified, access-controlled system of record — improving data integrity and visibility across geographies where inconsistency had previously created blind spots</div>
               
-              <div class="work-detail-item">Conducted extensive financial data research and secondary literature reviews, sourcing external validation from third-party databases to ensure accuracy and relevance across multiple research processes.</div>
+              <div class="work-detail-item">Implemented a cross-border compliance analytics pipeline that reduced manual review time by 40% — executing structured data architecture and repeatable validation frameworks across multiple research processes.</div>
               
-              <div class="work-detail-item">Led cross-border compliance analytics pipeline — reduced manual review time by 40% through structured data architecture and validation frameworks.</div>
+              <div class="work-detail-item">Acted as the local counterpart bridge across global teams — handling queries from onshore colleagues so client engagements could move forward without friction or delay.</div>
 
-               <div class="work-detail-item">Managed stakeholder relationships across India and onshore teams — translating ambiguous business requirements into structured data deliverables and executive-ready outputs for C-suite audiences.</div>
+              <div class="work-detail-item">Sourced and synthesised external validation from third-party databases across multiple research processes — ensuring outputs met the evidentiary standard that financial services clients require before acting.</div>
 
-               <div class="work-detail-item">Recognised with two Spot Awards (2023 & 2025) and the Amazing Addition Award for FY 2023–24 — for consistently exceeding delivery milestones and demonstrating outstanding dedication within the DDAI practice.</div>
+              <div class="work-detail-item">Recognised with two Spot Awards (2023 & 2025) and the Amazing Addition Award for FY 2023–24 — for consistently exceeding delivery milestones within the DDAI and GFS practice.</div>
 
             </div>
           </div>
@@ -1532,21 +1518,21 @@ footer {
               <div class="work-company">Vitrina AI</div>
               <div class="work-role">Data &amp; Product — Stanford SRI-Incubated Startup</div>
             </div>
-            <div class="work-period">2021 — 2022</div>
+            <div class="work-period">2021 — 2023</div>
           </div>
-          <p class="work-hook">Early hire structuring the global content intelligence layer for a Stanford SRI-incubated platform.</p>
+          <p class="work-hook">Built the intelligence layer for an industry that ran on referrals — before the platform had scale, before the data had structure.</p>
           <div class="work-expand">
             <div class="work-details">
 
-              <div class="work-detail-item">Early hire at a Stanford SRI-incubated startup rebuilding how the global media and entertainment industry discovers and licenses content — joined before the product had scale.</div>
+              <div class="work-detail-item">Joined as an early hire at a Stanford SRI-incubated startup rebuilding how the global media and entertainment industry discovers and licenses content — tasked with structuring an ecosystem that had never been mapped.</div>
 
-              <div class="work-detail-item">Built the intelligence layer from scratch: mapped 200+ companies, structured 1,200+ articles for algorithm training, and researched 2,000+ incomplete data points for genre mapping completion.</div>
+              <div class="work-detail-item">Built the content intelligence layer from scratch: mapped 200+ companies, structured 1,200+ data points for algorithm training, and resolved 2,000+ incomplete data points to enable genre classification at scale</div>
 
-              <div class="work-detail-item">Developed a solid grasp of end-to-end video production and distribution stages — translating industry domain knowledge directly into data architecture and classification decisions.</div>
+              <div class="work-detail-item">Developed deep domain knowledge across end-to-end video production and distribution stages — translating industry context directly into data architecture and classification decisions.</div>
 
-              <div class="work-detail-item">Delivered monthly and yearly market intelligence reports on 200+ companies — findings presented directly to the founder and senior leadership.</div>
+              <div class="work-detail-item">Delivered monthly and yearly market intelligence reports across 200+ companies — translating raw ecosystem data into strategic insight used directly by senior leadership in client-facing engagements.</div>
 
-              <div class="work-detail-item">Bridged data and product: translated business requirements into ML-ready features, surfaced data insights back into product decisions, and mentored new joiners on processes and domain knowledge.</div>
+              <div class="work-detail-item">Provided structured feedback on the proprietary platform from the data side — surfacing gaps and patterns from research that informed product improvements.</div>
 
               </div>
           </div>
@@ -1580,7 +1566,7 @@ footer {
             <div class="edu-inst-name">Indian School of Business, Hyderabad</div>
             <div class="edu-prog">Advanced Management Program in Business Analytics</div>
             <div class="edu-details">
-              Awarded a 40% Merit-Based Scholarship — selected among a competitive cohort. Recognition of prior professional achievement and academic standing.
+              Awarded a 40% Merit-Based Scholarship — granted to candidates demonstrating strong prior professional achievement and academic excellence. Building ML systems, analytics frameworks, and decision-oriented pipelines across a competitive cohort of working professionals.
             </div>
             <span class="edu-highlight">40% Merit Scholarship</span>
           </div>
@@ -1594,9 +1580,10 @@ footer {
           </div>
           <div class="edu-body">
             <div class="edu-inst-name">Symbiosis Centre of Management Studies, Noida</div>
-            <div class="edu-prog">Bachelor of Business Administration — Specialization in Business Analytics</div>
+            <div class="edu-prog">Bachelor of Business Administration — Major in Business Analytics · Minor in International Business</div>
             <div class="edu-details">
-              CGPA: 8.40 
+              CGPA: 8.40 · Dual focus on quantitative analytics and global business context — developed foundational frameworks in business analytics, economics, and cross-border market dynamics. Co-authored research on consumer perception and organisational value alignment.
+
             </div>
           </div>
         </div>
@@ -1641,8 +1628,8 @@ footer {
   <!-- Paper 1 -->
   <a class="research-card" href="https://github.com/Vridhi-Wadhawan/social-media-advertising-impact" target="_blank" rel="noopener">
     <div>
-      <div class="research-paper-title">Social Media Advertising Impact on Consumer Perception</div>
-      <div class="research-paper-desc">Analyzes how advertising exposure influences purchase intent and brand perception, using engagement and conversion signals to identify what drives effectiveness across campaigns.</div>
+      <div class="research-paper-title">Advertising Exposure & Consumer Decision-Making</div>
+      <div class="research-paper-desc">Thesis: Engagement signals alone don't predict purchase intent — the gap between attention and conversion reveals where brand perception actually breaks down. Built a measurement framework using regression analysis across campaign data to surface what drives effectiveness.</div>
       <div class="research-preview">
       <img src="https://raw.githubusercontent.com/Vridhi-Wadhawan/social-media-advertising-impact/main/consumer-preception-model.png"
            alt="Consumer Perception Model" loading="lazy" />
@@ -1655,7 +1642,8 @@ footer {
   <a class="research-card" href="https://github.com/Vridhi-Wadhawan/organizational-value-alignment-diagnostic" target="_blank" rel="noopener">
     <div>
       <div class="research-paper-title">Organizational Value Alignment Diagnostic</div>
-      <div class="research-paper-desc">Built a framework to measure gaps between stated organizational values and actual behaviour, translating qualitative principles into actionable insights.</div>
+      <div class="research-paper-desc">Thesis: The gap between what organisations say they value and how they actually behave is measurable — and that gap predicts cultural dysfunction before it surfaces. Designed a diagnostic framework translating qualitative principles into structured, actionable indicators across 32 organisations.</div>
+    
         <div class="research-preview">
           <img src="https://raw.githubusercontent.com/Vridhi-Wadhawan/organizational-value-alignment-diagnostic/main/conceptual-framework.png"
            alt="Conceptual Framework" loading="lazy" />
@@ -1849,15 +1837,15 @@ footer {
               <span class="article-featured">Featured</span>
             </div>
             <div class="article-hook">
-              Explained — Section 497 of the Indian Penal Code: Adultery <br> When relationships blur into ambition, clarity is often the first thing lost. </div>
-          </div>
-          <span class="article-arrow">↗</span>
+              A legal deconstruction of Section 497 of the Indian Penal Code — where the law's definition of adultery reveals more about power structures than morality.</div>
+             </div>
+            <span class="article-arrow">↗</span>
         </a>
 
         <a class="article-item reveal reveal-delay-1" href="https://medium.com/legex/is-my-share-equal-to-yours-b604c98bdaf1" target="_blank" rel="noopener">
           <div>
             <div class="article-title">Is My Share Equal to Yours?</div>
-            <div class="article-hook">Equal doesn’t always mean fair — especially when money, expectations, and perception collide.</div>
+            <div class="article-hook">On equity vs. equality — why identical distributions produce unequal outcomes when context, expectation, and perception differ.</div>
           </div>
           <span class="article-arrow">↗</span>
         </a>
@@ -1865,7 +1853,7 @@ footer {
         <a class="article-item reveal reveal-delay-2" href="https://medium.com/legex/dont-put-all-your-eggs-in-one-basket-2188fda8c58f" target="_blank" rel="noopener">
           <div>
             <div class="article-title">Don't Put All Your Eggs in One Basket</div>
-            <div class="article-hook">Diversification is simple in theory — discipline is where it breaks.</div>
+            <div class="article-hook">Diversification is theoretically simple and behaviourally hard — the gap between knowing and doing is where most strategies fail.</div>
           </div>
           <span class="article-arrow">↗</span>
         </a>
@@ -1873,7 +1861,7 @@ footer {
         <a class="article-item reveal reveal-delay-3" href="https://vri1999.medium.com/the-evolution-of-television-and-its-debut-in-the-india-market-930071ca0538" target="_blank" rel="noopener">
           <div>
             <div class="article-title">The Evolution of Television in India</div>
-            <div class="article-hook">From Doordarshan to streaming — a market shaped as much by consumers as by content.</div>
+            <div class="article-hook">From Doordarshan to streaming — how a market was shaped less by content strategy and more by the consumers who refused to wait for it.</div>
           </div>
           <span class="article-arrow">↗</span>
         </a>
@@ -1881,9 +1869,9 @@ footer {
         <a class="article-item reveal reveal-delay-4" href="https://medium.com/legex/a-new-normal-3fef6bdf0c77" target="_blank" rel="noopener">
           <div>
             <div class="article-title">A New Normal</div>
-            <div class="article-hook">The pandemic didn’t just disrupt routines — it redefined what we consider normal.</div>
+            <div class="article-hook">The pandemic didn't just disrupt routines — it stress-tested assumptions about work, proximity, and what we'd collectively agreed to call normal.</div>
           </div>
-          <span class="article-arrow">↗</span>
+        <span class="article-arrow">↗</span>
         </a>
 
       </div>
@@ -1903,8 +1891,9 @@ footer {
       <div class="section-divider reveal reveal-delay-2"></div>
 
       <p class="other-intro reveal reveal-delay-2">
-        Co-created a small video series during lockdown, handling creative direction, filming, and editing across five episodes. A hands-on exploration of building something from scratch — from idea to execution.<br>
-        Five episodes, one kitchen, endless iterations on what makes something worth watching.
+        During lockdown, co-built a food video series from zero — no team, no budget, no playbook. Handled creative direction, filming, and editing across five episodes. Every iteration was a question: what actually makes something worth watching?
+        <br>
+        The answer, eventually, was the same as in any system — structure underneath, clarity on top, and the willingness to cut what doesn't earn its place.
       </p>
 
       <!-- UPDATE HERE: Add or replace YouTube video URLs and thumbnail IDs below -->
@@ -2010,8 +1999,8 @@ footer {
        ============================================ -->
   <!-- EDITABLE TEXT START — footer -->
 <footer>
-  <span class="footer-copy">© 2024 Vridhi Wadhawan. All rights reserved.</span>
-  <span class="footer-sig">Making data speak. Building systems that listen.</span>
+  <span class="footer-copy">© 2026 Vridhi Wadhawan. All rights reserved.</span>
+  <span class="footer-sig">Turning ambiguity into decisions that hold.</span>
 </footer>
   <!-- EDITABLE TEXT END -->
 
@@ -2020,6 +2009,28 @@ footer {
        JAVASCRIPT
        ============================================ -->
   <script>
+
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.querySelector('.nav-links');
+
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      navLinks.classList.toggle('open');
+      document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        navLinks.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+});
+
     /* ——————————————————————————
        CURSOR
        —————————————————————————— */
@@ -2136,9 +2147,9 @@ document.addEventListener('click', () => {
        TYPED TAGLINE
        —————————————————————————— */
 const taglines = [
-  "Making data speak. Building systems that listen.",
-  "Where strategy meets machine learning.",
-  "Turning fragmented data into decisions."
+  "Turning ambiguity into decisions that hold.",
+  "Where data strategy meets real-world decisions.",
+  "Not just better models. Better decisions."
 ];
 const typedEl = document.getElementById('typed-text');
 let tPhrase = 0, tChar = 0, tDeleting = false;
@@ -2173,7 +2184,10 @@ setTimeout(typeLoop, 1200);
   const wordEl = document.getElementById('contact-word');
   if (!wordEl) return;
 
-  const phrases = ['something remarkable.', 'something legendary.', 'systems that matter.'];
+  const phrases = [  'something that holds.',
+  'systems that decide.',
+  'decisions that last.'
+];
   let phraseIdx = 0;
   let charIdx   = 0;
   let deleting  = false;
