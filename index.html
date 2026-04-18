@@ -1308,18 +1308,18 @@ footer {
 @media (max-width: 600px) {
   html { font-size: 95%; }
   .nav-links { display: none; }
-  .nav-links.open { 
-    display: flex; 
-    flex-direction: column; 
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(8,12,12,0.97);
-    backdrop-filter: blur(12px);
-    z-index: 99;
-    justify-content: center;
-    align-items: center;
-    gap: 2.5rem;
-  }
+.nav-links.open {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(8,12,12,0.98);
+  backdrop-filter: blur(16px);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+}
   .nav-links.open a {
     font-size: 1.2rem;
     letter-spacing: 0.15em;
@@ -1356,6 +1356,18 @@ footer {
   .work-card { padding: 1.5rem 1rem; }
   .cs-card { flex: 0 0 280px; }
   #hero { min-height: 100svh; }
+  #cursor-dot,
+#cursor-ring {
+  display: none;
+}
+
+html {
+  cursor: auto;
+}
+
+a, button {
+  cursor: pointer;
+}
   #canvas-container { opacity: 0.8 !important; }
   #particle-canvas { opacity: 1; }
   .hero-content {
